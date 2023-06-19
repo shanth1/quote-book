@@ -1,14 +1,5 @@
-const {
-    GraphQLObjectType,
-    GraphQLID,
-    GraphQLString,
-    GraphQLSchema,
-    GraphQLInt,
-    GraphQLList,
-    GraphQLNonNull,
-    GraphQLEnumType,
-} = require("graphql");
-const UserType = require("../types/userType");
+const { GraphQLID, GraphQLList, GraphQLNonNull } = require("graphql");
+const { UserType } = require("../types");
 const User = require("../../models/User");
 
 const getAllUsers = {
