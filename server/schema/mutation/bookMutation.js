@@ -1,16 +1,15 @@
 const {
-    GraphQLObjectType,
     GraphQLID,
     GraphQLString,
-    GraphQLSchema,
     GraphQLInt,
     GraphQLList,
     GraphQLNonNull,
     GraphQLEnumType,
+    GraphQLBoolean,
 } = require("graphql");
 const Book = require("../../models/Book");
 const User = require("../../models/User");
-const { UserType, BookType } = require("../types");
+const { BookType, DateInputType } = require("../types");
 
 const addBook = {
     type: BookType,
@@ -20,6 +19,18 @@ const addBook = {
         mainIdea: { type: GraphQLString },
         description: { type: GraphQLString },
         pages: { type: GraphQLInt },
+        year: { type: GraphQLInt },
+        pages: { type: GraphQLInt },
+        image: { type: GraphQLString },
+        file: { type: GraphQLString },
+        mainIdea: { type: GraphQLString },
+        description: { type: GraphQLString },
+        genres: { type: new GraphQLList(GraphQLString) },
+        tags: { type: new GraphQLList(GraphQLString) },
+        creationDate: {
+            type: new GraphQLNonNull(DateInputType),
+        },
+        private: { type: new GraphQLNonNull(GraphQLBoolean) },
         rating: {
             type: new GraphQLEnumType({
                 name: "BookRating",
@@ -55,6 +66,12 @@ const deleteBook = {
     type: BookType,
     args: { id: { type: GraphQLNonNull(GraphQLID) } },
     resolve(parent, args) {
+        Quote.find({ userId: args.id }).then((quotes) => {
+            quotes.forEach((quote) => {
+                quote.deleteOne();
+            });
+        });
+
         return Book.findByIdAndRemove(args.id);
     },
 };

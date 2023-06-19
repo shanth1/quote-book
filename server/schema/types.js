@@ -6,6 +6,7 @@ const {
     GraphQLList,
     GraphQLInt,
     GraphQLBoolean,
+    GraphQLInputObjectType,
 } = require("graphql");
 const User = require("../models/User");
 const Book = require("../models/Book");
@@ -14,13 +15,26 @@ const Quote = require("../models/Quote");
 const DateType = new GraphQLObjectType({
     name: "Date",
     fields: () => ({
-        time: { type: GraphQLInt },
-        year: { type: GraphQLInt },
-        month: { type: GraphQLInt },
-        day: { type: GraphQLInt },
-        hour: { type: GraphQLInt },
-        minute: { type: GraphQLInt },
-        second: { type: GraphQLInt },
+        time: { type: new GraphQLNonNull(GraphQLInt) },
+        year: { type: new GraphQLNonNull(GraphQLInt) },
+        month: { type: new GraphQLNonNull(GraphQLInt) },
+        day: { type: new GraphQLNonNull(GraphQLInt) },
+        hour: { type: new GraphQLNonNull(GraphQLInt) },
+        minute: { type: new GraphQLNonNull(GraphQLInt) },
+        second: { type: new GraphQLNonNull(GraphQLInt) },
+    }),
+});
+
+const DateInputType = new GraphQLInputObjectType({
+    name: "DateInput",
+    fields: () => ({
+        time: { type: new GraphQLNonNull(GraphQLInt) },
+        year: { type: new GraphQLNonNull(GraphQLInt) },
+        month: { type: new GraphQLNonNull(GraphQLInt) },
+        day: { type: new GraphQLNonNull(GraphQLInt) },
+        hour: { type: new GraphQLNonNull(GraphQLInt) },
+        minute: { type: new GraphQLNonNull(GraphQLInt) },
+        second: { type: new GraphQLNonNull(GraphQLInt) },
     }),
 });
 
@@ -66,7 +80,7 @@ const BookType = new GraphQLObjectType({
         creationDate: {
             type: new GraphQLNonNull(DateType),
         },
-        private: { type: GraphQLBoolean },
+        private: { type: new GraphQLNonNull(GraphQLBoolean) },
         rating: { type: GraphQLInt },
         quotes: {
             type: new GraphQLList(QuoteType),
@@ -94,7 +108,7 @@ const QuoteType = new GraphQLObjectType({
         },
         page: { type: GraphQLInt },
         tags: { type: new GraphQLList(GraphQLString) },
-        private: { type: GraphQLBoolean },
+        private: { type: new GraphQLNonNull(GraphQLBoolean) },
         rating: { type: GraphQLInt },
         user: {
             type: UserType,
@@ -111,4 +125,4 @@ const QuoteType = new GraphQLObjectType({
     }),
 });
 
-module.exports = { UserType, BookType, QuoteType };
+module.exports = { UserType, BookType, QuoteType, DateType, DateInputType };

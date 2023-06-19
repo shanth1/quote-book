@@ -1,15 +1,6 @@
-const {
-    GraphQLObjectType,
-    GraphQLID,
-    GraphQLString,
-    GraphQLSchema,
-    GraphQLInt,
-    GraphQLList,
-    GraphQLNonNull,
-    GraphQLEnumType,
-} = require("graphql");
-const Book = require("../../models/Book");
+const { GraphQLID, GraphQLList, GraphQLNonNull } = require("graphql");
 const { BookType } = require("../types");
+const Book = require("../../models/Book");
 
 const getAllBooks = {
     type: new GraphQLList(BookType),

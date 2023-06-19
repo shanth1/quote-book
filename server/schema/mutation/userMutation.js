@@ -1,29 +1,23 @@
-const {
-    GraphQLObjectType,
-    GraphQLID,
-    GraphQLString,
-    GraphQLSchema,
-    GraphQLInt,
-    GraphQLList,
-    GraphQLNonNull,
-    GraphQLEnumType,
-} = require("graphql");
+const { GraphQLID, GraphQLString, GraphQLNonNull } = require("graphql");
 const User = require("../../models/User");
-const { UserType, BookType } = require("../types");
+const { UserType, DateInputType } = require("../types");
 const Book = require("../../models/Book");
+const Quote = require("../../models/Quote");
 
 const addUser = {
     type: UserType,
     args: {
         name: { type: GraphQLString },
-        login: { type: GraphQLNonNull(GraphQLString) },
+        username: { type: GraphQLNonNull(GraphQLString) },
         password: { type: GraphQLNonNull(GraphQLString) },
+        registrationDate: {
+            type: new GraphQLNonNull(DateInputType),
+        },
     },
     resolve(parent, args) {
         const user = new User({
             name: args.name,
-            login: args.login,
-            password: args.password,
+            username: args.username,
         });
 
         return user.save();
@@ -37,6 +31,12 @@ const deleteUser = {
         Book.find({ userId: args.id }).then((books) => {
             books.forEach((book) => {
                 book.deleteOne();
+            });
+        });
+
+        Quote.find({ userId: args.id }).then((quotes) => {
+            quotes.forEach((quote) => {
+                quote.deleteOne();
             });
         });
 

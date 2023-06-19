@@ -1,16 +1,6 @@
-const {
-    GraphQLObjectType,
-    GraphQLID,
-    GraphQLString,
-    GraphQLSchema,
-    GraphQLInt,
-    GraphQLList,
-    GraphQLNonNull,
-    GraphQLEnumType,
-} = require("graphql");
+const { GraphQLID, GraphQLList, GraphQLNonNull } = require("graphql");
+const { UserType } = require("../types");
 const User = require("../../models/User");
-const Book = require("../../models/Book");
-const { UserType, BookType } = require("../types");
 
 const getAllUsers = {
     type: new GraphQLList(UserType),
@@ -27,12 +17,4 @@ const getUser = {
     },
 };
 
-const getUserBooks = {
-    type: new GraphQLList(BookType),
-    args: { id: { type: GraphQLNonNull(GraphQLID) } },
-    resolve(parent, args) {
-        return Book.find({ userId: args.id });
-    },
-};
-
-module.exports = { getAllUsers, getUser, getUserBooks };
+module.exports = { getAllUsers, getUser };
