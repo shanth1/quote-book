@@ -9,7 +9,7 @@ const {
     GraphQLEnumType,
 } = require("graphql");
 const User = require("../../models/User");
-const UserType = require("../types/userType");
+const { UserType, BookType } = require("../types");
 const Book = require("../../models/Book");
 
 const addUser = {

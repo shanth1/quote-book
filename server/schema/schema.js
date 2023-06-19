@@ -1,6 +1,6 @@
 const { GraphQLObjectType, GraphQLSchema } = require("graphql");
 const { getAllBooks, getBook } = require("./query/bookQuery");
-const { getAllUsers, getUser } = require("./query/userQuery");
+const { getAllUsers, getUser, getUserBooks } = require("./query/userQuery");
 const { addUser, deleteUser } = require("./mutation/userMutation");
 const { addBook, deleteBook } = require("./mutation/bookMutation");
 
@@ -11,6 +11,7 @@ const query = new GraphQLObjectType({
         getBook,
         getAllUsers,
         getUser,
+        getUserBooks,
     },
 });
 

@@ -9,7 +9,7 @@ const {
     GraphQLEnumType,
 } = require("graphql");
 const Book = require("../../models/Book");
-const BookType = require("../types/bookType");
+const { BookType } = require("../types");
 
 const getAllBooks = {
     type: new GraphQLList(BookType),

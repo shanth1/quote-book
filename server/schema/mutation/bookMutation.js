@@ -9,7 +9,8 @@ const {
     GraphQLEnumType,
 } = require("graphql");
 const Book = require("../../models/Book");
-const BookType = require("../types/bookType");
+const User = require("../../models/User");
+const { UserType, BookType } = require("../types");
 
 const addBook = {
     type: BookType,
@@ -43,6 +44,8 @@ const addBook = {
             rating: args.rating,
             userId: args.userId,
         });
+
+        console.log(User.findById(args.userId));
 
         return book.save();
     },
