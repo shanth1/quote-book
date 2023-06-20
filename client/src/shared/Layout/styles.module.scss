@@ -1,0 +1,18 @@
+$offset: 50px;
+
+.layout {
+    padding: 0 200px 0 200px;
+    box-sizing: border-box;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: $offset;
+    background-color: red;
+}
+
+.body {
+    margin-top: $offset;
+}
