@@ -18,6 +18,8 @@ const addUser = {
         const user = new User({
             name: args.name,
             username: args.username,
+            password: args.password,
+            registrationDate: args.registrationDate,
         });
 
         return user.save();

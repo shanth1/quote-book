@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Modal } from "../../shared/Modal/Modal";
+import { gql, useQuery } from "@apollo/client";
 
 export const Book = () => {
     const [bookModalActive, setBookModalActive] = useState(true);

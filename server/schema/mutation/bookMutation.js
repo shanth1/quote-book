@@ -16,9 +16,6 @@ const addBook = {
     args: {
         title: { type: GraphQLNonNull(GraphQLString) },
         authors: { type: new GraphQLList(GraphQLNonNull(GraphQLString)) },
-        mainIdea: { type: GraphQLString },
-        description: { type: GraphQLString },
-        pages: { type: GraphQLInt },
         year: { type: GraphQLInt },
         pages: { type: GraphQLInt },
         image: { type: GraphQLString },
@@ -49,14 +46,19 @@ const addBook = {
         const book = new Book({
             title: args.title,
             authors: args.authors,
+            year: args.year,
+            pages: args.pages,
+            image: args.image,
+            file: args.file,
             mainIdea: args.mainIdea,
             description: args.description,
-            pages: args.pages,
+            genres: args.genres,
+            tags: args.tags,
+            creationDate: args.creationDate,
+            private: args.private,
             rating: args.rating,
             userId: args.userId,
         });
-
-        console.log(User.findById(args.userId));
 
         return book.save();
     },
