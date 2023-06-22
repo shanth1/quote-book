@@ -32,7 +32,6 @@ module.exports = {
 
         deleteUser: async (_, { userId }, { User, Book, Quote }) => {
             try {
-                console.log(userId);
                 Book.find({ userId }).then((books) => {
                     books.forEach((book) => {
                         book.deleteOne();
