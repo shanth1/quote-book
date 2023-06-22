@@ -1,0 +1,55 @@
+query GetAllBooks {
+    getAllBooks {
+        id
+        title
+        authors
+        year
+        pages
+        image
+        file
+        mainIdea
+        description
+        genres
+        tags
+        private
+        rating
+        quotes {
+            id
+            text
+        }
+        user {
+            id
+            username
+        }
+        createdAt
+        updatedAt
+    }
+}
+
+query GetBook($bookId: ID!) {
+    getBook(bookId: $bookId) {
+        id
+        title
+        authors
+        year
+        pages
+        image
+        file
+        mainIdea
+        description
+        genres
+        tags
+        private
+        rating
+        quotes {
+            id
+            text
+        }
+        user {
+            id
+            username
+        }
+        createdAt
+        updatedAt
+    }
+}
