@@ -44,6 +44,6 @@ module.exports = gql`
         private: Boolean!
         rating: Int
         quotes: [Quote]
-        user: User!
+        user: User
     }
 `;

@@ -31,6 +31,6 @@ module.exports = gql`
         tags: [String]
         private: Boolean!
         user: User!
-        fromBook: Book!
+        book: Book!
     }
 `;

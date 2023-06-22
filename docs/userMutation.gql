@@ -1,0 +1,26 @@
+mutation RegisterUser($user: UserInput) {
+    registerUser(user: $user) {
+        id
+        firstName
+        lastName
+        username
+        password
+        books {
+            title
+            authors
+        }
+        quotes {
+            text
+        }
+        createdAt
+        updatedAt
+    }
+}
+
+mutation DeleteUser($userId: ID!) {
+    deleteUser(userId: $userId) {
+        id
+        firstName
+        username
+    }
+}

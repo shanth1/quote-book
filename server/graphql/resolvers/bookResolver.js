@@ -4,13 +4,20 @@ module.exports = {
             const books = await Book.find();
             return books;
         },
-        getBook: async (_, { bookArgs }, { Book }) => {
-            const { bookId } = bookArgs;
-            return await Book.find(bookId);
+        getBook: async (_, { bookId }, { Book }) => {
+            return await Book.findById(bookId);
+        },
+    },
+    Book: {
+        quotes: async (parent, _, { Quote }) => {
+            return await Quote.find({ bookId: parent.id });
+        },
+        user: async ({ userId }, _, { User }) => {
+            return User.findById(userId);
         },
     },
     Mutation: {
-        addBook: async (_, { userArgs }, { User }) => {
+        addBook: async (_, { book }, { User, Book }) => {
             const {
                 title,
                 authors,
@@ -25,7 +32,7 @@ module.exports = {
                 private,
                 rating,
                 userId,
-            } = userArgs;
+            } = book;
             const newBook = new Book({
                 title,
                 authors,
@@ -45,11 +52,10 @@ module.exports = {
             return newBook.save();
         },
 
-        deleteBook: async (_, { bookArgs }, { Book }) => {
-            const { bookId } = bookArgs;
-            Book.find({ bookId }).then((books) => {
-                books.forEach((book) => {
-                    book.deleteOne();
+        deleteBook: async (_, { bookId }, { Book, Quote }) => {
+            Quote.find({ bookId }).then((quote) => {
+                quote.forEach((quote) => {
+                    quote.deleteOne();
                 });
             });
 

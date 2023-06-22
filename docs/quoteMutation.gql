@@ -1,0 +1,28 @@
+mutation AddQuote($quote: QuoteInput!) {
+    addQuote(quote: $quote) {
+        id
+        header
+        text
+        page
+        private
+        tags
+        user {
+            id
+            firstName
+            username
+        }
+        book {
+            id
+            title
+        }
+        createdAt
+        updatedAt
+    }
+}
+
+mutation Mutation($quoteId: ID!) {
+    deleteQuote(quoteId: $quoteId) {
+        id
+        text
+    }
+}
