@@ -1,0 +1,43 @@
+query GetAllQuotes {
+    getAllQuotes {
+        id
+        header
+        text
+        page
+        tags
+        private
+        user {
+            id
+            firstName
+            username
+        }
+        book {
+            id
+            title
+        }
+        createdAt
+        updatedAt
+    }
+}
+
+query GetQuote($quoteId: ID!) {
+    getQuote(quoteId: $quoteId) {
+        id
+        header
+        text
+        page
+        tags
+        private
+        user {
+            id
+            firstName
+            username
+        }
+        book {
+            id
+            title
+        }
+        createdAt
+        updatedAt
+    }
+}

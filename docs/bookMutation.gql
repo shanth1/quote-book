@@ -1,0 +1,34 @@
+mutation AddBook($book: BookInput) {
+    addBook(book: $book) {
+        id
+        title
+        authors
+        year
+        pages
+        image
+        file
+        mainIdea
+        description
+        genres
+        tags
+        private
+        rating
+        quotes {
+            id
+            text
+        }
+        user {
+            id
+            username
+        }
+        createdAt
+        updatedAt
+    }
+}
+
+mutation DeleteBook($bookId: ID!) {
+    deleteBook(bookId: $bookId) {
+        id
+        title
+    }
+}

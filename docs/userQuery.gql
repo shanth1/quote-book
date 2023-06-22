@@ -1,0 +1,39 @@
+query GetAllUsers {
+    getAllUsers {
+        id
+        firstName
+        lastName
+        username
+        password
+        books {
+            id
+            title
+        }
+        quotes {
+            id
+            text
+        }
+        createdAt
+        updatedAt
+    }
+}
+
+query GetAllUsers($userId: ID!) {
+    getUser(userId: $userId) {
+        id
+        firstName
+        lastName
+        username
+        password
+        books {
+            id
+            title
+        }
+        quotes {
+            id
+            text
+        }
+        createdAt
+        updatedAt
+    }
+}
