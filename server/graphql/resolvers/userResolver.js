@@ -1,6 +1,6 @@
 const { ApolloError } = require("apollo-server-express");
 
-const { hash } = require("bcryptjs");
+const { hash, compare } = require("bcryptjs");
 const createToken = require("../../functions/issueToken");
 
 module.exports = {
@@ -11,6 +11,25 @@ module.exports = {
         },
         getUser: async (_, { userId }, { User }) => {
             return await User.findById(userId);
+        },
+        authenticateUser: async (_, { username, password }, { User }) => {
+            try {
+                const user = await User.findOne({ username });
+                if (!user) {
+                    throw new ApolloError("User not found");
+                }
+                const isPasswordCorrect = await compare(
+                    password,
+                    user.password,
+                );
+                if (!isPasswordCorrect) {
+                    throw new ApolloError("Invalid password");
+                }
+                const token = createToken(user.username);
+                return { user, token };
+            } catch (error) {
+                throw new ApolloError(error.message, 403);
+            }
         },
     },
 

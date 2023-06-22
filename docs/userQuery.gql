@@ -37,3 +37,14 @@ query GetAllUsers($userId: ID!) {
         updatedAt
     }
 }
+
+query AuthenticateUser($username: String!, $password: String!) {
+    authenticateUser(username: $username, password: $password) {
+        user {
+            id
+            firstName
+            username
+        }
+        token
+    }
+}
