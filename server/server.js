@@ -13,6 +13,7 @@ const baseDefs = require("./graphql/typeDefs/baseDef.js");
 const userType = require("./graphql/typeDefs/userType.js");
 const bookType = require("./graphql/typeDefs/bookType.js");
 const quoteType = require("./graphql/typeDefs/quoteType.js");
+const AuthMiddleware = require("./middleware/auth.js");
 
 const typeDefs = [baseDefs, userType, bookType, quoteType];
 const resolvers = [userResolver, bookResolver, quoteResolver];
@@ -20,12 +21,20 @@ const resolvers = [userResolver, bookResolver, quoteResolver];
 const PORT = process.env.PORT || 4000;
 
 const app = express();
+app.use(AuthMiddleware);
 
 const server = new ApolloServer({
     typeDefs,
     resolvers,
     playground: process.env.NODE_ENV === "development",
-    context: { ...AppModel },
+    context: ({ req }) => {
+        let { user, isAuth } = req;
+        return {
+            user,
+            isAuth,
+            ...AppModel,
+        };
+    },
 });
 
 const startApp = async () => {
