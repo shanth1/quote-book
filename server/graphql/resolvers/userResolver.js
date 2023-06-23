@@ -12,7 +12,7 @@ module.exports = {
         getUser: async (_, { userId }, { User }) => {
             return await User.findById(userId);
         },
-        authenticateUser: async (_, { username, password }, { User }) => {
+        loginUser: async (_, { username, password }, { User }) => {
             try {
                 const user = await User.findOne({ username });
                 if (!user) {

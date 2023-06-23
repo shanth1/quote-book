@@ -38,8 +38,8 @@ query GetAllUsers($userId: ID!) {
     }
 }
 
-query AuthenticateUser($username: String!, $password: String!) {
-    authenticateUser(username: $username, password: $password) {
+query LoginUser($username: String!, $password: String!) {
+    loginUser(username: $username, password: $password) {
         user {
             id
             firstName
