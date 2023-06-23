@@ -1,3 +1,8 @@
+const { ApolloError } = require("apollo-server-express");
+
+const { hash, compare } = require("bcryptjs");
+const createToken = require("../../functions/issueToken");
+
 module.exports = {
     Query: {
         getAllUsers: async (parent, {}, { User }) => {
@@ -6,6 +11,25 @@ module.exports = {
         },
         getUser: async (_, { userId }, { User }) => {
             return await User.findById(userId);
+        },
+        loginUser: async (_, { username, password }, { User }) => {
+            try {
+                const user = await User.findOne({ username });
+                if (!user) {
+                    throw new ApolloError("User not found");
+                }
+                const isPasswordCorrect = await compare(
+                    password,
+                    user.password,
+                );
+                if (!isPasswordCorrect) {
+                    throw new ApolloError("Invalid password");
+                }
+                const token = createToken(user.username);
+                return { user, token };
+            } catch (error) {
+                throw new ApolloError(error.message, 403);
+            }
         },
     },
 
@@ -18,16 +42,32 @@ module.exports = {
         },
     },
     Mutation: {
-        registerUser: async (_, { user }, { User }) => {
-            const { firstName, lastName, username, password } = user;
-            const newUser = new User({
-                firstName,
-                lastName,
-                username,
-                password,
-            });
+        registerUser: async (_, args, { User }) => {
+            try {
+                const { firstName, lastName, username, password } = args.user;
 
-            return newUser.save();
+                const newUser = await User.findOne({ username });
+
+                if (newUser) {
+                    throw new Error("Username is already taken ");
+                }
+
+                const hashedPassword = await hash(password, 7);
+
+                const user = new User({
+                    firstName,
+                    lastName,
+                    username,
+                    password: hashedPassword,
+                });
+
+                user.save();
+                const token = createToken(user.username);
+
+                return { user, token };
+            } catch (error) {
+                throw new ApolloError(error.message, 400);
+            }
         },
 
         deleteUser: async (_, { userId }, { User, Book, Quote }) => {

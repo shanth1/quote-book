@@ -4,11 +4,17 @@ module.exports = gql`
     extend type Query {
         getAllUsers: [User]!
         getUser(userId: ID!): User!
+        loginUser(username: String!, password: String!): AuthResponse!
     }
 
     extend type Mutation {
-        registerUser(user: UserInput): User!
+        registerUser(user: UserInput): AuthResponse!
         deleteUser(userId: ID!): User!
+    }
+
+    type AuthResponse {
+        user: User!
+        token: String!
     }
 
     input UserInput {
