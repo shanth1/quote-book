@@ -10,6 +10,8 @@ import {
     InMemoryCache,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+import { BrowserRouter } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
 
 const httpLint = createHttpLink({ uri: "http://localhost:4000/" });
 
@@ -31,9 +33,13 @@ const client = new ApolloClient({
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
-        <ApolloProvider client={client}>
-            <App />
-        </ApolloProvider>
+        <AuthProvider>
+            <ApolloProvider client={client}>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
+            </ApolloProvider>
+        </AuthProvider>
     </React.StrictMode>,
 );
 
