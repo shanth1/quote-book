@@ -44,7 +44,8 @@ module.exports = {
     Mutation: {
         registerUser: async (_, args, { User }) => {
             try {
-                const { firstName, lastName, username, password } = args.user;
+                const { firstName, lastName, email, username, password } =
+                    args.user;
 
                 const newUser = await User.findOne({ username });
 
@@ -57,12 +58,16 @@ module.exports = {
                 const user = new User({
                     firstName,
                     lastName,
+                    email,
                     username,
                     password: hashedPassword,
                 });
 
                 user.save();
-                const token = createToken(user.username);
+                const token = createToken({
+                    userId: user.id,
+                    userName: user.username,
+                });
 
                 return { user, token };
             } catch (error) {

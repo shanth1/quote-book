@@ -15,12 +15,15 @@ const bookType = require("./graphql/typeDefs/bookType.js");
 const quoteType = require("./graphql/typeDefs/quoteType.js");
 const AuthMiddleware = require("./middleware/auth.js");
 
+const cors = require("cors");
+
 const typeDefs = [baseDefs, userType, bookType, quoteType];
 const resolvers = [userResolver, bookResolver, quoteResolver];
 
 const PORT = process.env.PORT || 4000;
 
 const app = express();
+app.use(cors());
 app.use(AuthMiddleware);
 
 const server = new ApolloServer({
