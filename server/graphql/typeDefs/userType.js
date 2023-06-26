@@ -20,6 +20,7 @@ module.exports = gql`
     input UserInput {
         firstName: String
         lastName: String
+        email: String!
         username: String!
         password: String!
     }
@@ -28,6 +29,7 @@ module.exports = gql`
         id: ID!
         firstName: String
         lastName: String
+        email: String!
         username: String!
         password: String!
         createdAt: String!
