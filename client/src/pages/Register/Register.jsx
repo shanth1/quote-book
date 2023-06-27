@@ -1,7 +1,51 @@
-import { Link } from "react-router-dom";
-// import styles from "./styles.module.scss";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import { useForm } from "../../hooks/formHook";
+import { gql, useMutation } from "@apollo/client";
+
+const REGISTER_USER = gql`
+    mutation RegisterUser($user: UserInput) {
+        registerUser(user: $user) {
+            user {
+                id
+                email
+                username
+            }
+            token
+        }
+    }
+`;
 
 export const Register = () => {
+    const context = useContext(AuthContext);
+    let navigate = useNavigate();
+    const [errors, setErrors] = useState([]);
+
+    const registerUserCallback = () => {
+        registerUser();
+    };
+
+    const [onChange, onSubmit, values] = useForm(registerUserCallback, {
+        firstName: "",
+        email: "",
+        username: "",
+        password: "",
+    });
+
+    const [registerUser] = useMutation(REGISTER_USER, {
+        update(cache, { data: { registerUser: authResponse } }) {
+            context.login(authResponse);
+            navigate("/");
+        },
+        onError({ graphQLErrors }) {
+            setErrors(graphQLErrors);
+        },
+        variables: {
+            user: values,
+        },
+    });
+
     return (
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-full lg:py-0">
             {/* <Link
@@ -39,6 +83,8 @@ export const Register = () => {
                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="name"
                                 required=""
+                                name="firstName"
+                                onChange={onChange}
                             />
                         </div>
                         <div>
@@ -53,6 +99,8 @@ export const Register = () => {
                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="username"
                                 required=""
+                                name="username"
+                                onChange={onChange}
                             />
                         </div>
                         <div>
@@ -69,6 +117,7 @@ export const Register = () => {
                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="name@company.com"
                                 required=""
+                                onChange={onChange}
                             />
                         </div>
                         <div>
@@ -85,6 +134,7 @@ export const Register = () => {
                                 placeholder="••••••••"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required=""
+                                onChange={onChange}
                             />
                         </div>
                         <div>
@@ -103,6 +153,9 @@ export const Register = () => {
                                 required=""
                             />
                         </div>
+                        {errors.map((error) => (
+                            <div>{error.message}</div>
+                        ))}
                         {/* <div class="flex items-start">
                             <div class="flex items-center h-5">
                                 <input
@@ -130,6 +183,7 @@ export const Register = () => {
                         </div> */}
                         <button
                             type="submit"
+                            onClick={onSubmit}
                             class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                         >
                             Create an account

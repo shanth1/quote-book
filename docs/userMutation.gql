@@ -4,6 +4,7 @@ mutation RegisterUser($user: UserInput) {
         firstName
         lastName
         username
+        username
         password
         books {
             title

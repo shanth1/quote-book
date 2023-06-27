@@ -12,6 +12,17 @@ module.exports = {
         getUser: async (_, { userId }, { User }) => {
             return await User.findById(userId);
         },
+    },
+
+    User: {
+        books: async (parent, _, { Book }) => {
+            return await Book.find({ userId: parent.id });
+        },
+        quotes: async (parent, _, { Quote }) => {
+            return await Quote.find({ userId: parent.id });
+        },
+    },
+    Mutation: {
         loginUser: async (_, { username, password }, { User }) => {
             try {
                 const user = await User.findOne({ username });
@@ -25,25 +36,18 @@ module.exports = {
                 if (!isPasswordCorrect) {
                     throw new ApolloError("Invalid password");
                 }
-                const token = createToken(user.username);
+                const token = createToken({
+                    userId: user.id,
+                    username: user.username,
+                });
                 return { user, token };
             } catch (error) {
                 throw new ApolloError(error.message, 403);
             }
         },
-    },
-
-    User: {
-        books: async (parent, _, { Book }) => {
-            return await Book.find({ userId: parent.id });
-        },
-        quotes: async (parent, _, { Quote }) => {
-            return await Quote.find({ userId: parent.id });
-        },
-    },
-    Mutation: {
         registerUser: async (_, args, { User }) => {
             try {
+                console.log("REGISTER");
                 const { firstName, lastName, email, username, password } =
                     args.user;
 
@@ -66,7 +70,7 @@ module.exports = {
                 user.save();
                 const token = createToken({
                     userId: user.id,
-                    userName: user.username,
+                    username: user.username,
                 });
 
                 return { user, token };

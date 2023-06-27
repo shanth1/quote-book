@@ -2,11 +2,13 @@ import jwtDecode from "jwt-decode";
 import React, { useReducer, createContext } from "react";
 
 const initialState = {
+    token: null,
     user: null,
 };
 
-if (localStorage.getItem("token")) {
-    const decodedToken = jwtDecode(localStorage.getItem("token"));
+const token = localStorage.getItem("token");
+if (token && token !== "undefined") {
+    const decodedToken = jwtDecode(token);
 
     if (decodedToken.exp * 1000 < Date.now()) {
         localStorage.removeItem("token");
@@ -15,23 +17,19 @@ if (localStorage.getItem("token")) {
     }
 }
 
-const AuthContext = createContext({
-    user: null,
-    login: (userData) => {},
-    logout: () => {},
-});
-
 const authReducer = (state, action) => {
     switch (action.type) {
         case "LOGIN":
             return {
                 ...state,
-                user: action.payload,
+                user: action.payload.user,
+                token: action.payload.token,
             };
         case "LOGOUT":
             return {
                 ...state,
                 user: null,
+                token: null,
             };
 
         default:
@@ -39,18 +37,19 @@ const authReducer = (state, action) => {
     }
 };
 
+const AuthContext = createContext();
 const AuthProvider = (props) => {
     const [state, dispatch] = useReducer(authReducer, initialState);
 
-    const login = (userDate) => {
-        localStorage.setItem("token", userDate.token);
+    const login = (authResponse) => {
+        localStorage.setItem("token", authResponse.token);
         dispatch({
             type: "LOGIN",
-            payload: userDate,
+            payload: authResponse,
         });
     };
 
-    const logout = (userDate) => {
+    const logout = () => {
         localStorage.removeItem("token");
         dispatch({
             type: "LOGOUT",
@@ -59,10 +58,10 @@ const AuthProvider = (props) => {
 
     return (
         <AuthContext.Provider
-            value={{ user: state, login, logout }}
+            value={{ auth: state, login, logout }}
             {...props}
         />
     );
 };
 
-export { AuthProvider };
+export { AuthProvider, AuthContext };
