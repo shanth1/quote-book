@@ -37,7 +37,7 @@ module.exports = {
                     throw new ApolloError("Invalid password");
                 }
                 const token = createToken({
-                    userId: user.id,
+                    id: user.id,
                     username: user.username,
                 });
                 return { user, token };
@@ -69,7 +69,7 @@ module.exports = {
 
                 user.save();
                 const token = createToken({
-                    userId: user.id,
+                    id: user.id,
                     username: user.username,
                 });
 

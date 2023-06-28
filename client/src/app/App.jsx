@@ -8,6 +8,7 @@ import { NotFound } from "../pages/NotFound/NotFound";
 import { Profile } from "../pages/Profile/Profile";
 import { Quotes } from "../pages/Quotes/Quotes";
 import { Register } from "../pages/Register/Register";
+import { Settings } from "../pages/Settings/Settings";
 import { Layout } from "../shared/Layout/Layout";
 import { Header } from "../widgets/Header/Header";
 import { Routes, Route } from "react-router-dom";
@@ -22,9 +23,10 @@ function App() {
                     <Route path="/register" element={<Register />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/feed" element={<Feed />} />
-                    <Route path="/books" element={<Books />} />
+                    <Route path="/collections/books" element={<Books />} />
                     <Route path="/quotes" element={<Quotes />} />
                     <Route path="/favorites" element={<Favorites />} />
+                    <Route path="/settings" element={<Settings />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </Layout>

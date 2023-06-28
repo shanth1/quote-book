@@ -18,7 +18,7 @@ query GetAllUsers {
     }
 }
 
-query GetAllUsers($userId: ID!) {
+query GetUser($userId: ID!) {
     getUser(userId: $userId) {
         id
         firstName
