@@ -104,7 +104,7 @@ export const Header = () => {
                     {user && (
                         <li>
                             <NavLink
-                                to="/collections/books"
+                                to="collections"
                                 className={({ isActive, isPending }) =>
                                     isActive
                                         ? "block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
@@ -118,7 +118,7 @@ export const Header = () => {
                     )}
                     <li>
                         <NavLink
-                            to="/feed"
+                            to="feed"
                             className={({ isActive, isPending }) =>
                                 isActive
                                     ? "block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
@@ -132,7 +132,7 @@ export const Header = () => {
                     {user && (
                         <li>
                             <NavLink
-                                to="/settings"
+                                to="settings"
                                 className={({ isActive, isPending }) =>
                                     isActive
                                         ? "block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"

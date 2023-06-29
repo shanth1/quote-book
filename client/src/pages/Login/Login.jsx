@@ -33,7 +33,7 @@ export const Login = () => {
     const [loginUser] = useMutation(LOGIN_USER, {
         update(cache, { data: { loginUser: authResponse } }) {
             context.login(authResponse);
-            navigate("/collections/books");
+            navigate("/collections");
         },
         onError({ graphQLErrors }) {
             context.logout();

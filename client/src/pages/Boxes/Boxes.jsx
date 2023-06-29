@@ -15,7 +15,7 @@ const GET_USER = gql`
     }
 `;
 
-export const Books = () => {
+export const Boxes = () => {
     const [bookModalActive, setBookModalActive] = useState(false);
     const {
         auth: { user },
