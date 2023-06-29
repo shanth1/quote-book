@@ -7,9 +7,9 @@ const UserSchema = new mongoose.Schema(
         email: { type: String, unique: true, required: true },
         username: { type: String, unique: true, required: true },
         password: { type: String, required: true },
-        books: {
+        boxes: {
             type: [mongoose.Schema.Types.ObjectId],
-            ref: "Book",
+            ref: "Box",
         },
         quotes: {
             type: [mongoose.Schema.Types.ObjectId],

@@ -1,5 +1,5 @@
 const User = require("./User");
-const Book = require("./Book");
+const Box = require("./Box");
 const Quote = require("./Quote");
 
-module.exports = { User, Book, Quote };
+module.exports = { User, Box, Quote };

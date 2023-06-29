@@ -6,19 +6,19 @@ const connectDB = require("./config/db.js");
 const AppModel = require("./models/AppModel.js");
 
 const userResolver = require("./graphql/resolvers/userResolver.js");
-const bookResolver = require("./graphql/resolvers/bookResolver.js");
+const boxResolver = require("./graphql/resolvers/boxResolver.js");
 const quoteResolver = require("./graphql/resolvers/quoteResolver.js");
 
 const baseDefs = require("./graphql/typeDefs/baseDef.js");
 const userType = require("./graphql/typeDefs/userType.js");
-const bookType = require("./graphql/typeDefs/bookType.js");
+const boxType = require("./graphql/typeDefs/boxType.js");
 const quoteType = require("./graphql/typeDefs/quoteType.js");
 const AuthMiddleware = require("./middleware/auth.js");
 
 const cors = require("cors");
 
-const typeDefs = [baseDefs, userType, bookType, quoteType];
-const resolvers = [userResolver, bookResolver, quoteResolver];
+const typeDefs = [baseDefs, userType, boxType, quoteType];
+const resolvers = [userResolver, boxResolver, quoteResolver];
 
 const PORT = process.env.PORT || 4000;
 

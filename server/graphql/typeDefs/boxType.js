@@ -2,39 +2,36 @@ const { gql } = require("apollo-server-express");
 
 module.exports = gql`
     extend type Query {
-        getAllBooks: [Book]!
-        getBook(bookId: ID!): Book
+        getAllBoxes: [Box]!
+        getBox(boxId: ID!): Box
     }
 
     extend type Mutation {
-        addBook(book: BookInput): Book!
-        deleteBook(bookId: ID!): Book!
+        addBox(box: BoxInput): Box!
+        deleteBox(boxId: ID!): Box!
     }
 
-    input BookInput {
+    input BoxInput {
         title: String!
         authors: [String!]!
         year: Int
-        pages: Int
         image: String
-        file: String
         mainIdea: String
         description: String
         genres: [String]
         tags: [String]
-        private: Boolean!
+        type: String!
+        isPrivate: Boolean!
         rating: Int
         userId: ID!
     }
 
-    type Book {
+    type Box {
         id: ID!
         title: String!
         authors: [String!]!
         year: Int
-        pages: Int
         image: String
-        file: String
         mainIdea: String
         description: String
         genres: [String]

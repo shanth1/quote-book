@@ -15,8 +15,8 @@ module.exports = {
     },
 
     User: {
-        books: async (parent, _, { Book }) => {
-            return await Book.find({ userId: parent.id });
+        boxes: async (parent, _, { Box }) => {
+            return await Box.find({ userId: parent.id });
         },
         quotes: async (parent, _, { Quote }) => {
             return await Quote.find({ userId: parent.id });
@@ -79,11 +79,11 @@ module.exports = {
             }
         },
 
-        deleteUser: async (_, { userId }, { User, Book, Quote }) => {
+        deleteUser: async (_, { userId }, { User, Box, Quote }) => {
             try {
-                Book.find({ userId }).then((books) => {
-                    books.forEach((book) => {
-                        book.deleteOne();
+                Box.find({ userId }).then((boxes) => {
+                    boxes.forEach((box) => {
+                        box.deleteOne();
                     });
                 });
 

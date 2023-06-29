@@ -1,18 +1,24 @@
 const mongoose = require("mongoose");
 
-const BookSchema = new mongoose.Schema(
+const BoxSchema = new mongoose.Schema(
     {
         title: { type: String },
         authors: { type: [String] },
         year: { type: Number },
-        pages: { type: Number },
-        image: { type: String },
-        file: { type: String },
+        image: {
+            type: String,
+            default:
+                "https://www.vinterier.ru/pictures/shop/rodnoiy-peiyzag-kartina-maslom-90x60.jpg",
+        },
         mainIdea: { type: String },
         description: { type: String },
+        type: {
+            type: String,
+            enum: ["Book", "Movie", "Series", "Song", "Other"],
+        },
         genres: { type: [String] },
         tags: { type: [String] },
-        private: Boolean,
+        isPrivate: { type: Boolean, default: true },
         rating: {
             type: Number,
             enum: [1, 2, 3, 4, 5],
@@ -29,4 +35,4 @@ const BookSchema = new mongoose.Schema(
     { timestamps: true },
 );
 
-module.exports = mongoose.model("Book", BookSchema);
+module.exports = mongoose.model("Box", BoxSchema);
