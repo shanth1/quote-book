@@ -3,6 +3,7 @@ import { useState } from "react";
 import { IoAddCircle, IoFileTrayStacked, IoAlbums } from "react-icons/io5";
 import { NavLink, useLocation } from "react-router-dom";
 import { Modal } from "../../shared/Modal/Modal";
+import { AddItem } from "../AddItem/AddItem";
 
 export const TabBar = () => {
     const [addModalActive, setAddModalActive] = useState(false);
@@ -45,9 +46,15 @@ export const TabBar = () => {
                     />
                 </div>
             </div>
-            <Modal active={addModalActive} setActive={setAddModalActive}>
-                {location.pathname}
-            </Modal>
+
+            {addModalActive && (
+                <Modal active={addModalActive} setActive={setAddModalActive}>
+                    <AddItem
+                        path={location.pathname}
+                        closeCallback={() => setAddModalActive(false)}
+                    />
+                </Modal>
+            )}
         </div>
     );
 };

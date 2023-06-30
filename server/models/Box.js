@@ -14,14 +14,13 @@ const BoxSchema = new mongoose.Schema(
         description: { type: String },
         type: {
             type: String,
-            enum: ["Book", "Movie", "Series", "Song", "Other"],
+            enum: ["Book", "Movie", "Music", "Person", "Other"],
         },
         genres: { type: [String] },
         tags: { type: [String] },
         isPrivate: { type: Boolean, default: true },
         rating: {
             type: Number,
-            enum: [1, 2, 3, 4, 5],
         },
         quotes: {
             type: [mongoose.Schema.Types.ObjectId],

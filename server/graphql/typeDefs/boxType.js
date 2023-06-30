@@ -37,8 +37,9 @@ module.exports = gql`
         genres: [String]
         tags: [String]
         createdAt: String!
+        type: String!
         updatedAt: String!
-        private: Boolean!
+        isPrivate: Boolean!
         rating: Int
         quotes: [Quote]
         user: User
