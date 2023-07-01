@@ -4,7 +4,7 @@ import { IoTrashBin, IoPencil } from "react-icons/io5";
 export const Box = ({ boxData }) => {
     const { title, image } = boxData;
     return (
-        <div className=" cursor-pointer hover:bg-primary-100 flex flex-col gap-2 p-2 border-[1px] border-gray-500 rounded-lg ">
+        <div className="cursor-pointer flex flex-col p-3 gap-2 bg-white rounded-lg ">
             <div className="flex justify-between items-center">
                 <div className="p-1 hover:bg-primary-200 rounded-lg">
                     <IoPencil />

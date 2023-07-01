@@ -10,6 +10,7 @@ import { GET_BOOKS } from "../../graphql/queries";
 import { ADD_BOX } from "../../graphql/mutation";
 import H1 from "../../shared/H1/H1";
 import { stringToArray } from "../../utils/stringToArray";
+import Content from "../../shared/Content/Content";
 
 export const AddBox = ({ closeCallback }) => {
     const addBox = () => {
@@ -59,8 +60,8 @@ export const AddBox = ({ closeCallback }) => {
     });
 
     return (
-        <div>
-            <form className="space-y-4 md:space-y-6" action="#">
+        <form>
+            <Content>
                 <H1 text="Add item" />
                 <SelectFrom
                     names={["Book", "Movie", "Person", "Other"]}
@@ -69,7 +70,7 @@ export const AddBox = ({ closeCallback }) => {
                 />
                 <div className="w-full flex gap-4">
                     <div className="w-full">
-                        <Label text="Title" />
+                        <Label>Title</Label>
                         <Input
                             name="title"
                             placeholder="Enter title of box"
@@ -77,7 +78,7 @@ export const AddBox = ({ closeCallback }) => {
                         />
                     </div>
                     <div className="w-52">
-                        <Label text="Rating" />
+                        <Label>Rating</Label>
                         <select
                             onChange={(event) => setRating(event.target.value)}
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -93,7 +94,7 @@ export const AddBox = ({ closeCallback }) => {
                 </div>
                 <div className="w-full flex gap-4">
                     <div className="w-full">
-                        <Label text="Authors" />
+                        <Label>Authors</Label>
                         <Input
                             name="authors"
                             placeholder="Biba, Boba"
@@ -101,7 +102,7 @@ export const AddBox = ({ closeCallback }) => {
                         />
                     </div>
                     <div className="w-52">
-                        <Label text="Year" />
+                        <Label>Year</Label>
                         <Input
                             name="year"
                             placeholder="2023"
@@ -111,7 +112,7 @@ export const AddBox = ({ closeCallback }) => {
                 </div>
 
                 <div>
-                    <Label text="Main idea" />
+                    <Label>Main idea</Label>
                     <Input
                         name="mainIdea"
                         placeholder="Add main idea of box"
@@ -119,7 +120,7 @@ export const AddBox = ({ closeCallback }) => {
                     />
                 </div>
                 <div>
-                    <Label text="Description" />
+                    <Label>Description</Label>
                     <Input
                         name="description"
                         placeholder="Add description"
@@ -128,7 +129,7 @@ export const AddBox = ({ closeCallback }) => {
                 </div>
                 <div className="w-full flex gap-4">
                     <div className="w-full">
-                        <Label text="Genres" />
+                        <Label>Genres</Label>
                         <Input
                             name="genres"
                             placeholder="Drama, Comedy"
@@ -136,7 +137,7 @@ export const AddBox = ({ closeCallback }) => {
                         />
                     </div>
                     <div className="w-full">
-                        <Label text="Tags" />
+                        <Label>Tags</Label>
                         <Input
                             name="tags"
                             placeholder="Work"
@@ -145,7 +146,7 @@ export const AddBox = ({ closeCallback }) => {
                     </div>
                 </div>
                 <div className="w-50">
-                    <Label text="Image (URL)" />
+                    <Label>Image (URL)</Label>
                     <Input
                         name="image"
                         placeholder="https://www.images.com/image1"
@@ -169,10 +170,10 @@ export const AddBox = ({ closeCallback }) => {
                         </label>
                     </div>
                     <div className="w-full">
-                        <Button text="Add box" onClick={onSubmit} />
+                        <Button onClick={onSubmit}>Add box</Button>
                     </div>
                 </div>
-            </form>
-        </div>
+            </Content>
+        </form>
     );
 };

@@ -3,7 +3,7 @@ import styles from "./styles.module.scss";
 
 export const Layout = ({ header, children }) => {
     return (
-        <div>
+        <div className="py-2 sm:py-4 lg:py-6">
             <div className={classNames(styles.layout, styles.header)}>
                 {header}
             </div>
