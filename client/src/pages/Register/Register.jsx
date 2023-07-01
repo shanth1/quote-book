@@ -2,25 +2,17 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useForm } from "../../hooks/formHook";
-import { gql, useMutation } from "@apollo/client";
-
-const REGISTER_USER = gql`
-    mutation RegisterUser($user: UserInput) {
-        registerUser(user: $user) {
-            user {
-                id
-                email
-                username
-            }
-            token
-        }
-    }
-`;
+import { useMutation } from "@apollo/client";
+import { REGISTER_USER } from "../../graphql/mutation";
+import Label from "../../shared/Label/Label";
+import Input from "../../shared/Input/Input";
+import Button from "../../shared/Button/Button";
+import H1 from "../../shared/H1/H1";
 
 export const Register = () => {
+    const [errors, setErrors] = useState([]);
     const context = useContext(AuthContext);
     let navigate = useNavigate();
-    const [errors, setErrors] = useState([]);
 
     const registerUserCallback = () => {
         registerUser();
@@ -48,109 +40,50 @@ export const Register = () => {
 
     return (
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-full lg:py-0">
-            {/* <Link
-                to="/"
-                className="flex
-                items-center
-                mb-6
-                text-2xl
-                font-semibold
-                text-gray-900
-                dark:text-white"
-            >
-                <img
-                    class="w-8 h-8 mr-2"
-                    src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
-                    alt="logo"
-                />
-                Flowbite
-            </Link> */}
             <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                    <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                        Create an account
-                    </h1>
+                    <H1 text="Create an account" />
                     <form class="space-y-4 md:space-y-6" action="#">
                         <div>
-                            <label
-                                for="name"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                            >
-                                Your name
-                            </label>
-                            <input
-                                type="text"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            <Label text="Your name" />
+                            <Input
                                 placeholder="name"
-                                required=""
                                 name="firstName"
                                 onChange={onChange}
                             />
                         </div>
                         <div>
-                            <label
-                                for="username"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                            >
-                                Your username
-                            </label>
-                            <input
-                                type="text"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            <Label text="Your username" />
+                            <Input
                                 placeholder="username"
-                                required=""
                                 name="username"
                                 onChange={onChange}
                             />
                         </div>
                         <div>
-                            <label
-                                for="email"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                            >
-                                Your email
-                            </label>
-                            <input
-                                type="email"
+                            <Label text="Your email" />
+                            <Input
+                                placeholder="email"
                                 name="email"
-                                id="email"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="name@company.com"
-                                required=""
                                 onChange={onChange}
                             />
                         </div>
                         <div>
-                            <label
-                                for="password"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                            >
-                                Password
-                            </label>
-                            <input
+                            <Label text="Password" />
+                            <Input
                                 type="password"
-                                name="password"
-                                id="password"
                                 placeholder="••••••••"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                required=""
+                                name="password"
                                 onChange={onChange}
                             />
                         </div>
                         <div>
-                            <label
-                                for="confirm-password"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                            >
-                                Confirm password
-                            </label>
-                            <input
-                                type="confirm-password"
-                                name="confirm-password"
-                                id="confirm-password"
+                            <Label text="Confirm password" />
+                            <Input
+                                type="password"
                                 placeholder="••••••••"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                required=""
+                                name="confirmPassword"
+                                onChange={onChange}
                             />
                         </div>
                         {errors.map((error) => (
@@ -181,13 +114,7 @@ export const Register = () => {
                                 </label>
                             </div>
                         </div> */}
-                        <button
-                            type="submit"
-                            onClick={onSubmit}
-                            class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                        >
-                            Create an account
-                        </button>
+                        <Button text="Create an account" onClick={onSubmit} />
                         <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                             Already have an account?{" "}
                             <Link

@@ -4,52 +4,14 @@ import Input from "../../shared/Input/Input";
 import { useForm } from "../../hooks/formHook";
 import Label from "../../shared/Label/Label";
 import SelectFrom from "../../shared/SelectForm/SelectForm";
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { AuthContext } from "../../context/AuthContext";
+import { GET_BOOKS } from "../../graphql/queries";
+import { ADD_BOX } from "../../graphql/mutation";
+import H1 from "../../shared/H1/H1";
+import { stringToArray } from "../../utils/stringToArray";
 
-const ADD_BOX = gql`
-    mutation AddBox($box: BoxInput) {
-        addBox(box: $box) {
-            id
-            title
-            authors
-            year
-            image
-            mainIdea
-            description
-            genres
-            tags
-            createdAt
-            updatedAt
-            isPrivate
-            rating
-            user {
-                id
-                username
-            }
-            type
-        }
-    }
-`;
-
-const GET_USER = gql`
-    query GetUser($userId: ID!) {
-        getUser(userId: $userId) {
-            username
-            boxes {
-                id
-                title
-                image
-            }
-        }
-    }
-`;
-
-const stringToArray = (string) => {
-    return string.split(",");
-};
-
-export const AddItem = ({ path, closeCallback }) => {
+export const AddBox = ({ closeCallback }) => {
     const addBox = () => {
         addBoxMutation();
         closeCallback();
@@ -93,15 +55,13 @@ export const AddItem = ({ path, closeCallback }) => {
                 image: values.image ? values.image : undefined,
             },
         },
-        refetchQueries: [GET_USER],
+        refetchQueries: [GET_BOOKS],
     });
 
     return (
         <div>
             <form className="space-y-4 md:space-y-6" action="#">
-                <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                    Add item
-                </h1>
+                <H1 text="Add item" />
                 <SelectFrom
                     names={["Book", "Movie", "Person", "Other"]}
                     selected={type}
@@ -111,7 +71,6 @@ export const AddItem = ({ path, closeCallback }) => {
                     <div className="w-full">
                         <Label text="Title" />
                         <Input
-                            type="text"
                             name="title"
                             placeholder="Enter title of box"
                             onChange={onChange}
@@ -136,7 +95,6 @@ export const AddItem = ({ path, closeCallback }) => {
                     <div className="w-full">
                         <Label text="Authors" />
                         <Input
-                            type="text"
                             name="authors"
                             placeholder="Biba, Boba"
                             onChange={onChange}
@@ -145,7 +103,6 @@ export const AddItem = ({ path, closeCallback }) => {
                     <div className="w-52">
                         <Label text="Year" />
                         <Input
-                            type="text"
                             name="year"
                             placeholder="2023"
                             onChange={onChange}
@@ -156,7 +113,6 @@ export const AddItem = ({ path, closeCallback }) => {
                 <div>
                     <Label text="Main idea" />
                     <Input
-                        type="text"
                         name="mainIdea"
                         placeholder="Add main idea of box"
                         onChange={onChange}
@@ -165,7 +121,6 @@ export const AddItem = ({ path, closeCallback }) => {
                 <div>
                     <Label text="Description" />
                     <Input
-                        type="text"
                         name="description"
                         placeholder="Add description"
                         onChange={onChange}
@@ -175,7 +130,6 @@ export const AddItem = ({ path, closeCallback }) => {
                     <div className="w-full">
                         <Label text="Genres" />
                         <Input
-                            type="text"
                             name="genres"
                             placeholder="Drama, Comedy"
                             onChange={onChange}
@@ -184,7 +138,6 @@ export const AddItem = ({ path, closeCallback }) => {
                     <div className="w-full">
                         <Label text="Tags" />
                         <Input
-                            type="text"
                             name="tags"
                             placeholder="Work"
                             onChange={onChange}
@@ -194,9 +147,8 @@ export const AddItem = ({ path, closeCallback }) => {
                 <div className="w-50">
                     <Label text="Image (URL)" />
                     <Input
-                        type="text"
                         name="image"
-                        placeholder="https://images.com/image1"
+                        placeholder="https://www.images.com/image1"
                         onChange={onChange}
                     />
                 </div>
@@ -217,11 +169,7 @@ export const AddItem = ({ path, closeCallback }) => {
                         </label>
                     </div>
                     <div className="w-full">
-                        <Button
-                            text="Add box"
-                            type="submit"
-                            onClick={onSubmit}
-                        />
+                        <Button text="Add box" onClick={onSubmit} />
                     </div>
                 </div>
             </form>

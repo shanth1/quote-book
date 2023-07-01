@@ -2,21 +2,12 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useForm } from "../../hooks/formHook";
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import Button from "../../shared/Button/Button";
 import Input from "../../shared/Input/Input";
-
-const LOGIN_USER = gql`
-    mutation LoginUser($username: String!, $password: String!) {
-        loginUser(username: $username, password: $password) {
-            user {
-                id
-                username
-            }
-            token
-        }
-    }
-`;
+import { LOGIN_USER } from "../../graphql/mutation";
+import H1 from "../../shared/H1/H1";
+import Label from "../../shared/Label/Label";
 
 export const Login = () => {
     const context = useContext(AuthContext);
@@ -62,50 +53,29 @@ export const Login = () => {
             </Link>
             <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                 <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                    <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                        Sign in to your account
-                    </h1>
+                    <H1 text="Sign in to your account" />
                     <form className="space-y-4 md:space-y-6" action="#">
                         <div>
-                            <label
-                                // for="email"
-                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                            >
-                                Username
-                            </label>
+                            <Label text="Username" />
                             <Input
-                                type="text"
                                 name="username"
                                 placeholder="Enter your username"
                                 onChange={onChange}
                             />
                         </div>
                         <div>
-                            <label
-                                for="password"
-                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                            >
-                                Password
-                            </label>
-                            <input
+                            <Label text="Password" />
+                            <Input
                                 type="password"
                                 name="password"
-                                id="password"
-                                placeholder="••••••••"
-                                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                required=""
+                                placeholder="Enter your password"
                                 onChange={onChange}
                             />
                         </div>
                         <div className="flex items-center justify-between">
                             <div className="flex items-start">
                                 <div className="flex items-center h-5">
-                                    <input
-                                        type="checkbox"
-                                        id="remember"
-                                        aria-describedby="remember"
-                                        required=""
-                                    />
+                                    <Input type="checkbox" />
                                 </div>
                                 <div className="ml-3 text-sm">
                                     <label

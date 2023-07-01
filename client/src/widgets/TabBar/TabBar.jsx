@@ -1,14 +1,12 @@
 // import styles from "./styles.module.scss";
 import { useState } from "react";
 import { IoAddCircle, IoFileTrayStacked, IoAlbums } from "react-icons/io5";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Modal } from "../../shared/Modal/Modal";
-import { AddItem } from "../AddItem/AddItem";
+import { AddBox } from "../AddBox/AddBox";
 
 export const TabBar = () => {
     const [addModalActive, setAddModalActive] = useState(false);
-
-    const location = useLocation();
 
     return (
         <div className="flex justify-center">
@@ -17,7 +15,7 @@ export const TabBar = () => {
                     <NavLink to="boxes">
                         {({ isActive }) => (
                             <div>
-                                <IoAlbums
+                                <IoFileTrayStacked
                                     size="30px"
                                     color={isActive ? "blue" : "white"}
                                 />
@@ -27,7 +25,7 @@ export const TabBar = () => {
                     <NavLink to="quotes">
                         {({ isActive }) => (
                             <div>
-                                <IoFileTrayStacked
+                                <IoAlbums
                                     size="30px"
                                     color={isActive ? "blue" : "white"}
                                 />
@@ -49,10 +47,7 @@ export const TabBar = () => {
 
             {addModalActive && (
                 <Modal active={addModalActive} setActive={setAddModalActive}>
-                    <AddItem
-                        path={location.pathname}
-                        closeCallback={() => setAddModalActive(false)}
-                    />
+                    <AddBox closeCallback={() => setAddModalActive(false)} />
                 </Modal>
             )}
         </div>
