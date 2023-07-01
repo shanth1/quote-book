@@ -10,6 +10,7 @@ const GET_USER = gql`
             boxes {
                 id
                 title
+                image
             }
         }
     }
@@ -29,12 +30,14 @@ export const Boxes = () => {
 
     const boxes = data.getUser.boxes;
 
+    console.log(boxes);
+
     return (
         <div>
             <h1>Книги</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
                 {boxes.length !== 0
-                    ? boxes.map((item) => <Box title={item.title} />)
+                    ? boxes.map((item) => <Box boxData={item} />)
                     : "No boxes"}
             </div>
         </div>

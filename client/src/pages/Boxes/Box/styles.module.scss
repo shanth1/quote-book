@@ -1,0 +1,15 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 40px 1fr;
+    overflow: hidden;
+    padding-top: 2rem;
+    @apply bg-primary-200 rounded-lg;
+}
+
+.imageWrapper {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}

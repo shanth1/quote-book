@@ -39,6 +39,7 @@ const GET_USER = gql`
             boxes {
                 id
                 title
+                image
             }
         }
     }
@@ -89,6 +90,7 @@ export const AddItem = ({ path, closeCallback }) => {
                 description: values.description,
                 isPrivate: isPrivate,
                 rating: Number(rating),
+                image: values.image ? values.image : undefined,
             },
         },
         refetchQueries: [GET_USER],
