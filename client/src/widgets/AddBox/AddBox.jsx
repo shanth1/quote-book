@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Button from "../../shared/Button/Button";
 import Input from "../../shared/Input/Input";
 import { useForm } from "../../hooks/formHook";
@@ -11,6 +11,8 @@ import { ADD_BOX } from "../../graphql/mutation";
 import H1 from "../../shared/H1/H1";
 import { stringToArray } from "../../utils/stringToArray";
 import Content from "../../shared/Content/Content";
+import Required from "../../shared/Required/Required";
+import { validateForm } from "../../utils/validateForm";
 
 export const AddBox = ({ closeCallback }) => {
     const addBox = () => {
@@ -38,6 +40,13 @@ export const AddBox = ({ closeCallback }) => {
         tags: "",
         image: "",
     });
+
+    const [validStatus, setValidStatus] = useState(
+        validateForm([values.title, values.image]),
+    );
+    useEffect(() => {
+        setValidStatus(validateForm([values.title]));
+    }, [values.title]);
 
     const [addBoxMutation] = useMutation(ADD_BOX, {
         variables: {
@@ -70,7 +79,9 @@ export const AddBox = ({ closeCallback }) => {
                 />
                 <div className="w-full flex gap-4">
                     <div className="w-full">
-                        <Label>Title</Label>
+                        <Label>
+                            <Required>Title</Required>
+                        </Label>
                         <Input
                             name="title"
                             placeholder="Enter title of box"
@@ -170,7 +181,9 @@ export const AddBox = ({ closeCallback }) => {
                         </label>
                     </div>
                     <div className="w-full">
-                        <Button onClick={onSubmit}>Add box</Button>
+                        <Button onClick={onSubmit} isActive={validStatus}>
+                            Add box
+                        </Button>
                     </div>
                 </div>
             </Content>
