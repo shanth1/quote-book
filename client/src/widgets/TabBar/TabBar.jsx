@@ -1,48 +1,65 @@
 // import styles from "./styles.module.scss";
 import { useState } from "react";
-import { IoAddCircle, IoFileTrayStacked, IoAlbums } from "react-icons/io5";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { Modal } from "../../shared/Modal/Modal";
 import { AddBox } from "../AddBox/AddBox";
 
+import { FiPlusCircle, FiPackage, FiFileText } from "react-icons/fi";
+
 export const TabBar = () => {
     const [addModalActive, setAddModalActive] = useState(false);
+    const location = useLocation();
 
     return (
-        <div className="flex justify-center">
-            <div className="fixed flex justify-center items-center bottom-10 w-56 h-8  bg-primary-300 rounded-lg px-8 py-5">
-                <div className="flex justify-between w-[100%]">
-                    <NavLink to="boxes">
-                        {({ isActive }) => (
+        <div className="flex justify-center ">
+            <div className="fixed w-56 shadow-md transition-all justify-evenly flex items-center bottom-10 gap-4 bg-white rounded-lg p-1">
+                <NavLink to="boxes">
+                    {({ isActive }) => (
+                        <div
+                            className={
+                                isActive
+                                    ? "p-1 rounded-full bg-primary-500 hover:bg-primary-600 hover:scale-90 transition-all"
+                                    : "transition-all hover:scale-90"
+                            }
+                        >
                             <div>
-                                <IoFileTrayStacked
+                                <FiPackage
                                     size="30px"
-                                    color={isActive ? "blue" : "white"}
+                                    color={isActive ? "white" : "black"}
                                 />
                             </div>
-                        )}
-                    </NavLink>
-                    <NavLink to="quotes">
-                        {({ isActive }) => (
+                        </div>
+                    )}
+                </NavLink>
+                {location.pathname === "/collections/boxes" && (
+                    <div className="flex justify-center">
+                        <div
+                            onClick={() => setAddModalActive(true)}
+                            className="flex w-14 h-14 transition-all hover:scale-110 shadow-lg hover:bg-gray-50 justify-center bg-white items-center cursor-pointer rounded-full absolute top-[-22px] "
+                        >
+                            <FiPlusCircle color="black" size="40px" />
+                        </div>
+                    </div>
+                )}
+
+                <NavLink to="quotes">
+                    {({ isActive }) => (
+                        <div
+                            className={
+                                isActive
+                                    ? "p-1 rounded-full bg-primary-500 hover:bg-primary-600  hover:scale-90 transition-all"
+                                    : "transition-all hover:scale-90"
+                            }
+                        >
                             <div>
-                                <IoAlbums
+                                <FiFileText
                                     size="30px"
-                                    color={isActive ? "blue" : "white"}
+                                    color={isActive ? "white" : "black"}
                                 />
                             </div>
-                        )}
-                    </NavLink>
-                </div>
-                <div
-                    onClick={() => setAddModalActive(true)}
-                    className="flex justify-center items-center cursor-pointer w-12 h-12 rounded-[50%] absolute top-[-50%] bg-primary-500"
-                >
-                    <IoAddCircle
-                        color="white"
-                        size="100%"
-                        style={{ transform: "scale(1)" }}
-                    />
-                </div>
+                        </div>
+                    )}
+                </NavLink>
             </div>
 
             {addModalActive && (
