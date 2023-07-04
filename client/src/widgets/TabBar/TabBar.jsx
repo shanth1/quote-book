@@ -10,6 +10,8 @@ export const TabBar = () => {
     const [addModalActive, setAddModalActive] = useState(false);
     const location = useLocation();
 
+    console.log(location.pathname);
+
     return (
         <div className="flex justify-center ">
             <div className="fixed w-56 shadow-md transition-all justify-evenly flex items-center bottom-10 gap-4 bg-white rounded-lg p-1">
@@ -32,6 +34,16 @@ export const TabBar = () => {
                     )}
                 </NavLink>
                 {location.pathname === "/collections/boxes" && (
+                    <div className="flex justify-center">
+                        <div
+                            onClick={() => setAddModalActive(true)}
+                            className="flex w-14 h-14 transition-all hover:scale-110 shadow-lg hover:bg-gray-50 justify-center bg-white items-center cursor-pointer rounded-full absolute top-[-22px] "
+                        >
+                            <FiPlusCircle color="black" size="40px" />
+                        </div>
+                    </div>
+                )}
+                {location.pathname.includes("/collections/box/") && (
                     <div className="flex justify-center">
                         <div
                             onClick={() => setAddModalActive(true)}
