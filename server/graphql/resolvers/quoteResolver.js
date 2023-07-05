@@ -17,7 +17,7 @@ module.exports = {
     },
     Mutation: {
         addQuote: async (_, { quote }, { Quote }) => {
-            const { header, text, page, tags, isPrivate, userId, bookId } =
+            const { header, text, page, tags, isPrivate, userId, boxId } =
                 quote;
             const newQuote = new Quote({
                 header,
@@ -26,7 +26,7 @@ module.exports = {
                 tags,
                 isPrivate,
                 userId,
-                bookId,
+                boxId,
             });
 
             return newQuote.save();

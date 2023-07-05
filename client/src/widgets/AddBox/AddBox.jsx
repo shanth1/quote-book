@@ -71,7 +71,7 @@ export const AddBox = ({ closeCallback }) => {
     return (
         <form>
             <Content>
-                <H1>Add item</H1>
+                <H1>Add box</H1>
                 <SelectFrom
                     names={["Book", "Movie", "Person", "Other"]}
                     selected={type}

@@ -27,7 +27,7 @@ function App() {
                         <Route index element={<Navigate to="boxes" />} />
                         <Route path="boxes" element={<Boxes />} />
                         <Route path="quotes" element={<Quotes />} />
-                        <Route path="box/:id" element={<Box />} />
+                        <Route path="box/:boxId" element={<Box />} />
                     </Route>
                     <Route path="settings" element={<Settings />} />
                     <Route path="*" element={<NotFound />} />
