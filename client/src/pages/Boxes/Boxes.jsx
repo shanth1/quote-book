@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useQuery } from "@apollo/client";
 import { AuthContext } from "../../context/AuthContext";
 import { BoxPreview } from "./BoxPreview/BoxPreview";
-import { GET_BOOKS } from "../../graphql/queries";
+import { GET_BOXES } from "../../graphql/queries";
 import H1 from "../../shared/H1/H1";
 import Content from "../../shared/Content/Content";
 
@@ -10,7 +10,7 @@ export const Boxes = () => {
     const {
         auth: { user },
     } = useContext(AuthContext);
-    const { loading, error, data } = useQuery(GET_BOOKS, {
+    const { loading, error, data } = useQuery(GET_BOXES, {
         variables: { userId: user.id },
     });
 

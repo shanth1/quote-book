@@ -1,17 +1,20 @@
 import { IoTrashBin, IoPencil } from "react-icons/io5";
 import H2 from "../../shared/H2/H2";
 
-const QuoteItem = ({ username, header, marker, tags, status, text }) => {
+const QuoteItem = ({ quoteData }) => {
+    const { username, header, page, tags, privateStatus, text } = quoteData;
     return (
         <div className="bg-white flex flex-col gap-4 rounded-lg w-full p-4">
             <div className="flex items-center justify-between">
                 <div>
-                    <H2>Header</H2>
-                    <p className="leading-none text-xs">username</p>
+                    <H2>{header}</H2>
+                    <p className="leading-none text-xs">{username}</p>
                 </div>
-                <div className="text-sm">273 page</div>
-                <div className="text-sm hidden lg:flex">Work, Personal</div>
-                <div className="text-sm hidden md:flex">Private</div>
+                <div className="text-sm">{page}</div>
+                <div className="text-sm hidden lg:flex">{tags.join(", ")}</div>
+                <div className="text-sm hidden md:flex">
+                    {privateStatus ? "Private" : "Public"}
+                </div>
                 <div className="flex gap-2">
                     <div className="p-2 cursor-pointer hover:bg-primary-200 rounded-lg">
                         <IoPencil />
@@ -22,13 +25,7 @@ const QuoteItem = ({ username, header, marker, tags, status, text }) => {
                 </div>
             </div>
             <div>
-                <p className="text-justify">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Laboriosam ipsam mollitia, officiis eos non sapiente, error
-                    ea cumque animi temporibus delectus pariatur quidem
-                    blanditiis tempore maxime perspiciatis unde! Culpa,
-                    voluptas.
-                </p>
+                <p className="text-justify">{text}</p>
             </div>
         </div>
     );
