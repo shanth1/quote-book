@@ -34,7 +34,7 @@ module.exports = gql`
         password: String!
         createdAt: String!
         updatedAt: String!
-        books: [Book]
+        boxes: [Box]
         quotes: [Quote]
     }
 `;

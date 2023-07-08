@@ -14,11 +14,12 @@ module.exports = gql`
     input QuoteInput {
         header: String
         text: String!
-        page: Int
+        page: String
+        timeCode: String
         tags: [String]
-        private: Boolean!
+        isPrivate: Boolean!
         userId: ID!
-        bookId: ID!
+        boxId: ID!
     }
 
     type Quote {
@@ -27,10 +28,11 @@ module.exports = gql`
         text: String!
         createdAt: String!
         updatedAt: String!
-        page: Int
+        page: String
+        timeCode: String
         tags: [String]
-        private: Boolean!
+        isPrivate: Boolean!
         user: User!
-        book: Book!
+        box: Box!
     }
 `;

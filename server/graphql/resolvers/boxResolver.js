@@ -1,65 +1,65 @@
 module.exports = {
     Query: {
-        getAllBooks: async (_, {}, { Book }) => {
-            const books = await Book.find();
-            return books;
+        getAllBoxes: async (_, {}, { Box }) => {
+            const boxes = await Box.find();
+            return boxes;
         },
-        getBook: async (_, { bookId }, { Book }) => {
-            return await Book.findById(bookId);
+        getBox: async (_, { boxId }, { Box }) => {
+            return await Box.findById(boxId);
         },
     },
-    Book: {
+    Box: {
         quotes: async (parent, _, { Quote }) => {
-            return await Quote.find({ bookId: parent.id });
+            return await Quote.find({ boxId: parent.id });
         },
         user: async ({ userId }, _, { User }) => {
             return User.findById(userId);
         },
     },
     Mutation: {
-        addBook: async (_, { book }, { User, Book }) => {
+        addBox: async (_, { box }, { Box }) => {
             const {
                 title,
                 authors,
                 year,
-                pages,
                 image,
                 file,
                 mainIdea,
                 description,
                 genres,
+                type,
                 tags,
-                private,
+                isPrivate,
                 rating,
                 userId,
-            } = book;
-            const newBook = new Book({
+            } = box;
+            const newBox = new Box({
                 title,
                 authors,
                 year,
-                pages,
                 image,
                 file,
                 mainIdea,
                 description,
                 genres,
+                type,
                 tags,
-                private,
+                isPrivate,
                 rating,
                 userId,
             });
 
-            return newBook.save();
+            return newBox.save();
         },
 
-        deleteBook: async (_, { bookId }, { Book, Quote }) => {
-            Quote.find({ bookId }).then((quote) => {
+        deleteBox: async (_, { boxId }, { Box, Quote }) => {
+            Quote.find({ boxId }).then((quote) => {
                 quote.forEach((quote) => {
                     quote.deleteOne();
                 });
             });
 
-            return Book.findByIdAndRemove(bookId);
+            return Box.findByIdAndRemove(boxId);
         },
     },
 };

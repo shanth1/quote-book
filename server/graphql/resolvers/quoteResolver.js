@@ -11,21 +11,22 @@ module.exports = {
         user: async ({ userId }, _, { User }) => {
             return User.findById(userId);
         },
-        book: async ({ bookId }, _, { Book }) => {
-            return Book.findById(bookId);
+        box: async ({ boxId }, _, { Box }) => {
+            return Box.findById(boxId);
         },
     },
     Mutation: {
         addQuote: async (_, { quote }, { Quote }) => {
-            const { header, text, page, tags, private, userId, bookId } = quote;
+            const { header, text, page, tags, isPrivate, userId, boxId } =
+                quote;
             const newQuote = new Quote({
                 header,
                 text,
                 page,
                 tags,
-                private,
+                isPrivate,
                 userId,
-                bookId,
+                boxId,
             });
 
             return newQuote.save();

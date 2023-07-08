@@ -4,9 +4,10 @@ const QuoteSchema = new mongoose.Schema(
     {
         header: { type: String },
         text: { type: String },
-        page: { type: Number },
+        page: { type: String },
+        timeCode: { type: String },
         tags: { type: [String] },
-        private: Boolean,
+        isPrivate: { type: Boolean, default: true },
         rating: {
             type: Number,
             enum: [1, 2, 3, 4, 5],
@@ -15,9 +16,9 @@ const QuoteSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
         },
-        bookId: {
+        boxId: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Book",
+            ref: "Box",
         },
     },
     { timestamps: true },

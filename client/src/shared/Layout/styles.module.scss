@@ -10,10 +10,9 @@ $offset: 60px;
     top: 0;
     width: 100%;
     height: $offset;
-    background-color: rgb(235, 235, 235);
+    background-color: white;
 }
 
 .body {
     margin-top: $offset;
-    height: calc(100vh - $offset);
 }

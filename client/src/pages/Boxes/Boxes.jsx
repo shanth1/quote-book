@@ -1,43 +1,32 @@
-import { useContext, useState } from "react";
-import { Modal } from "../../shared/Modal/Modal";
-import { gql, useQuery } from "@apollo/client";
+import { useContext } from "react";
+import { useQuery } from "@apollo/client";
 import { AuthContext } from "../../context/AuthContext";
-
-const GET_USER = gql`
-    query GetUser($userId: ID!) {
-        getUser(userId: $userId) {
-            username
-            books {
-                id
-                title
-            }
-        }
-    }
-`;
+import { BoxPreview } from "./BoxPreview/BoxPreview";
+import { GET_BOXES } from "../../graphql/queries";
+import H1 from "../../shared/H1/H1";
+import Content from "../../shared/Content/Content";
 
 export const Boxes = () => {
-    const [bookModalActive, setBookModalActive] = useState(false);
     const {
         auth: { user },
     } = useContext(AuthContext);
-
-    console.log(user);
-
-    const { loading, error, data } = useQuery(GET_USER, {
+    const { loading, error, data } = useQuery(GET_BOXES, {
         variables: { userId: user.id },
     });
 
     if (loading) return <div>Loading...</div>;
+    if (error) return <div>{error.message}</div>;
 
-    if (error) alert(error.message);
-
-    console.log(data.getUser.books);
+    const boxes = data.getUser.boxes;
 
     return (
-        <div>
-            <button onClick={() => setBookModalActive(true)}>Modal</button>
-            <h1>Книги</h1>
-            <Modal active={bookModalActive} setActive={setBookModalActive} />
-        </div>
+        <Content>
+            <H1>Boxes</H1>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+                {boxes.length !== 0
+                    ? boxes.map((item) => <BoxPreview boxData={item} />)
+                    : "No boxes"}
+            </div>
+        </Content>
     );
 };
