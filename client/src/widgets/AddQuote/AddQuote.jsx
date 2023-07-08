@@ -12,6 +12,7 @@ import Content from "../../shared/Content/Content";
 import Required from "../../shared/Required/Required";
 import { validateForm } from "../../utils/validateForm";
 import Textarea from "../../shared/Textarea/Textarea";
+import { GET_BOX_QUOTES } from "../../graphql/queries";
 
 export const AddQuote = ({ closeCallback, boxId }) => {
     const addQuote = () => {
@@ -53,7 +54,7 @@ export const AddQuote = ({ closeCallback, boxId }) => {
                 isPrivate,
             },
         },
-        // refetchQueries: [GET_BOX_QUERIES],
+        refetchQueries: [GET_BOX_QUOTES],
     });
 
     return (
