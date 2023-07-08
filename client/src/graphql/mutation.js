@@ -50,6 +50,15 @@ export const ADD_BOX = gql`
     }
 `;
 
+export const DELETE_BOX = gql`
+    mutation DeleteBox($boxId: ID!) {
+        deleteBox(boxId: $boxId) {
+            id
+            title
+        }
+    }
+`;
+
 export const ADD_QUOTE = gql`
     mutation Mutation($quote: QuoteInput!) {
         addQuote(quote: $quote) {
