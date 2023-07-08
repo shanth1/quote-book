@@ -1,14 +1,18 @@
 // import styles from "./styles.module.scss";
 import { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 import { Modal } from "../../shared/Modal/Modal";
 import { AddBox } from "../AddBox/AddBox";
 
 import { FiPlusCircle, FiPackage, FiFileText } from "react-icons/fi";
+import { AddQuote } from "../AddQuote/AddQuote";
 
 export const TabBar = () => {
-    const [addModalActive, setAddModalActive] = useState(false);
+    const [addBoxModalActive, setAddBoxModalActive] = useState(false);
+    const [addQuoteModalActive, setAddQuoteModalActive] = useState(false);
     const location = useLocation();
+
+    const { boxId } = useParams();
 
     return (
         <div className="flex justify-center ">
@@ -34,7 +38,17 @@ export const TabBar = () => {
                 {location.pathname === "/collections/boxes" && (
                     <div className="flex justify-center">
                         <div
-                            onClick={() => setAddModalActive(true)}
+                            onClick={() => setAddBoxModalActive(true)}
+                            className="flex w-14 h-14 transition-all hover:scale-110 shadow-lg hover:bg-gray-50 justify-center bg-white items-center cursor-pointer rounded-full absolute top-[-22px] "
+                        >
+                            <FiPlusCircle color="black" size="40px" />
+                        </div>
+                    </div>
+                )}
+                {location.pathname.includes("/collections/box/") && (
+                    <div className="flex justify-center">
+                        <div
+                            onClick={() => setAddQuoteModalActive(true)}
                             className="flex w-14 h-14 transition-all hover:scale-110 shadow-lg hover:bg-gray-50 justify-center bg-white items-center cursor-pointer rounded-full absolute top-[-22px] "
                         >
                             <FiPlusCircle color="black" size="40px" />
@@ -62,9 +76,23 @@ export const TabBar = () => {
                 </NavLink>
             </div>
 
-            {addModalActive && (
-                <Modal active={addModalActive} setActive={setAddModalActive}>
-                    <AddBox closeCallback={() => setAddModalActive(false)} />
+            {addBoxModalActive && (
+                <Modal
+                    active={addBoxModalActive}
+                    setActive={setAddBoxModalActive}
+                >
+                    <AddBox closeCallback={() => setAddBoxModalActive(false)} />
+                </Modal>
+            )}
+            {addQuoteModalActive && (
+                <Modal
+                    active={addQuoteModalActive}
+                    setActive={setAddQuoteModalActive}
+                >
+                    <AddQuote
+                        closeCallback={() => setAddQuoteModalActive(false)}
+                        boxId={boxId}
+                    />
                 </Modal>
             )}
         </div>

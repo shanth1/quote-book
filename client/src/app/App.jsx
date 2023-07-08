@@ -1,3 +1,4 @@
+import { Box } from "../pages/Box/Box";
 import { Boxes } from "../pages/Boxes/Boxes";
 import { Collections } from "../pages/Collections/Collections";
 import { Feed } from "../pages/Feed/Feed";
@@ -26,6 +27,7 @@ function App() {
                         <Route index element={<Navigate to="boxes" />} />
                         <Route path="boxes" element={<Boxes />} />
                         <Route path="quotes" element={<Quotes />} />
+                        <Route path="box/:boxId" element={<Box />} />
                     </Route>
                     <Route path="settings" element={<Settings />} />
                     <Route path="*" element={<NotFound />} />

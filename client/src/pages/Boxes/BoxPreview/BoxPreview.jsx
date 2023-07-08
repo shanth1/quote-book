@@ -1,17 +1,33 @@
 // import styles from "./styles.module.scss";
 import { IoTrashBin, IoPencil } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
-export const Box = ({ boxData }) => {
-    const { title, image } = boxData;
+export const BoxPreview = ({ boxData }) => {
+    const { id, title, image } = boxData;
+    const navigate = useNavigate();
+
+    const boxClickHandler = (event) => {
+        navigate(`/collections/box/${id}`);
+    };
+
     return (
-        <div className="cursor-pointer flex flex-col p-3 gap-2 bg-white rounded-lg ">
+        <div
+            className="cursor-pointer flex flex-col p-3 gap-2 bg-white rounded-lg"
+            onClick={boxClickHandler}
+        >
             <div className="flex justify-between items-center">
                 <div className="p-1 hover:bg-primary-200 rounded-lg">
                     <IoPencil />
                 </div>
 
                 <h1>{title}</h1>
-                <div className="p-1 bg-red-500 hover:bg-red-600 rounded-lg">
+                <div
+                    className="p-1 bg-red-500 hover:bg-red-600 rounded-lg"
+                    onClick={(event) => {
+                        event.stopPropagation();
+                        console.log("delete");
+                    }}
+                >
                     <IoTrashBin color="white" />
                 </div>
             </div>

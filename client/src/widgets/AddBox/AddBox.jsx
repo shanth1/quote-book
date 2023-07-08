@@ -6,7 +6,7 @@ import Label from "../../shared/Label/Label";
 import SelectFrom from "../../shared/SelectForm/SelectForm";
 import { useMutation } from "@apollo/client";
 import { AuthContext } from "../../context/AuthContext";
-import { GET_BOOKS } from "../../graphql/queries";
+import { GET_BOXES } from "../../graphql/queries";
 import { ADD_BOX } from "../../graphql/mutation";
 import H1 from "../../shared/H1/H1";
 import { stringToArray } from "../../utils/stringToArray";
@@ -65,13 +65,13 @@ export const AddBox = ({ closeCallback }) => {
                 image: values.image ? values.image : undefined,
             },
         },
-        refetchQueries: [GET_BOOKS],
+        refetchQueries: [GET_BOXES],
     });
 
     return (
         <form>
             <Content>
-                <H1 text="Add item" />
+                <H1>Add box</H1>
                 <SelectFrom
                     names={["Book", "Movie", "Person", "Other"]}
                     selected={type}

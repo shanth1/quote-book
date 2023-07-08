@@ -43,7 +43,7 @@ export const Register = () => {
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-full lg:py-0">
             <form class="w-full p-4 md:p-6 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md  dark:bg-gray-800 dark:border-gray-700">
                 <Content>
-                    <H1 text="Create an account" />
+                    <H1>Create an account</H1>
                     <div>
                         <Label>Your name</Label>
                         <Input

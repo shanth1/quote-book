@@ -49,3 +49,27 @@ export const ADD_BOX = gql`
         }
     }
 `;
+
+export const ADD_QUOTE = gql`
+    mutation Mutation($quote: QuoteInput!) {
+        addQuote(quote: $quote) {
+            id
+            user {
+                id
+                username
+            }
+            box {
+                id
+                title
+            }
+            header
+            page
+            timeCode
+            tags
+            text
+            isPrivate
+            createdAt
+            updatedAt
+        }
+    }
+`;
