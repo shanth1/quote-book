@@ -13,7 +13,7 @@ const DeleteBox = ({ id, title, closeCallback }) => {
 
     const onClick = () => {
         deleteBox();
-        closeCallback(false);
+        closeCallback();
     };
 
     const onChange = (event) => {

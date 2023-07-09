@@ -82,3 +82,10 @@ export const ADD_QUOTE = gql`
         }
     }
 `;
+export const DELETE_QUOTE = gql`
+    mutation DeleteQuote($quoteId: ID!) {
+        deleteQuote(quoteId: $quoteId) {
+            id
+        }
+    }
+`;
