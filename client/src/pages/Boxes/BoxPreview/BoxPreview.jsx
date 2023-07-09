@@ -2,7 +2,12 @@
 import { IoTrashBin, IoPencil } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
-export const BoxPreview = ({ boxData }) => {
+export const BoxPreview = ({
+    boxData,
+    setModalActive,
+    setDeleteTitle,
+    setDeleteId,
+}) => {
     const { id, title, image } = boxData;
     const navigate = useNavigate();
 
@@ -25,7 +30,9 @@ export const BoxPreview = ({ boxData }) => {
                     className="p-1 bg-red-500 hover:bg-red-600 rounded-lg"
                     onClick={(event) => {
                         event.stopPropagation();
-                        console.log("delete");
+                        setDeleteTitle(title);
+                        setDeleteId(id);
+                        setModalActive(true);
                     }}
                 >
                     <IoTrashBin color="white" />
