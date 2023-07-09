@@ -35,7 +35,12 @@ export const Register = () => {
             setErrors(graphQLErrors);
         },
         variables: {
-            user: values,
+            user: {
+                firstName: values.firstName,
+                email: values.email,
+                username: values.username,
+                password: values.password,
+            },
         },
     });
 
