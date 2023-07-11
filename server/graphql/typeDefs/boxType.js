@@ -9,6 +9,7 @@ module.exports = gql`
     extend type Mutation {
         addBox(box: BoxInput): Box!
         deleteBox(boxId: ID!): Box!
+        updateBox(boxId: ID!, newBox: BoxInput!): Box!
     }
 
     input BoxInput {

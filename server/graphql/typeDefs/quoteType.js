@@ -9,6 +9,7 @@ module.exports = gql`
     extend type Mutation {
         addQuote(quote: QuoteInput!): Quote!
         deleteQuote(quoteId: ID!): Quote!
+        updateQuote(quoteId: ID!, newQuote: QuoteInput!): Quote!
     }
 
     input QuoteInput {

@@ -18,37 +18,7 @@ module.exports = {
     },
     Mutation: {
         addBox: async (_, { box }, { Box }) => {
-            const {
-                title,
-                authors,
-                year,
-                image,
-                file,
-                mainIdea,
-                description,
-                genres,
-                type,
-                tags,
-                isPrivate,
-                rating,
-                userId,
-            } = box;
-            const newBox = new Box({
-                title,
-                authors,
-                year,
-                image,
-                file,
-                mainIdea,
-                description,
-                genres,
-                type,
-                tags,
-                isPrivate,
-                rating,
-                userId,
-            });
-
+            const newBox = await new Box(box);
             return newBox.save();
         },
 
@@ -60,6 +30,13 @@ module.exports = {
             });
 
             return Box.findByIdAndRemove(boxId);
+        },
+
+        updateBox: async (_, { boxId, newBox }, { Box }) => {
+            const updatedBox = await Box.findByIdAndUpdate(boxId, newBox, {
+                new: true,
+            });
+            return updatedBox;
         },
     },
 };
