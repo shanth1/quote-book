@@ -17,23 +17,21 @@ module.exports = {
     },
     Mutation: {
         addQuote: async (_, { quote }, { Quote }) => {
-            const { header, text, page, tags, isPrivate, userId, boxId } =
-                quote;
-            const newQuote = new Quote({
-                header,
-                text,
-                page,
-                tags,
-                isPrivate,
-                userId,
-                boxId,
-            });
-
+            const newQuote = await new Quote(quote);
             return newQuote.save();
         },
 
         deleteQuote: async (_, { quoteId }, { Quote }) => {
             return Quote.findByIdAndRemove(quoteId);
+        },
+
+        updateQuote: async (_, { quoteId, newQuote }, { Quote }) => {
+            const updatedQUote = await Quote.findByIdAndUpdate(
+                quoteId,
+                newQuote,
+                { new: true },
+            );
+            return updatedQUote;
         },
     },
 };

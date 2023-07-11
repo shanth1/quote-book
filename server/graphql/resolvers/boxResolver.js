@@ -33,7 +33,9 @@ module.exports = {
         },
 
         updateBox: async (_, { boxId, newBox }, { Box }) => {
-            const updatedBox = await Box.findByIdAndUpdate(boxId, newBox);
+            const updatedBox = await Box.findByIdAndUpdate(boxId, newBox, {
+                new: true,
+            });
             return updatedBox;
         },
     },
