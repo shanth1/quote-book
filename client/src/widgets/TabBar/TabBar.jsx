@@ -15,7 +15,7 @@ export const TabBar = () => {
     const { boxId } = useParams();
 
     return (
-        <div className="flex justify-center ">
+        <div className="flex justify-center">
             <div className="fixed w-56 shadow-md transition-all justify-evenly flex items-center bottom-10 gap-4 bg-white rounded-lg p-1">
                 <NavLink to="boxes">
                     {({ isActive }) => (
@@ -76,25 +76,19 @@ export const TabBar = () => {
                 </NavLink>
             </div>
 
-            {addBoxModalActive && (
-                <Modal
-                    active={addBoxModalActive}
-                    setActive={setAddBoxModalActive}
-                >
-                    <AddBox closeCallback={() => setAddBoxModalActive(false)} />
-                </Modal>
-            )}
-            {addQuoteModalActive && (
-                <Modal
-                    active={addQuoteModalActive}
-                    setActive={setAddQuoteModalActive}
-                >
-                    <AddQuote
-                        closeCallback={() => setAddQuoteModalActive(false)}
-                        boxId={boxId}
-                    />
-                </Modal>
-            )}
+            <Modal active={addBoxModalActive} setActive={setAddBoxModalActive}>
+                <AddBox closeCallback={() => setAddBoxModalActive(false)} />
+            </Modal>
+
+            <Modal
+                active={addQuoteModalActive}
+                setActive={setAddQuoteModalActive}
+            >
+                <AddQuote
+                    closeCallback={() => setAddQuoteModalActive(false)}
+                    boxId={boxId}
+                />
+            </Modal>
         </div>
     );
 };
