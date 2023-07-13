@@ -7,7 +7,18 @@ export const GET_BOXES = gql`
             boxes {
                 id
                 title
+                type
+                mainIdea
+                authors
+                genres
+                rating
+                description
+                isPrivate
                 image
+                year
+                tags
+                createdAt
+                updatedAt
             }
         }
     }

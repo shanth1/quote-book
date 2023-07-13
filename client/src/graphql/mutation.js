@@ -82,6 +82,15 @@ export const ADD_QUOTE = gql`
         }
     }
 `;
+
+export const UPDATE_BOX = gql`
+    mutation UpdateBox($boxId: ID!, $newBox: BoxInput!) {
+        updateBox(boxId: $boxId, newBox: $newBox) {
+            id
+        }
+    }
+`;
+
 export const DELETE_QUOTE = gql`
     mutation DeleteQuote($quoteId: ID!) {
         deleteQuote(quoteId: $quoteId) {

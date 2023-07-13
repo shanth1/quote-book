@@ -11,6 +11,7 @@ import { UPDATE_BOX } from "../../graphql/mutation";
 import { stringToArray } from "../../utils/stringToArray";
 import { GET_BOXES } from "../../graphql/queries";
 import Content from "../../shared/Content/Content";
+import { isEqualObject } from "../../utils/compareObjects";
 
 const EditBox = ({ userId, boxData, closeCallback }) => {
     const [type, setType] = useState("");
@@ -39,11 +40,11 @@ const EditBox = ({ userId, boxData, closeCallback }) => {
     useEffect(() => {
         setPrivateStatus(boxData.isPrivate);
         setType(boxData.type);
-        setRating(boxData.rating);
+        setRating(boxData.rating ? String(boxData.rating) : "");
         setForm({
             title: boxData.title,
             authors: boxData.authors ? boxData.authors.join(", ") : "",
-            year: boxData.year,
+            year: boxData.year ? boxData.year : "",
             mainIdea: boxData.mainIdea,
             description: boxData.description,
             genres: boxData.genres ? boxData.genres.join(", ") : "",
@@ -52,16 +53,42 @@ const EditBox = ({ userId, boxData, closeCallback }) => {
         });
     }, [boxData]);
 
-    const [validStatus, setValidStatus] = useState(
-        validateForm([form.title, form.image]),
-    );
+    const [validStatus, setValidStatus] = useState(false);
     useEffect(() => {
         setValidStatus(validateForm([form.title]));
     }, [form.title]);
 
+    const [oldValues, setOldValues] = useState({});
+    useEffect(() => {
+        setOldValues({
+            rating: boxData.rating ? String(boxData.rating) : "",
+            isPrivate: boxData.isPrivate,
+            type: boxData.type,
+            title: boxData.title,
+            authors: boxData.authors ? boxData.authors.join(", ") : "",
+            year: boxData.year ? boxData.year : "",
+            mainIdea: boxData.mainIdea,
+            description: boxData.description,
+            genres: boxData.genres ? boxData.genres.join(", ") : "",
+            tags: boxData.tags ? boxData.tags.join(", ") : "",
+            image: boxData.image,
+        });
+    }, [boxData]);
+
+    const [updatedStatus, setUpdatedStatus] = useState(false);
+    useEffect(() => {
+        setUpdatedStatus(
+            !isEqualObject(
+                { ...form, rating, isPrivate: privateStatus, type },
+                oldValues,
+            ),
+        );
+    }, [form, rating, privateStatus, type, oldValues]);
+
     const [updateBoxMutation] = useMutation(UPDATE_BOX, {
         variables: {
-            box: {
+            boxId: boxData.id,
+            newBox: {
                 userId: userId,
                 title: form.title,
                 type: type,
@@ -201,7 +228,10 @@ const EditBox = ({ userId, boxData, closeCallback }) => {
                         </label>
                     </div>
                     <div className="w-full">
-                        <Button onClick={onSubmit} isActive={validStatus}>
+                        <Button
+                            onClick={onSubmit}
+                            isActive={validStatus && updatedStatus}
+                        >
                             Update box
                         </Button>
                     </div>
