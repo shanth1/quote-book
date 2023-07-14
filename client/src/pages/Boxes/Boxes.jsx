@@ -49,18 +49,22 @@ export const Boxes = () => {
             </Content>
 
             <Modal active={deleteModalActive} setActive={setDeleteModalActive}>
-                <DeleteBox
-                    id={deleteId}
-                    title={deleteTitle}
-                    closeCallback={setDeleteModalActive}
-                />
+                {deleteModalActive && (
+                    <DeleteBox
+                        id={deleteId}
+                        title={deleteTitle}
+                        closeCallback={setDeleteModalActive}
+                    />
+                )}
             </Modal>
             <Modal active={editModalActive} setActive={setEditModalActive}>
-                <EditBox
-                    userId={user.id}
-                    boxData={editedBoxData}
-                    closeCallback={setEditModalActive}
-                />
+                {editModalActive && (
+                    <EditBox
+                        userId={user.id}
+                        boxData={editedBoxData}
+                        closeCallback={setEditModalActive}
+                    />
+                )}
             </Modal>
         </div>
     );
