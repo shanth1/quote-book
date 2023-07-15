@@ -72,8 +72,6 @@ const EditBox = ({ userId, boxData, closeCallback }) => {
         );
     }, [type, rating, isPrivate, form, oldValues]);
 
-    console.log(isPrivate);
-
     const [updateBoxMutation] = useMutation(UPDATE_BOX, {
         variables: {
             boxId: boxData.id,

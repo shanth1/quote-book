@@ -72,13 +72,20 @@ export const ADD_QUOTE = gql`
                 title
             }
             header
-            page
-            timeCode
+            marker
             tags
             text
             isPrivate
             createdAt
             updatedAt
+        }
+    }
+`;
+
+export const UPDATE_QUOTE = gql`
+    mutation UpdateQuote($quoteId: ID!, $newQuote: QuoteInput!) {
+        updateQuote(quoteId: $quoteId, newQuote: $newQuote) {
+            id
         }
     }
 `;

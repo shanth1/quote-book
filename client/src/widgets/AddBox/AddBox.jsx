@@ -41,9 +41,7 @@ export const AddBox = ({ closeCallback }) => {
         image: "",
     });
 
-    const [validStatus, setValidStatus] = useState(
-        validateForm([values.title, values.image]),
-    );
+    const [validStatus, setValidStatus] = useState();
     useEffect(() => {
         setValidStatus(validateForm([values.title]));
     }, [values.title]);

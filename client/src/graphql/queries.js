@@ -30,8 +30,7 @@ export const GET_BOX_QUOTES = gql`
             quotes {
                 id
                 header
-                page
-                timeCode
+                marker
                 tags
                 text
                 isPrivate

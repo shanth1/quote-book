@@ -15,8 +15,7 @@ module.exports = gql`
     input QuoteInput {
         header: String
         text: String!
-        page: String
-        timeCode: String
+        marker: String
         tags: [String]
         isPrivate: Boolean!
         userId: ID!
@@ -29,8 +28,7 @@ module.exports = gql`
         text: String!
         createdAt: String!
         updatedAt: String!
-        page: String
-        timeCode: String
+        marker: String
         tags: [String]
         isPrivate: Boolean!
         user: User!
