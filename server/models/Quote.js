@@ -4,8 +4,7 @@ const QuoteSchema = new mongoose.Schema(
     {
         header: { type: String },
         text: { type: String },
-        page: { type: String },
-        timeCode: { type: String },
+        marker: { type: String },
         tags: { type: [String] },
         isPrivate: { type: Boolean, default: true },
         rating: {

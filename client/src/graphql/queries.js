@@ -7,7 +7,18 @@ export const GET_BOXES = gql`
             boxes {
                 id
                 title
+                type
+                mainIdea
+                authors
+                genres
+                rating
+                description
+                isPrivate
                 image
+                year
+                tags
+                createdAt
+                updatedAt
             }
         }
     }
@@ -19,8 +30,7 @@ export const GET_BOX_QUOTES = gql`
             quotes {
                 id
                 header
-                page
-                timeCode
+                marker
                 tags
                 text
                 isPrivate

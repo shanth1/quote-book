@@ -9,13 +9,13 @@ module.exports = gql`
     extend type Mutation {
         addQuote(quote: QuoteInput!): Quote!
         deleteQuote(quoteId: ID!): Quote!
+        updateQuote(quoteId: ID!, newQuote: QuoteInput!): Quote!
     }
 
     input QuoteInput {
         header: String
         text: String!
-        page: String
-        timeCode: String
+        marker: String
         tags: [String]
         isPrivate: Boolean!
         userId: ID!
@@ -28,8 +28,7 @@ module.exports = gql`
         text: String!
         createdAt: String!
         updatedAt: String!
-        page: String
-        timeCode: String
+        marker: String
         tags: [String]
         isPrivate: Boolean!
         user: User!

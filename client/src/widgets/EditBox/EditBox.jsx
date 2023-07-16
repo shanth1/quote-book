@@ -1,66 +1,93 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../shared/Button/Button";
-import Input from "../../shared/Input/Input";
-import { useForm } from "../../hooks/formHook";
-import Label from "../../shared/Label/Label";
-import SelectFrom from "../../shared/SelectForm/SelectForm";
-import { useMutation } from "@apollo/client";
-import { AuthContext } from "../../context/AuthContext";
-import { GET_BOXES } from "../../graphql/queries";
-import { ADD_BOX } from "../../graphql/mutation";
 import H1 from "../../shared/H1/H1";
-import { stringToArray } from "../../utils/stringToArray";
-import Content from "../../shared/Content/Content";
+import Input from "../../shared/Input/Input";
+import Label from "../../shared/Label/Label";
 import Required from "../../shared/Required/Required";
+import SelectFrom from "../../shared/SelectForm/SelectForm";
 import { validateForm } from "../../utils/validateForm";
+import { useMutation } from "@apollo/client";
+import { UPDATE_BOX } from "../../graphql/mutation";
+import { GET_BOXES } from "../../graphql/queries";
+import Content from "../../shared/Content/Content";
+import { isEqualObject } from "../../utils/compareObjects";
+import { stringToArray } from "../../utils/stringToArray";
 
-export const AddBox = ({ closeCallback }) => {
-    const addBox = () => {
-        addBoxMutation();
+const EditBox = ({ userId, boxData, closeCallback }) => {
+    const [oldValues, setOldValues] = useState({});
+    useEffect(() => {
+        setOldValues({
+            rating: boxData.rating ? String(boxData.rating) : "",
+            isPrivate: boxData.isPrivate,
+            type: boxData.type,
+            title: boxData.title,
+            authors: boxData.authors ? boxData.authors.join(", ") : "",
+            year: boxData.year ? boxData.year : "",
+            mainIdea: boxData.mainIdea,
+            description: boxData.description,
+            genres: boxData.genres ? boxData.genres.join(", ") : "",
+            tags: boxData.tags ? boxData.tags.join(", ") : "",
+            image: boxData.image,
+        });
+    }, [boxData]);
+
+    const [type, setType] = useState("");
+    const [isPrivate, setPrivateStatus] = useState(true);
+    const [rating, setRating] = useState("");
+    const [form, setForm] = useState({});
+    useEffect(() => {
+        setType(boxData.type);
+        setPrivateStatus(boxData.isPrivate);
+        setRating(boxData.rating ? boxData.rating : "");
+        setForm({
+            title: boxData.title,
+            authors: boxData.authors ? boxData.authors.join(", ") : "",
+            year: boxData.year ? boxData.year : "",
+            mainIdea: boxData.mainIdea,
+            description: boxData.description,
+            genres: boxData.genres ? boxData.genres.join(", ") : "",
+            tags: boxData.tags ? boxData.tags.join(", ") : "",
+            image: boxData.image,
+        });
+    }, [boxData]);
+
+    const onChange = (event) => {
+        setForm({ ...form, [event.target.name]: event.target.value });
+    };
+    const onSubmit = (event) => {
+        event.preventDefault();
+        updateBoxMutation();
         closeCallback();
     };
 
-    const {
-        auth: {
-            user: { id },
-        },
-    } = useContext(AuthContext);
-    const [type, setType] = useState("Book");
-    const [isPrivate, setPrivateStatus] = useState(true);
-    const [rating, setRating] = useState("");
-
-    const [onChange, onSubmit, values] = useForm(addBox, {
-        title: "",
-        ratings: "",
-        authors: "",
-        year: "",
-        mainIdea: "",
-        description: "",
-        genres: "",
-        tags: "",
-        image: "",
-    });
-
-    const [validStatus, setValidStatus] = useState();
+    const [validStatus, setValidStatus] = useState(false);
     useEffect(() => {
-        setValidStatus(validateForm([values.title]));
-    }, [values.title]);
+        setValidStatus(validateForm([form.title]));
+    }, [form.title]);
 
-    const [addBoxMutation] = useMutation(ADD_BOX, {
+    const [updatedStatus, setUpdatedStatus] = useState(false);
+    useEffect(() => {
+        setUpdatedStatus(
+            !isEqualObject({ ...form, type, rating, isPrivate }, oldValues),
+        );
+    }, [type, rating, isPrivate, form, oldValues]);
+
+    const [updateBoxMutation] = useMutation(UPDATE_BOX, {
         variables: {
-            box: {
-                userId: id,
-                title: values.title,
+            boxId: boxData.id,
+            newBox: {
+                userId: userId,
+                title: form.title,
                 type: type,
-                authors: stringToArray(values.authors),
-                year: Number(values.year),
-                genres: stringToArray(values.genres),
-                tags: stringToArray(values.tags),
-                mainIdea: values.mainIdea,
-                description: values.description,
+                authors: stringToArray(form.authors),
+                year: Number(form.year),
+                genres: stringToArray(form.genres),
+                tags: stringToArray(form.tags),
+                mainIdea: form.mainIdea,
+                description: form.description,
                 isPrivate: isPrivate,
                 rating: Number(rating),
-                image: values.image ? values.image : undefined,
+                image: form.image ? form.image : undefined,
             },
         },
         refetchQueries: [GET_BOXES],
@@ -69,7 +96,7 @@ export const AddBox = ({ closeCallback }) => {
     return (
         <form>
             <Content>
-                <H1>Add box</H1>
+                <H1>Edit box</H1>
                 <SelectFrom
                     names={["Book", "Movie", "Person", "Other"]}
                     selected={type}
@@ -82,6 +109,7 @@ export const AddBox = ({ closeCallback }) => {
                         </Label>
                         <Input
                             name="title"
+                            value={form.title}
                             placeholder="Enter title of box"
                             onChange={onChange}
                         />
@@ -89,6 +117,7 @@ export const AddBox = ({ closeCallback }) => {
                     <div className="w-52">
                         <Label>Rating</Label>
                         <select
+                            value={rating}
                             onChange={(event) => setRating(event.target.value)}
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         >
@@ -106,6 +135,7 @@ export const AddBox = ({ closeCallback }) => {
                         <Label>Authors</Label>
                         <Input
                             name="authors"
+                            value={form.authors}
                             placeholder="Biba, Boba"
                             onChange={onChange}
                         />
@@ -114,6 +144,7 @@ export const AddBox = ({ closeCallback }) => {
                         <Label>Year</Label>
                         <Input
                             name="year"
+                            value={form.year}
                             placeholder="2023"
                             onChange={onChange}
                         />
@@ -124,6 +155,7 @@ export const AddBox = ({ closeCallback }) => {
                     <Label>Main idea</Label>
                     <Input
                         name="mainIdea"
+                        value={form.mainIdea}
                         placeholder="Add main idea of box"
                         onChange={onChange}
                     />
@@ -132,6 +164,7 @@ export const AddBox = ({ closeCallback }) => {
                     <Label>Description</Label>
                     <Input
                         name="description"
+                        value={form.description}
                         placeholder="Add description"
                         onChange={onChange}
                     />
@@ -141,6 +174,7 @@ export const AddBox = ({ closeCallback }) => {
                         <Label>Genres</Label>
                         <Input
                             name="genres"
+                            value={form.genres}
                             placeholder="Drama, Comedy"
                             onChange={onChange}
                         />
@@ -149,6 +183,7 @@ export const AddBox = ({ closeCallback }) => {
                         <Label>Tags</Label>
                         <Input
                             name="tags"
+                            value={form.tags}
                             placeholder="Work"
                             onChange={onChange}
                         />
@@ -158,6 +193,7 @@ export const AddBox = ({ closeCallback }) => {
                     <Label>Image (URL)</Label>
                     <Input
                         name="image"
+                        value={form.image}
                         placeholder="https://www.images.com/image1"
                         onChange={onChange}
                     />
@@ -179,8 +215,11 @@ export const AddBox = ({ closeCallback }) => {
                         </label>
                     </div>
                     <div className="w-full">
-                        <Button onClick={onSubmit} isActive={validStatus}>
-                            Add box
+                        <Button
+                            onClick={onSubmit}
+                            isActive={validStatus && updatedStatus}
+                        >
+                            Update box
                         </Button>
                     </div>
                 </div>
@@ -188,3 +227,5 @@ export const AddBox = ({ closeCallback }) => {
         </form>
     );
 };
+
+export { EditBox };

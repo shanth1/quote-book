@@ -72,8 +72,7 @@ export const ADD_QUOTE = gql`
                 title
             }
             header
-            page
-            timeCode
+            marker
             tags
             text
             isPrivate
@@ -82,6 +81,23 @@ export const ADD_QUOTE = gql`
         }
     }
 `;
+
+export const UPDATE_QUOTE = gql`
+    mutation UpdateQuote($quoteId: ID!, $newQuote: QuoteInput!) {
+        updateQuote(quoteId: $quoteId, newQuote: $newQuote) {
+            id
+        }
+    }
+`;
+
+export const UPDATE_BOX = gql`
+    mutation UpdateBox($boxId: ID!, $newBox: BoxInput!) {
+        updateBox(boxId: $boxId, newBox: $newBox) {
+            id
+        }
+    }
+`;
+
 export const DELETE_QUOTE = gql`
     mutation DeleteQuote($quoteId: ID!) {
         deleteQuote(quoteId: $quoteId) {

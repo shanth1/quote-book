@@ -1,3 +1,3 @@
 export const stringToArray = (string) => {
-    return string.split(",");
+    return string ? string.split(",") : [];
 };
