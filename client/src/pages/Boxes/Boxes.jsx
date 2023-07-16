@@ -7,9 +7,12 @@ import H1 from "../../shared/H1/H1";
 import Content from "../../shared/Content/Content";
 import { Modal } from "../../shared/Modal/Modal";
 import { DeleteBox } from "../../widgets/DeleteBox/DeleteBox";
+import { EditBox } from "../../widgets/EditBox/EditBox";
 
 export const Boxes = () => {
     const [deleteModalActive, setDeleteModalActive] = useState(false);
+    const [editModalActive, setEditModalActive] = useState(false);
+    const [editedBoxData, setEditedBoxData] = useState({});
     const [deleteTitle, setDeleteTitle] = useState("");
     const [deleteId, setDeleteId] = useState("");
 
@@ -37,17 +40,31 @@ export const Boxes = () => {
                                   setModalActive={setDeleteModalActive}
                                   setDeleteTitle={setDeleteTitle}
                                   setDeleteId={setDeleteId}
+                                  setEditedBoxData={setEditedBoxData}
+                                  setEditModalActive={setEditModalActive}
                               />
                           ))
                         : "No boxes"}
                 </div>
             </Content>
+
             <Modal active={deleteModalActive} setActive={setDeleteModalActive}>
-                <DeleteBox
-                    id={deleteId}
-                    title={deleteTitle}
-                    closeCallback={setDeleteModalActive}
-                />
+                {deleteModalActive && (
+                    <DeleteBox
+                        id={deleteId}
+                        title={deleteTitle}
+                        closeCallback={setDeleteModalActive}
+                    />
+                )}
+            </Modal>
+            <Modal active={editModalActive} setActive={setEditModalActive}>
+                {editModalActive && (
+                    <EditBox
+                        userId={user.id}
+                        boxData={editedBoxData}
+                        closeCallback={setEditModalActive}
+                    />
+                )}
             </Modal>
         </div>
     );

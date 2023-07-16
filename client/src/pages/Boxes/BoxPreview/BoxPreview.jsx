@@ -7,6 +7,8 @@ export const BoxPreview = ({
     setModalActive,
     setDeleteTitle,
     setDeleteId,
+    setEditedBoxData,
+    setEditModalActive,
 }) => {
     const { id, title, image } = boxData;
     const navigate = useNavigate();
@@ -21,7 +23,14 @@ export const BoxPreview = ({
             onClick={boxClickHandler}
         >
             <div className="flex justify-between items-center">
-                <div className="p-1 hover:bg-primary-200 rounded-lg">
+                <div
+                    className="p-1 hover:bg-primary-200 rounded-lg"
+                    onClick={(event) => {
+                        event.stopPropagation();
+                        setEditedBoxData(boxData);
+                        setEditModalActive(true);
+                    }}
+                >
                     <IoPencil />
                 </div>
 
