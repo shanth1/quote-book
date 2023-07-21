@@ -10,6 +10,7 @@ import Button from "../../shared/Button/Button";
 import H1 from "../../shared/H1/H1";
 import Content from "../../shared/Content/Content";
 import { validateEmail } from "../../utils/validateEmail";
+import { validateUsername } from "../../utils/validateUsername";
 
 export const Register = () => {
     const [errors, setErrors] = useState([]);
@@ -122,7 +123,10 @@ export const Register = () => {
                         </div> */}
                     <Button
                         onClick={onSubmit}
-                        isActive={validateEmail(values.email)}
+                        isActive={
+                            validateEmail(values.email) &&
+                            validateUsername(values.username)
+                        }
                     >
                         Create an account
                     </Button>
