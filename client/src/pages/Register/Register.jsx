@@ -11,6 +11,7 @@ import H1 from "../../shared/H1/H1";
 import Content from "../../shared/Content/Content";
 import { validateEmail } from "../../utils/validateEmail";
 import { validateUsername } from "../../utils/validateUsername";
+import { validatePassword } from "../../utils/validatePassword";
 
 export const Register = () => {
     const [errors, setErrors] = useState([]);
@@ -125,7 +126,8 @@ export const Register = () => {
                         onClick={onSubmit}
                         isActive={
                             validateEmail(values.email) &&
-                            validateUsername(values.username)
+                            validateUsername(values.username) &&
+                            validatePassword(values.password)
                         }
                     >
                         Create an account
