@@ -9,6 +9,9 @@ import Input from "../../shared/Input/Input";
 import Button from "../../shared/Button/Button";
 import H1 from "../../shared/H1/H1";
 import Content from "../../shared/Content/Content";
+import { validateEmail } from "../../utils/validateEmail";
+import { validateUsername } from "../../utils/validateUsername";
+import { validatePassword } from "../../utils/validatePassword";
 
 export const Register = () => {
     const [errors, setErrors] = useState([]);
@@ -119,7 +122,17 @@ export const Register = () => {
                                 </label>
                             </div>
                         </div> */}
-                    <Button onClick={onSubmit}>Create an account</Button>
+                    <Button
+                        onClick={onSubmit}
+                        isActive={
+                            validateEmail(values.email) &&
+                            validateUsername(values.username) &&
+                            validatePassword(values.password) &&
+                            values.password === values.confirmPassword
+                        }
+                    >
+                        Create an account
+                    </Button>
                     <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                         Already have an account?{" "}
                         <Link
