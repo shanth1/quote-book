@@ -127,7 +127,8 @@ export const Register = () => {
                         isActive={
                             validateEmail(values.email) &&
                             validateUsername(values.username) &&
-                            validatePassword(values.password)
+                            validatePassword(values.password) &&
+                            values.password === values.confirmPassword
                         }
                     >
                         Create an account
