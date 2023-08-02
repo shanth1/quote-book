@@ -125,6 +125,7 @@ export const Register = () => {
                     <Button
                         onClick={onSubmit}
                         isActive={
+                            !!values.firstName &&
                             validateEmail(values.email) &&
                             validateUsername(values.username) &&
                             validatePassword(values.password) &&
