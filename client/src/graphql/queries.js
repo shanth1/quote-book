@@ -36,9 +36,35 @@ export const GET_BOX_QUOTES = gql`
                 isPrivate
                 createdAt
                 updatedAt
+                box {
+                    id
+                    title
+                }
                 user {
                     id
                     username
+                }
+            }
+        }
+    }
+`;
+
+export const GET_USER_QUOTES = gql`
+    query GetUser($userId: ID!) {
+        getUser(userId: $userId) {
+            id
+            quotes {
+                id
+                header
+                text
+                marker
+                tags
+                isPrivate
+                createdAt
+                updatedAt
+                box {
+                    id
+                    title
                 }
             }
         }

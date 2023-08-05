@@ -7,8 +7,11 @@ const QuoteItem = ({
     setDeleteModalActive,
     setUpdateModalActive,
     setSelectedQuoteData,
+    setBoxId,
 }) => {
     const { id, username, header, marker, tags, isPrivate, text } = quoteData;
+
+    const boxId = quoteData.box.id;
 
     return (
         <div className="bg-white flex flex-col gap-4 rounded-lg w-full p-4">
@@ -37,6 +40,7 @@ const QuoteItem = ({
                         onClick={() => {
                             setSelectedId(id);
                             setDeleteModalActive(true);
+                            setBoxId(boxId);
                         }}
                         className="p-2 cursor-pointer bg-red-500 hover:bg-red-600 rounded-lg"
                     >
