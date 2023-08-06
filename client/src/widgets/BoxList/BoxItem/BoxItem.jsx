@@ -2,7 +2,7 @@
 import { IoTrashBin, IoPencil } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
-export const BoxPreview = ({
+export const BoxItem = ({
     boxData,
     setModalActive,
     setDeleteTitle,
