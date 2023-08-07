@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Modal } from "../../shared/Modal/Modal";
-import { DeleteQuote } from "../DeleteQuote/DeleteQuote";
-import { EditQuote } from "../EditQuote/EditQuote";
-import { QuoteItem } from "../QuoteItem/QuoteItem";
+import { DeleteQuote } from "../../features/DeleteQuote/DeleteQuote";
+import { EditQuote } from "../../features/EditQuote/EditQuote";
+import { QuoteItem } from "../../features/QuoteItem/QuoteItem";
 import Content from "../../shared/Content/Content";
 
 export const QuoteList = ({ quotes, userId }) => {

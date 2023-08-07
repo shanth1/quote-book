@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Modal } from "../../shared/Modal/Modal";
-import { DeleteBox } from "../DeleteBox/DeleteBox";
-import { EditBox } from "../EditBox/EditBox";
+import { DeleteBox } from "../../features/DeleteBox/DeleteBox";
+import { EditBox } from "../../features/EditBox/EditBox";
 import { BoxItem } from "./BoxItem/BoxItem";
 
 export const BoxList = ({ boxes, userId }) => {

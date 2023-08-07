@@ -2,10 +2,10 @@
 import { useState } from "react";
 import { NavLink, useLocation, useParams } from "react-router-dom";
 import { Modal } from "../../shared/Modal/Modal";
-import { AddBox } from "../AddBox/AddBox";
+import { AddBox } from "../../features/AddBox/AddBox";
 
 import { FiPlusCircle, FiPackage, FiFileText } from "react-icons/fi";
-import { AddQuote } from "../AddQuote/AddQuote";
+import { AddQuote } from "../../features/AddQuote/AddQuote";
 
 export const TabBar = ({ userId }) => {
     const [addBoxModalActive, setAddBoxModalActive] = useState(false);
