@@ -14,12 +14,10 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { Boxes } from "../pages/Collections/pages/Boxes/Boxes";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { getUserId } from "../utils/checkAuth";
 
 function App() {
-    const {
-        auth: { user },
-    } = useContext(AuthContext);
-    const userId = user?.id;
+    const userId = getUserId(useContext(AuthContext));
 
     return (
         <div>
