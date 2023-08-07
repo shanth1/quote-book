@@ -1,13 +1,11 @@
-// import { Navbar } from "../../widgets/Navigation/Navbar";
-
 import { Outlet } from "react-router-dom";
 import { TabBar } from "../../widgets/TabBar/TabBar";
 
-export const Collections = () => {
+export const Collections = ({ userId }) => {
     return (
         <div>
             <Outlet />
-            <TabBar />
+            <TabBar userId={userId} />
         </div>
     );
 };

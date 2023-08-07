@@ -2,12 +2,12 @@
 import { useState } from "react";
 import { NavLink, useLocation, useParams } from "react-router-dom";
 import { Modal } from "../../shared/Modal/Modal";
-import { AddBox } from "../AddBox/AddBox";
+import { AddBox } from "../../features/AddBox/AddBox";
 
 import { FiPlusCircle, FiPackage, FiFileText } from "react-icons/fi";
-import { AddQuote } from "../AddQuote/AddQuote";
+import { AddQuote } from "../../features/AddQuote/AddQuote";
 
-export const TabBar = () => {
+export const TabBar = ({ userId }) => {
     const [addBoxModalActive, setAddBoxModalActive] = useState(false);
     const [addQuoteModalActive, setAddQuoteModalActive] = useState(false);
     const location = useLocation();
@@ -76,19 +76,30 @@ export const TabBar = () => {
                 </NavLink>
             </div>
 
-            <Modal active={addBoxModalActive} setActive={setAddBoxModalActive}>
-                <AddBox closeCallback={() => setAddBoxModalActive(false)} />
-            </Modal>
+            {addBoxModalActive && (
+                <Modal
+                    active={addBoxModalActive}
+                    setActive={setAddBoxModalActive}
+                >
+                    <AddBox
+                        closeCallback={() => setAddBoxModalActive(false)}
+                        userId={userId}
+                    />
+                </Modal>
+            )}
 
-            <Modal
-                active={addQuoteModalActive}
-                setActive={setAddQuoteModalActive}
-            >
-                <AddQuote
-                    closeCallback={() => setAddQuoteModalActive(false)}
-                    boxId={boxId}
-                />
-            </Modal>
+            {addQuoteModalActive && (
+                <Modal
+                    active={addQuoteModalActive}
+                    setActive={setAddQuoteModalActive}
+                >
+                    <AddQuote
+                        closeCallback={() => setAddQuoteModalActive(false)}
+                        userId={userId}
+                        boxId={boxId}
+                    />
+                </Modal>
+            )}
         </div>
     );
 };

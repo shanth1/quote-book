@@ -32,6 +32,7 @@ const QuoteItem = ({
                             setSelectedId(id);
                             setUpdateModalActive(true);
                             setSelectedQuoteData(quoteData);
+                            setBoxId(boxId);
                         }}
                     >
                         <IoPencil />
