@@ -1,10 +1,9 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../shared/Button/Button";
 import Input from "../../shared/Input/Input";
 import { useForm } from "../../hooks/formHook";
 import Label from "../../shared/Label/Label";
 import { useMutation } from "@apollo/client";
-import { AuthContext } from "../../context/AuthContext";
 import { ADD_QUOTE } from "../../graphql/mutation";
 import H1 from "../../shared/H1/H1";
 import { stringToArray } from "../../utils/stringToArray";
@@ -14,17 +13,11 @@ import { validateForm } from "../../utils/validateForm";
 import Textarea from "../../shared/Textarea/Textarea";
 import { GET_BOX_QUOTES } from "../../graphql/queries";
 
-export const AddQuote = ({ closeCallback, boxId }) => {
+export const AddQuote = ({ closeCallback, userId, boxId }) => {
     const addQuote = () => {
         addQuoteMutation();
         closeCallback();
     };
-
-    const {
-        auth: {
-            user: { id },
-        },
-    } = useContext(AuthContext);
     const [isPrivate, setPrivateStatus] = useState(true);
 
     const [onChange, onSubmit, values] = useForm(addQuote, {
@@ -44,7 +37,7 @@ export const AddQuote = ({ closeCallback, boxId }) => {
     const [addQuoteMutation] = useMutation(ADD_QUOTE, {
         variables: {
             quote: {
-                userId: id,
+                userId: userId,
                 boxId: boxId,
                 header: values.header,
                 marker: values.marker,

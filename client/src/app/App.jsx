@@ -31,7 +31,10 @@ function App() {
                         <Route path="register" element={<Register />} />
                         <Route path="profile" element={<Profile />} />
                         <Route path="feed" element={<Feed />} />
-                        <Route path="collections" element={<Collections />}>
+                        <Route
+                            path="collections"
+                            element={<Collections userId={userId} />}
+                        >
                             <Route index element={<Navigate to="boxes" />} />
                             <Route
                                 path="boxes"
