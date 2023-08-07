@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
+import { useMutation } from "@apollo/client";
 import Button from "../../shared/Button/Button";
 import H1 from "../../shared/H1/H1";
 import Input from "../../shared/Input/Input";
 import Label from "../../shared/Label/Label";
 import Required from "../../shared/Required/Required";
+import Content from "../../shared/Content/Content";
 import SelectFrom from "../../shared/SelectForm/SelectForm";
 import { validateForm } from "../../utils/validateForm";
-import { useMutation } from "@apollo/client";
 import { UPDATE_BOX } from "../../graphql/mutation";
 import { GET_BOXES } from "../../graphql/queries";
-import Content from "../../shared/Content/Content";
 import { isEqualObject } from "../../utils/compareObjects";
 import { stringToArray } from "../../utils/stringToArray";
 
@@ -59,18 +59,6 @@ const EditBox = ({ userId, boxData, closeCallback }) => {
         updateBoxMutation();
         closeCallback();
     };
-
-    const [validStatus, setValidStatus] = useState(false);
-    useEffect(() => {
-        setValidStatus(validateForm([form.title]));
-    }, [form.title]);
-
-    const [updatedStatus, setUpdatedStatus] = useState(false);
-    useEffect(() => {
-        setUpdatedStatus(
-            !isEqualObject({ ...form, type, rating, isPrivate }, oldValues),
-        );
-    }, [type, rating, isPrivate, form, oldValues]);
 
     const [updateBoxMutation] = useMutation(UPDATE_BOX, {
         variables: {
@@ -218,7 +206,13 @@ const EditBox = ({ userId, boxData, closeCallback }) => {
                     <div className="w-full">
                         <Button
                             onClick={onSubmit}
-                            isActive={validStatus && updatedStatus}
+                            isActive={
+                                validateForm([form.title]) &&
+                                !isEqualObject(
+                                    { ...form, type, rating, isPrivate },
+                                    oldValues,
+                                )
+                            }
                         >
                             Update box
                         </Button>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "../../shared/Button/Button";
 import Input from "../../shared/Input/Input";
 import { useForm } from "../../hooks/formHook";
@@ -26,14 +26,6 @@ export const AddQuote = ({ closeCallback, userId, boxId }) => {
         tags: "",
         text: "",
     });
-
-    const [validStatus, setValidStatus] = useState(
-        validateForm([values.header, values.text]),
-    );
-    useEffect(() => {
-        setValidStatus(validateForm([values.header, values.text]));
-    }, [values.header, values.text]);
-
     const [addQuoteMutation] = useMutation(ADD_QUOTE, {
         variables: {
             quote: {
@@ -111,7 +103,13 @@ export const AddQuote = ({ closeCallback, userId, boxId }) => {
                         </label>
                     </div>
                     <div className="w-full">
-                        <Button onClick={onSubmit} isActive={validStatus}>
+                        <Button
+                            onClick={onSubmit}
+                            isActive={validateForm([
+                                values.header,
+                                values.text,
+                            ])}
+                        >
                             Add quote
                         </Button>
                     </div>

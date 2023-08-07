@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
+import { useMutation } from "@apollo/client";
 import Button from "../../shared/Button/Button";
 import Input from "../../shared/Input/Input";
 import Label from "../../shared/Label/Label";
-import { useMutation } from "@apollo/client";
-import { UPDATE_QUOTE } from "../../graphql/mutation";
 import H1 from "../../shared/H1/H1";
-import { stringToArray } from "../../utils/stringToArray";
 import Content from "../../shared/Content/Content";
-import Required from "../../shared/Required/Required";
-import { validateForm } from "../../utils/validateForm";
 import Textarea from "../../shared/Textarea/Textarea";
+import Required from "../../shared/Required/Required";
+import { UPDATE_QUOTE } from "../../graphql/mutation";
+import { stringToArray } from "../../utils/stringToArray";
+import { validateForm } from "../../utils/validateForm";
 import { GET_BOX_QUOTES } from "../../graphql/queries";
 import { isEqualObject } from "../../utils/compareObjects";
 
@@ -52,16 +52,6 @@ export const EditQuote = ({
         updateQuoteMutation();
         closeCallback();
     };
-
-    const [validStatus, setValidStatus] = useState(false);
-    useEffect(() => {
-        setValidStatus(validateForm([values.header, values.text]));
-    }, [values.header, values.text]);
-
-    const [updatedStatus, setUpdatedStatus] = useState(false);
-    useEffect(() => {
-        setUpdatedStatus(!isEqualObject({ ...values, isPrivate }, oldValues));
-    }, [values, isPrivate, oldValues]);
 
     const [updateQuoteMutation] = useMutation(UPDATE_QUOTE, {
         variables: {
@@ -147,7 +137,13 @@ export const EditQuote = ({
                     <div className="w-full">
                         <Button
                             onClick={onSubmit}
-                            isActive={validStatus && updatedStatus}
+                            isActive={
+                                validateForm([values.header, values.text]) &&
+                                !isEqualObject(
+                                    { ...values, isPrivate },
+                                    oldValues,
+                                )
+                            }
                         >
                             Update quote
                         </Button>

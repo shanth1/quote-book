@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
-import Button from "../../shared/Button/Button";
-import Input from "../../shared/Input/Input";
-import { useForm } from "../../hooks/formHook";
-import Label from "../../shared/Label/Label";
-import SelectFrom from "../../shared/SelectForm/SelectForm";
+import { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { GET_BOXES } from "../../graphql/queries";
-import { ADD_BOX } from "../../graphql/mutation";
 import H1 from "../../shared/H1/H1";
-import { stringToArray } from "../../utils/stringToArray";
+import Button from "../../shared/Button/Button";
+import Label from "../../shared/Label/Label";
+import Input from "../../shared/Input/Input";
+import SelectFrom from "../../shared/SelectForm/SelectForm";
 import Content from "../../shared/Content/Content";
 import Required from "../../shared/Required/Required";
+import { useForm } from "../../hooks/formHook";
+import { GET_BOXES } from "../../graphql/queries";
+import { ADD_BOX } from "../../graphql/mutation";
+import { stringToArray } from "../../utils/stringToArray";
 import { validateForm } from "../../utils/validateForm";
 
 export const AddBox = ({ closeCallback, userId }) => {
@@ -33,11 +33,6 @@ export const AddBox = ({ closeCallback, userId }) => {
         tags: "",
         image: "",
     });
-
-    const [validStatus, setValidStatus] = useState();
-    useEffect(() => {
-        setValidStatus(validateForm([values.title]));
-    }, [values.title]);
 
     const [addBoxMutation] = useMutation(ADD_BOX, {
         variables: {
@@ -173,7 +168,10 @@ export const AddBox = ({ closeCallback, userId }) => {
                         </label>
                     </div>
                     <div className="w-full">
-                        <Button onClick={onSubmit} isActive={validStatus}>
+                        <Button
+                            onClick={onSubmit}
+                            isActive={validateForm([values.title])}
+                        >
                             Add box
                         </Button>
                     </div>
