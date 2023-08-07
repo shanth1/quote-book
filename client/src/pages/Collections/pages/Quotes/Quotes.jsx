@@ -17,7 +17,7 @@ export const Quotes = ({ userId }) => {
     return (
         <Content>
             <H1>All quotes</H1>
-            <QuoteList quotes={quotes} userId={userId} />;
+            <QuoteList quotes={quotes} userId={userId} />
         </Content>
     );
 };

@@ -112,6 +112,7 @@ const EditBox = ({ userId, boxData, closeCallback }) => {
                             value={form.title}
                             placeholder="Enter title of box"
                             onChange={onChange}
+                            autoFocus={true}
                         />
                     </div>
                     <div className="w-52">

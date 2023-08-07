@@ -28,24 +28,28 @@ export const BoxList = ({ boxes, userId }) => {
                     : "No boxes"}
             </div>
 
-            <Modal active={deleteModalActive} setActive={setDeleteModalActive}>
-                {deleteModalActive && (
+            {deleteModalActive && (
+                <Modal
+                    active={deleteModalActive}
+                    setActive={setDeleteModalActive}
+                >
                     <DeleteBox
                         id={deleteId}
                         title={deleteTitle}
                         closeCallback={setDeleteModalActive}
                     />
-                )}
-            </Modal>
-            <Modal active={editModalActive} setActive={setEditModalActive}>
-                {editModalActive && (
+                </Modal>
+            )}
+
+            {editModalActive && (
+                <Modal active={editModalActive} setActive={setEditModalActive}>
                     <EditBox
                         userId={userId}
                         boxData={editedBoxData}
                         closeCallback={setEditModalActive}
                     />
-                )}
-            </Modal>
+                </Modal>
+            )}
         </div>
     );
 };

@@ -7,7 +7,6 @@ import H1 from "../../../../shared/H1/H1";
 
 const Box = ({ userId }) => {
     const { boxId } = useParams();
-
     const { loading, error, data } = useQuery(GET_BOX_QUOTES, {
         variables: { boxId: boxId },
     });

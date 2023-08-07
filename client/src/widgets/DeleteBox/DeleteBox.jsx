@@ -28,21 +28,23 @@ const DeleteBox = ({ id, title, closeCallback }) => {
     });
 
     return (
-        <Content>
-            <H1>Delete box</H1>
-            <Label>{`Type "${title}" to delete the box`}</Label>
-            <Input onChange={onChange} />
-            <div className="w-full">
-                <div className="w-1/2 ml-auto mr-0">
-                    <DeleteButton
-                        onClick={onClick}
-                        isActive={inputTitle === title}
-                    >
-                        Delete box
-                    </DeleteButton>
+        <form>
+            <Content>
+                <H1>Delete box</H1>
+                <Label>{`Type "${title}" to delete the box`}</Label>
+                <Input onChange={onChange} autoFocus={true} />
+                <div className="w-full">
+                    <div className="w-1/2 ml-auto mr-0">
+                        <DeleteButton
+                            onClick={onClick}
+                            isActive={inputTitle === title}
+                        >
+                            Delete box
+                        </DeleteButton>
+                    </div>
                 </div>
-            </div>
-        </Content>
+            </Content>
+        </form>
     );
 };
 

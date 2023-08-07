@@ -27,15 +27,22 @@ export const QuoteList = ({ quotes, userId }) => {
                       ))
                     : "No quotes"}
             </Content>
-
-            <Modal active={deleteModalActive} setActive={setDeleteModalActive}>
-                <DeleteQuote
-                    id={selectedId}
-                    closeCallback={setDeleteModalActive}
-                />
-            </Modal>
-            <Modal active={updateModalActive} setActive={setUpdateModalActive}>
-                {updateModalActive && (
+            {deleteModalActive && (
+                <Modal
+                    active={deleteModalActive}
+                    setActive={setDeleteModalActive}
+                >
+                    <DeleteQuote
+                        id={selectedId}
+                        closeCallback={setDeleteModalActive}
+                    />
+                </Modal>
+            )}
+            {updateModalActive && (
+                <Modal
+                    active={updateModalActive}
+                    setActive={setUpdateModalActive}
+                >
                     <EditQuote
                         userId={userId}
                         boxId={boxId}
@@ -43,8 +50,8 @@ export const QuoteList = ({ quotes, userId }) => {
                         quoteData={selectedQuoteData}
                         closeCallback={setUpdateModalActive}
                     />
-                )}
-            </Modal>
+                </Modal>
+            )}
         </div>
     );
 };

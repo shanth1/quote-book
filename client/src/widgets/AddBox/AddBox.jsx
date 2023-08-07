@@ -84,6 +84,7 @@ export const AddBox = ({ closeCallback }) => {
                             name="title"
                             placeholder="Enter title of box"
                             onChange={onChange}
+                            autoFocus={true}
                         />
                     </div>
                     <div className="w-52">

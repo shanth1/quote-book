@@ -76,19 +76,26 @@ export const TabBar = () => {
                 </NavLink>
             </div>
 
-            <Modal active={addBoxModalActive} setActive={setAddBoxModalActive}>
-                <AddBox closeCallback={() => setAddBoxModalActive(false)} />
-            </Modal>
+            {addBoxModalActive && (
+                <Modal
+                    active={addBoxModalActive}
+                    setActive={setAddBoxModalActive}
+                >
+                    <AddBox closeCallback={() => setAddBoxModalActive(false)} />
+                </Modal>
+            )}
 
-            <Modal
-                active={addQuoteModalActive}
-                setActive={setAddQuoteModalActive}
-            >
-                <AddQuote
-                    closeCallback={() => setAddQuoteModalActive(false)}
-                    boxId={boxId}
-                />
-            </Modal>
+            {addQuoteModalActive && (
+                <Modal
+                    active={addQuoteModalActive}
+                    setActive={setAddQuoteModalActive}
+                >
+                    <AddQuote
+                        closeCallback={() => setAddQuoteModalActive(false)}
+                        boxId={boxId}
+                    />
+                </Modal>
+            )}
         </div>
     );
 };

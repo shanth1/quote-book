@@ -68,6 +68,7 @@ export const AddQuote = ({ closeCallback, boxId }) => {
                         name="header"
                         placeholder="Enter header of quote"
                         onChange={onChange}
+                        autoFocus={true}
                     />
                 </div>
                 <div className="w-full flex gap-4">

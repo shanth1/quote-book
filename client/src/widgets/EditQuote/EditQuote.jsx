@@ -60,8 +60,6 @@ export const EditQuote = ({
 
     const [updatedStatus, setUpdatedStatus] = useState(false);
     useEffect(() => {
-        console.log("values", values);
-        console.log("old values", oldValues);
         setUpdatedStatus(!isEqualObject({ ...values, isPrivate }, oldValues));
     }, [values, isPrivate, oldValues]);
 
@@ -94,6 +92,7 @@ export const EditQuote = ({
                         placeholder="Enter header of quote"
                         value={values.header}
                         onChange={onChange}
+                        autoFocus={true}
                     />
                 </div>
                 <div className="w-full flex gap-4">

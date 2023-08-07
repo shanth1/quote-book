@@ -1,6 +1,7 @@
 const DeleteButton = ({ children, onClick, isActive = true }) => {
     return (
         <button
+            autoFocus
             onClick={onClick}
             disabled={!isActive}
             className={
