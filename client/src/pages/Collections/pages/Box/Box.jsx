@@ -21,7 +21,7 @@ const Box = () => {
         return <div>{error.message}</div>;
     }
 
-    const quotes = data.getBox.quotes;
+    const quotes = data?.getBox?.quotes || [];
 
     return (
         <Content>

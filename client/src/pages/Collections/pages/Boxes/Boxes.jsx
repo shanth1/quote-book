@@ -19,7 +19,7 @@ export const Boxes = () => {
         return <div>{error.message}</div>;
     }
 
-    const boxes = data.getUser.boxes;
+    const boxes = data?.getUser?.boxes || [];
 
     return (
         <Content>

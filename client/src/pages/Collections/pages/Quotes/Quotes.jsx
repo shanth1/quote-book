@@ -19,7 +19,7 @@ export const Quotes = () => {
         return <div>{error.message}</div>;
     }
 
-    const quotes = data.getUser.quotes;
+    const quotes = data?.getUser?.quotes || [];
 
     return (
         <Content>
