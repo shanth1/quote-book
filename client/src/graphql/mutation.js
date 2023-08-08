@@ -105,3 +105,20 @@ export const DELETE_QUOTE = gql`
         }
     }
 `;
+
+export const INCREMENT_QUOTE_COUNTER = gql`
+    mutation IncrementQuoteCounter($boxId: ID!) {
+        incrementQuoteCounter(boxId: $boxId) {
+            id
+            quoteCounter
+        }
+    }
+`;
+export const DECREMENT_QUOTE_COUNTER = gql`
+    mutation DecrementQuoteCounter($boxId: ID!) {
+        decrementQuoteCounter(boxId: $boxId) {
+            id
+            quoteCounter
+        }
+    }
+`;

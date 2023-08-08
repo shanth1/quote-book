@@ -35,7 +35,7 @@ export const BoxList = ({ boxes }) => {
                     setActive={setDeleteModalActive}
                 >
                     <DeleteBox
-                        id={deleteId}
+                        boxId={deleteId}
                         title={deleteTitle}
                         closeCallback={setDeleteModalActive}
                     />

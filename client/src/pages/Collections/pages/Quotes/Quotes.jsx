@@ -12,7 +12,6 @@ export const Quotes = () => {
     const { loading, error, data } = useQuery(GET_USER_QUOTES, {
         variables: { userId: userId },
     });
-
     if (loading) return <div>Loading...</div>;
     if (error) {
         if (error.message === "Auth error") logout();

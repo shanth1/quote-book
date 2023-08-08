@@ -28,6 +28,7 @@ module.exports = {
             if (!isAuth) {
                 throw new ApolloError("Auth error");
             }
+
             return Quote.findByIdAndRemove(quoteId);
         },
 

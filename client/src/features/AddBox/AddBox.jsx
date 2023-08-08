@@ -8,11 +8,11 @@ import SelectFrom from "../../shared/SelectForm/SelectForm";
 import Content from "../../shared/Content/Content";
 import Required from "../../shared/Required/Required";
 import { useForm } from "../../hooks/formHook";
-import { GET_BOXES } from "../../graphql/queries";
 import { ADD_BOX } from "../../graphql/mutation";
 import { stringToArray } from "../../utils/stringToArray";
 import { validateForm } from "../../utils/validateForm";
 import { AuthContext } from "../../context/AuthContext";
+import { GET_USER_BOXES } from "../../graphql/queries";
 
 export const AddBox = ({ closeCallback }) => {
     const { userId, logout } = useContext(AuthContext);
@@ -54,7 +54,7 @@ export const AddBox = ({ closeCallback }) => {
                 image: values.image ? values.image : undefined,
             },
         },
-        refetchQueries: [GET_BOXES],
+        refetchQueries: [GET_USER_BOXES],
     });
 
     return (

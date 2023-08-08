@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const GET_BOXES = gql`
+export const GET_USER_BOXES = gql`
     query GetUser($userId: ID!) {
         getUser(userId: $userId) {
             id
@@ -20,6 +20,7 @@ export const GET_BOXES = gql`
                 tags
                 createdAt
                 updatedAt
+                quoteCounter
             }
         }
     }

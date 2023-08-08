@@ -1,15 +1,15 @@
 import { useQuery } from "@apollo/client";
-import { GET_BOXES } from "../../../../graphql/queries";
 import { BoxList } from "../../../../widgets/BoxList/BoxList";
 import Content from "../../../../shared/Content/Content";
 import H1 from "../../../../shared/H1/H1";
 import { useContext } from "react";
 import { AuthContext } from "../../../../context/AuthContext";
+import { GET_USER_BOXES } from "../../../../graphql/queries";
 
 export const Boxes = () => {
     const { userId, logout } = useContext(AuthContext);
 
-    const { loading, error, data } = useQuery(GET_BOXES, {
+    const { loading, error, data } = useQuery(GET_USER_BOXES, {
         variables: { userId },
     });
 

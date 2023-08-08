@@ -30,6 +30,10 @@ const BoxSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
         },
+        quoteCounter: {
+            type: Number,
+            default: 0,
+        },
     },
     { timestamps: true },
 );

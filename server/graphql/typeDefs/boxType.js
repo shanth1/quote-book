@@ -10,6 +10,8 @@ module.exports = gql`
         addBox(box: BoxInput): Box!
         deleteBox(boxId: ID!): Box!
         updateBox(boxId: ID!, newBox: BoxInput!): Box!
+        incrementQuoteCounter(boxId: ID!): Box!
+        decrementQuoteCounter(boxId: ID!): Box!
     }
 
     input BoxInput {
@@ -44,5 +46,6 @@ module.exports = gql`
         rating: Int
         quotes: [Quote]
         user: User
+        quoteCounter: Int
     }
 `;
