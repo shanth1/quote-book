@@ -8,6 +8,7 @@ const SelectFrom = ({ names, selected, setSelected }) => {
                 const isActive = name === selected;
                 return (
                     <div
+                        key={Math.random()}
                         onClick={() => {
                             setSelected(name);
                         }}

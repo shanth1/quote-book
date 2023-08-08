@@ -17,6 +17,7 @@ export const QuoteList = ({ quotes }) => {
                 {quotes.length !== 0
                     ? quotes.map((item) => (
                           <QuoteItem
+                              key={item.id}
                               quoteData={item}
                               setSelectedId={setSelectedId}
                               setDeleteModalActive={setDeleteModalActive}

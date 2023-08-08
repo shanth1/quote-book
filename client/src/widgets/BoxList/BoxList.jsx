@@ -17,6 +17,7 @@ export const BoxList = ({ boxes }) => {
                 {boxes.length !== 0
                     ? boxes.map((item) => (
                           <BoxItem
+                              key={item.id}
                               boxData={item}
                               setModalActive={setDeleteModalActive}
                               setDeleteTitle={setDeleteTitle}

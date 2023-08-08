@@ -40,7 +40,7 @@ export const Login = () => {
     });
 
     return (
-        <div class="flex flex-col items-center justify-center md:h-full">
+        <div className="flex flex-col items-center justify-center md:h-full">
             <Link
                 to={"/"}
                 className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
@@ -78,10 +78,7 @@ export const Login = () => {
                                 <Input type="checkbox" />
                             </div>
                             <div className="ml-3 text-sm">
-                                <label
-                                    for="remember"
-                                    class="text-gray-500 dark:text-gray-300"
-                                >
+                                <label className="text-gray-500 dark:text-gray-300">
                                     Remember me
                                 </label>
                             </div>

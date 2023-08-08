@@ -1,6 +1,6 @@
 const H2 = ({ children }) => {
     return (
-        <h2 class="text-lg md:text-lg font-bold leading-tight tracking-tight text-gray-900  dark:text-white">
+        <h2 className="text-lg md:text-lg font-bold leading-tight tracking-tight text-gray-900  dark:text-white">
             {children}
         </h2>
     );

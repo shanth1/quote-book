@@ -50,7 +50,6 @@ module.exports = {
         },
         registerUser: async (_, args, { User }) => {
             try {
-                console.log("REGISTER");
                 const { firstName, lastName, email, username, password } =
                     args.user;
 

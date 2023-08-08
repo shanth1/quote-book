@@ -14,7 +14,8 @@ const DeleteBox = ({ id, title, closeCallback }) => {
 
     const { logout } = useContext(AuthContext);
 
-    const onClick = () => {
+    const onSubmit = (event) => {
+        event.preventDefault();
         deleteBox().catch((e) => logout());
         closeCallback();
     };
@@ -39,7 +40,7 @@ const DeleteBox = ({ id, title, closeCallback }) => {
                 <div className="w-full">
                     <div className="w-1/2 ml-auto mr-0">
                         <DeleteButton
-                            onClick={onClick}
+                            onClick={onSubmit}
                             isActive={inputTitle === title}
                         >
                             Delete box

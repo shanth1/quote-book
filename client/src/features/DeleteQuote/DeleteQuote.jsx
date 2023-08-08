@@ -11,7 +11,8 @@ import { AuthContext } from "../../context/AuthContext";
 const DeleteQuote = ({ id, closeCallback }) => {
     const { logout } = useContext(AuthContext);
 
-    const onClick = () => {
+    const onSubmit = (event) => {
+        event.preventDefault();
         deleteQuote().catch((e) => logout());
         closeCallback();
     };
@@ -29,7 +30,7 @@ const DeleteQuote = ({ id, closeCallback }) => {
                 <Label>Quote can`t be retrieved</Label>
                 <div className="w-full">
                     <div className="w-1/2 ml-auto mr-0">
-                        <DeleteButton onClick={onClick}>
+                        <DeleteButton onClick={onSubmit}>
                             Delete quote
                         </DeleteButton>
                     </div>
