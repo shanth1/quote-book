@@ -3,10 +3,7 @@ import { NavLink, Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
 export const Header = () => {
-    const {
-        auth: { user },
-        logout,
-    } = useContext(AuthContext);
+    const { userId, logout } = useContext(AuthContext);
     let navigate = useNavigate();
 
     return (
@@ -22,7 +19,7 @@ export const Header = () => {
                 </span>
             </Link>
             <div className=" flex items-center lg:order-2">
-                {user ? (
+                {userId ? (
                     <button
                         onClick={() => {
                             logout();
@@ -101,7 +98,7 @@ export const Header = () => {
                             Home
                         </NavLink>
                     </li>
-                    {user && (
+                    {userId && (
                         <li>
                             <NavLink
                                 to="collections"
@@ -129,7 +126,7 @@ export const Header = () => {
                             Feed
                         </NavLink>
                     </li>
-                    {user && (
+                    {userId && (
                         <li>
                             <NavLink
                                 to="settings"
