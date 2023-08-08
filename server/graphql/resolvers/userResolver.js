@@ -9,7 +9,10 @@ module.exports = {
             let users = await User.find();
             return users;
         },
-        getUser: async (_, { userId }, { User }) => {
+        getUser: async (_, { userId }, { User, isAuth }) => {
+            if (!isAuth) {
+                throw new ApolloError("Auth error");
+            }
             return await User.findById(userId);
         },
     },
@@ -79,7 +82,10 @@ module.exports = {
             }
         },
 
-        deleteUser: async (_, { userId }, { User, Box, Quote }) => {
+        deleteUser: async (_, { userId }, { User, Box, Quote, isAuth }) => {
+            if (!isAuth) {
+                throw new ApolloError("Auth error");
+            }
             try {
                 Box.find({ userId }).then((boxes) => {
                     boxes.forEach((box) => {
