@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
 import Button from "../../shared/Button/Button";
 import H1 from "../../shared/H1/H1";
@@ -12,8 +12,11 @@ import { UPDATE_BOX } from "../../graphql/mutation";
 import { GET_BOXES } from "../../graphql/queries";
 import { isEqualObject } from "../../utils/compareObjects";
 import { stringToArray } from "../../utils/stringToArray";
+import { AuthContext } from "../../context/AuthContext";
 
 const EditBox = ({ userId, boxData, closeCallback }) => {
+    const { logout } = useContext(AuthContext);
+
     const [oldValues, setOldValues] = useState({});
     useEffect(() => {
         setOldValues({
@@ -56,7 +59,7 @@ const EditBox = ({ userId, boxData, closeCallback }) => {
     };
     const onSubmit = (event) => {
         event.preventDefault();
-        updateBoxMutation();
+        updateBoxMutation().catch((e) => logout());
         closeCallback();
     };
 

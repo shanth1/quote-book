@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
 import Button from "../../shared/Button/Button";
 import Input from "../../shared/Input/Input";
@@ -12,6 +12,7 @@ import { stringToArray } from "../../utils/stringToArray";
 import { validateForm } from "../../utils/validateForm";
 import { GET_BOX_QUOTES } from "../../graphql/queries";
 import { isEqualObject } from "../../utils/compareObjects";
+import { AuthContext } from "../../context/AuthContext";
 
 export const EditQuote = ({
     userId,
@@ -20,6 +21,8 @@ export const EditQuote = ({
     quoteData,
     closeCallback,
 }) => {
+    const { logout } = useContext(AuthContext);
+
     const [oldValues, setOldValues] = useState();
     useEffect(() => {
         setOldValues({
@@ -49,7 +52,7 @@ export const EditQuote = ({
 
     const onSubmit = (event) => {
         event.preventDefault();
-        updateQuoteMutation();
+        updateQuoteMutation().catch((e) => logout());
         closeCallback();
     };
 

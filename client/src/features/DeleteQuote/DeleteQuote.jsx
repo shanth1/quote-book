@@ -5,10 +5,14 @@ import H1 from "../../shared/H1/H1";
 import Label from "../../shared/Label/Label";
 import { DELETE_QUOTE } from "../../graphql/mutation";
 import { GET_BOX_QUOTES, GET_USER_QUOTES } from "../../graphql/queries";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const DeleteQuote = ({ id, closeCallback }) => {
+    const { logout } = useContext(AuthContext);
+
     const onClick = () => {
-        deleteQuote();
+        deleteQuote().catch((e) => logout());
         closeCallback();
     };
 

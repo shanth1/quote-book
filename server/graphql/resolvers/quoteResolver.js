@@ -16,16 +16,25 @@ module.exports = {
         },
     },
     Mutation: {
-        addQuote: async (_, { quote }, { Quote }) => {
+        addQuote: async (_, { quote }, { Quote, isAuth }) => {
+            if (!isAuth) {
+                throw new ApolloError("Auth error");
+            }
             const newQuote = await new Quote(quote);
             return newQuote.save();
         },
 
-        deleteQuote: async (_, { quoteId }, { Quote }) => {
+        deleteQuote: async (_, { quoteId }, { Quote, isAuth }) => {
+            if (!isAuth) {
+                throw new ApolloError("Auth error");
+            }
             return Quote.findByIdAndRemove(quoteId);
         },
 
-        updateQuote: async (_, { quoteId, newQuote }, { Quote }) => {
+        updateQuote: async (_, { quoteId, newQuote }, { Quote, isAuth }) => {
+            if (!isAuth) {
+                throw new ApolloError("Auth error");
+            }
             const updatedQUote = await Quote.findByIdAndUpdate(
                 quoteId,
                 newQuote,

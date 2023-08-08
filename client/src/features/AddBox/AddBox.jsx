@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useMutation } from "@apollo/client";
 import H1 from "../../shared/H1/H1";
 import Button from "../../shared/Button/Button";
@@ -12,10 +12,13 @@ import { GET_BOXES } from "../../graphql/queries";
 import { ADD_BOX } from "../../graphql/mutation";
 import { stringToArray } from "../../utils/stringToArray";
 import { validateForm } from "../../utils/validateForm";
+import { AuthContext } from "../../context/AuthContext";
 
 export const AddBox = ({ closeCallback, userId }) => {
+    const { logout } = useContext(AuthContext);
+
     const addBox = () => {
-        addBoxMutation();
+        addBoxMutation().catch((e) => logout());
         closeCallback();
     };
     const [type, setType] = useState("Book");
