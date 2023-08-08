@@ -20,7 +20,7 @@ const authReducer = (state, action) => {
     switch (action.type) {
         case "LOGIN":
             return {
-                userId: action.payload.userId,
+                userId: action.payload,
             };
         case "LOGOUT":
             return {
@@ -37,6 +37,8 @@ const AuthProvider = (props) => {
     const [state, dispatch] = useReducer(authReducer, initialState);
 
     const login = (authResponse) => {
+        console.log(authResponse.token);
+        console.log(authResponse.user.id);
         localStorage.setItem("token", authResponse.token);
         dispatch({
             type: "LOGIN",

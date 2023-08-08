@@ -11,7 +11,7 @@ import Label from "../../shared/Label/Label";
 import Content from "../../shared/Content/Content";
 
 export const Login = () => {
-    const context = useContext(AuthContext);
+    const { login, logout } = useContext(AuthContext);
     let navigate = useNavigate();
     const [errors, setErrors] = useState([]);
 
@@ -26,11 +26,11 @@ export const Login = () => {
 
     const [loginUser] = useMutation(LOGIN_USER, {
         update(cache, { data: { loginUser: authResponse } }) {
-            context.login(authResponse);
+            login(authResponse);
             navigate("/collections");
         },
         onError({ graphQLErrors }) {
-            context.logout();
+            logout();
             setErrors(graphQLErrors);
         },
         variables: {
