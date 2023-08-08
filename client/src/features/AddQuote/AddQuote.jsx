@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Button from "../../shared/Button/Button";
 import Input from "../../shared/Input/Input";
 import { useForm } from "../../hooks/formHook";
@@ -12,10 +12,13 @@ import Required from "../../shared/Required/Required";
 import { validateForm } from "../../utils/validateForm";
 import Textarea from "../../shared/Textarea/Textarea";
 import { GET_BOX_QUOTES } from "../../graphql/queries";
+import { AuthContext } from "../../context/AuthContext";
 
 export const AddQuote = ({ closeCallback, userId, boxId }) => {
+    const { logout } = useContext(AuthContext);
+
     const addQuote = () => {
-        addQuoteMutation();
+        addQuoteMutation().catch((e) => logout());
         closeCallback();
     };
     const [isPrivate, setPrivateStatus] = useState(true);

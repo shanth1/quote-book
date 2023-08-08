@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Content from "../../shared/Content/Content";
 import DeleteButton from "../../shared/DeleteButton/DeleteButton";
 import H1 from "../../shared/H1/H1";
@@ -7,12 +7,15 @@ import Label from "../../shared/Label/Label";
 import { useMutation } from "@apollo/client";
 import { DELETE_BOX } from "../../graphql/mutation";
 import { GET_BOXES } from "../../graphql/queries";
+import { AuthContext } from "../../context/AuthContext";
 
 const DeleteBox = ({ id, title, closeCallback }) => {
     const [inputTitle, setInputTitle] = useState("");
 
+    const { logout } = useContext(AuthContext);
+
     const onClick = () => {
-        deleteBox();
+        deleteBox().catch((e) => logout());
         closeCallback();
     };
 
