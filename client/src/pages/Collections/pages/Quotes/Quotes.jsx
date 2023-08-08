@@ -6,8 +6,8 @@ import H1 from "../../../../shared/H1/H1";
 import { useContext } from "react";
 import { AuthContext } from "../../../../context/AuthContext";
 
-export const Quotes = ({ userId }) => {
-    const { logout } = useContext(AuthContext);
+export const Quotes = () => {
+    const { userId, logout } = useContext(AuthContext);
 
     const { loading, error, data } = useQuery(GET_USER_QUOTES, {
         variables: { userId: userId },
@@ -24,7 +24,7 @@ export const Quotes = ({ userId }) => {
     return (
         <Content>
             <H1>All quotes</H1>
-            <QuoteList quotes={quotes} userId={userId} />
+            <QuoteList quotes={quotes} />
         </Content>
     );
 };

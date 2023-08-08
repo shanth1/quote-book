@@ -7,7 +7,7 @@ import H1 from "../../../../shared/H1/H1";
 import { useContext } from "react";
 import { AuthContext } from "../../../../context/AuthContext";
 
-const Box = ({ userId }) => {
+const Box = () => {
     const { logout } = useContext(AuthContext);
 
     const { boxId } = useParams();
@@ -26,7 +26,7 @@ const Box = ({ userId }) => {
     return (
         <Content>
             <H1>Box {boxId}</H1>
-            <QuoteList quotes={quotes} userId={userId} />
+            <QuoteList quotes={quotes} />
         </Content>
     );
 };

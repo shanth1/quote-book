@@ -14,8 +14,8 @@ import Textarea from "../../shared/Textarea/Textarea";
 import { GET_BOX_QUOTES } from "../../graphql/queries";
 import { AuthContext } from "../../context/AuthContext";
 
-export const AddQuote = ({ closeCallback, userId, boxId }) => {
-    const { logout } = useContext(AuthContext);
+export const AddQuote = ({ closeCallback, boxId }) => {
+    const { userId, logout } = useContext(AuthContext);
 
     const addQuote = () => {
         addQuoteMutation().catch((e) => logout());

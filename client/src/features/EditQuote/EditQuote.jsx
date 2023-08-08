@@ -14,14 +14,8 @@ import { GET_BOX_QUOTES } from "../../graphql/queries";
 import { isEqualObject } from "../../utils/compareObjects";
 import { AuthContext } from "../../context/AuthContext";
 
-export const EditQuote = ({
-    userId,
-    boxId,
-    quoteId,
-    quoteData,
-    closeCallback,
-}) => {
-    const { logout } = useContext(AuthContext);
+export const EditQuote = ({ boxId, quoteId, quoteData, closeCallback }) => {
+    const { userId, logout } = useContext(AuthContext);
 
     const [oldValues, setOldValues] = useState();
     useEffect(() => {

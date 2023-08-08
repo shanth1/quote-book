@@ -14,8 +14,8 @@ import { isEqualObject } from "../../utils/compareObjects";
 import { stringToArray } from "../../utils/stringToArray";
 import { AuthContext } from "../../context/AuthContext";
 
-const EditBox = ({ userId, boxData, closeCallback }) => {
-    const { logout } = useContext(AuthContext);
+const EditBox = ({ boxData, closeCallback }) => {
+    const { userId, logout } = useContext(AuthContext);
 
     const [oldValues, setOldValues] = useState({});
     useEffect(() => {

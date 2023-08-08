@@ -5,7 +5,7 @@ import { EditQuote } from "../../features/EditQuote/EditQuote";
 import { QuoteItem } from "../../features/QuoteItem/QuoteItem";
 import Content from "../../shared/Content/Content";
 
-export const QuoteList = ({ quotes, userId }) => {
+export const QuoteList = ({ quotes }) => {
     const [selectedQuoteData, setSelectedQuoteData] = useState({});
     const [deleteModalActive, setDeleteModalActive] = useState(false);
     const [updateModalActive, setUpdateModalActive] = useState(false);
@@ -44,7 +44,6 @@ export const QuoteList = ({ quotes, userId }) => {
                     setActive={setUpdateModalActive}
                 >
                     <EditQuote
-                        userId={userId}
                         boxId={boxId}
                         quoteId={selectedId}
                         quoteData={selectedQuoteData}

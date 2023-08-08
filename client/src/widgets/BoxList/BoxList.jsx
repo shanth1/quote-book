@@ -4,7 +4,7 @@ import { DeleteBox } from "../../features/DeleteBox/DeleteBox";
 import { EditBox } from "../../features/EditBox/EditBox";
 import { BoxItem } from "./BoxItem/BoxItem";
 
-export const BoxList = ({ boxes, userId }) => {
+export const BoxList = ({ boxes }) => {
     const [deleteModalActive, setDeleteModalActive] = useState(false);
     const [editModalActive, setEditModalActive] = useState(false);
     const [editedBoxData, setEditedBoxData] = useState({});
@@ -44,7 +44,6 @@ export const BoxList = ({ boxes, userId }) => {
             {editModalActive && (
                 <Modal active={editModalActive} setActive={setEditModalActive}>
                     <EditBox
-                        userId={userId}
                         boxData={editedBoxData}
                         closeCallback={setEditModalActive}
                     />
