@@ -7,7 +7,7 @@ import { AddBox } from "../../features/AddBox/AddBox";
 import { FiPlusCircle, FiPackage, FiFileText } from "react-icons/fi";
 import { AddQuote } from "../../features/AddQuote/AddQuote";
 
-export const TabBar = ({ userId }) => {
+export const TabBar = () => {
     const [addBoxModalActive, setAddBoxModalActive] = useState(false);
     const [addQuoteModalActive, setAddQuoteModalActive] = useState(false);
     const location = useLocation();
@@ -81,10 +81,7 @@ export const TabBar = ({ userId }) => {
                     active={addBoxModalActive}
                     setActive={setAddBoxModalActive}
                 >
-                    <AddBox
-                        closeCallback={() => setAddBoxModalActive(false)}
-                        userId={userId}
-                    />
+                    <AddBox closeCallback={() => setAddBoxModalActive(false)} />
                 </Modal>
             )}
 
@@ -95,7 +92,6 @@ export const TabBar = ({ userId }) => {
                 >
                     <AddQuote
                         closeCallback={() => setAddQuoteModalActive(false)}
-                        userId={userId}
                         boxId={boxId}
                     />
                 </Modal>

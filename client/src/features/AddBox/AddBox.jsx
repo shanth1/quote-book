@@ -14,8 +14,8 @@ import { stringToArray } from "../../utils/stringToArray";
 import { validateForm } from "../../utils/validateForm";
 import { AuthContext } from "../../context/AuthContext";
 
-export const AddBox = ({ closeCallback, userId }) => {
-    const { logout } = useContext(AuthContext);
+export const AddBox = ({ closeCallback }) => {
+    const { userId, logout } = useContext(AuthContext);
 
     const addBox = () => {
         addBoxMutation().catch((e) => logout());

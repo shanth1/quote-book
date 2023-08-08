@@ -6,8 +6,8 @@ import H1 from "../../../../shared/H1/H1";
 import { useContext } from "react";
 import { AuthContext } from "../../../../context/AuthContext";
 
-export const Boxes = ({ userId }) => {
-    const { logout } = useContext(AuthContext);
+export const Boxes = () => {
+    const { userId, logout } = useContext(AuthContext);
 
     const { loading, error, data } = useQuery(GET_BOXES, {
         variables: { userId },
@@ -24,7 +24,7 @@ export const Boxes = ({ userId }) => {
     return (
         <Content>
             <H1>Boxes</H1>
-            <BoxList boxes={boxes} userId={userId} />
+            <BoxList boxes={boxes} />
         </Content>
     );
 };

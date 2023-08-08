@@ -28,23 +28,11 @@ function App() {
                         <Route path="register" element={<Register />} />
                         <Route path="profile" element={<Profile />} />
                         <Route path="feed" element={<Feed />} />
-                        <Route
-                            path="collections"
-                            element={<Collections userId={userId} />}
-                        >
+                        <Route path="collections" element={<Collections />}>
                             <Route index element={<Navigate to="boxes" />} />
-                            <Route
-                                path="boxes"
-                                element={<Boxes userId={userId} />}
-                            />
-                            <Route
-                                path="quotes"
-                                element={<Quotes userId={userId} />}
-                            />
-                            <Route
-                                path="box/:boxId"
-                                element={<Box userId={userId} />}
-                            />
+                            <Route path="boxes" element={<Boxes />} />
+                            <Route path="quotes" element={<Quotes />} />
+                            <Route path="box/:boxId" element={<Box />} />
                         </Route>
                         <Route path="settings" element={<Settings />} />
                         <Route path="*" element={<NotFound />} />
