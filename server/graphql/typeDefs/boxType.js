@@ -44,5 +44,6 @@ module.exports = gql`
         rating: Int
         quotes: [Quote]
         user: User
+        quoteCounter: Int
     }
 `;
