@@ -3,16 +3,17 @@ import Content from "../../shared/Content/Content";
 import DeleteButton from "../../shared/DeleteButton/DeleteButton";
 import H1 from "../../shared/H1/H1";
 import Label from "../../shared/Label/Label";
-import { DELETE_QUOTE } from "../../graphql/mutation";
+import { DECREMENT_QUOTE_COUNTER, DELETE_QUOTE } from "../../graphql/mutation";
 import { GET_BOX_QUOTES, GET_USER_QUOTES } from "../../graphql/queries";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
-const DeleteQuote = ({ id, closeCallback }) => {
+const DeleteQuote = ({ id, boxId, closeCallback }) => {
     const { logout } = useContext(AuthContext);
 
     const onSubmit = (event) => {
         event.preventDefault();
+        decrementQuoteCounter().catch((e) => logout());
         deleteQuote().catch((e) => logout());
         closeCallback();
     };
@@ -22,6 +23,11 @@ const DeleteQuote = ({ id, closeCallback }) => {
             quoteId: id,
         },
         refetchQueries: [GET_USER_QUOTES, GET_BOX_QUOTES],
+    });
+    const [decrementQuoteCounter] = useMutation(DECREMENT_QUOTE_COUNTER, {
+        variables: {
+            boxId: boxId,
+        },
     });
     return (
         <form>

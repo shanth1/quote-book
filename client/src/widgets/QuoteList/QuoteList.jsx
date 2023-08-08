@@ -35,6 +35,7 @@ export const QuoteList = ({ quotes }) => {
                 >
                     <DeleteQuote
                         id={selectedId}
+                        boxId={boxId}
                         closeCallback={setDeleteModalActive}
                     />
                 </Modal>

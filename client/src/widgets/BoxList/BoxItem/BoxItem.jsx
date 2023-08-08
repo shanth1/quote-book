@@ -10,7 +10,8 @@ export const BoxItem = ({
     setEditedBoxData,
     setEditModalActive,
 }) => {
-    const { id, title, image } = boxData;
+    const { id, title, image, quoteCounter } = boxData;
+    console.log("quoteCounter", quoteCounter);
     const navigate = useNavigate();
 
     const boxClickHandler = (event) => {

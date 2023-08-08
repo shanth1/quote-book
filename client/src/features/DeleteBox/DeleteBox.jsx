@@ -6,10 +6,10 @@ import Input from "../../shared/Input/Input";
 import Label from "../../shared/Label/Label";
 import { useMutation } from "@apollo/client";
 import { DELETE_BOX } from "../../graphql/mutation";
-import { GET_BOXES } from "../../graphql/queries";
 import { AuthContext } from "../../context/AuthContext";
+import { GET_USER_BOXES } from "../../graphql/queries";
 
-const DeleteBox = ({ id, title, closeCallback }) => {
+const DeleteBox = ({ boxId, title, closeCallback }) => {
     const [inputTitle, setInputTitle] = useState("");
 
     const { logout } = useContext(AuthContext);
@@ -26,9 +26,9 @@ const DeleteBox = ({ id, title, closeCallback }) => {
 
     const [deleteBox] = useMutation(DELETE_BOX, {
         variables: {
-            boxId: id,
+            boxId: boxId,
         },
-        refetchQueries: [GET_BOXES],
+        refetchQueries: [GET_USER_BOXES],
     });
 
     return (

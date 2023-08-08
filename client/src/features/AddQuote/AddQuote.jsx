@@ -4,7 +4,7 @@ import Input from "../../shared/Input/Input";
 import { useForm } from "../../hooks/formHook";
 import Label from "../../shared/Label/Label";
 import { useMutation } from "@apollo/client";
-import { ADD_QUOTE } from "../../graphql/mutation";
+import { ADD_QUOTE, INCREMENT_QUOTE_COUNTER } from "../../graphql/mutation";
 import H1 from "../../shared/H1/H1";
 import { stringToArray } from "../../utils/stringToArray";
 import Content from "../../shared/Content/Content";
@@ -18,6 +18,7 @@ export const AddQuote = ({ closeCallback, boxId }) => {
     const { userId, logout } = useContext(AuthContext);
 
     const addQuote = () => {
+        incrementQuoteCounter().catch((e) => logout());
         addQuoteMutation().catch((e) => logout());
         closeCallback();
     };
@@ -42,6 +43,11 @@ export const AddQuote = ({ closeCallback, boxId }) => {
             },
         },
         refetchQueries: [GET_BOX_QUOTES],
+    });
+    const [incrementQuoteCounter] = useMutation(INCREMENT_QUOTE_COUNTER, {
+        variables: {
+            boxId: boxId,
+        },
     });
 
     return (

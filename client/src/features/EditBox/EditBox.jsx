@@ -9,10 +9,10 @@ import Content from "../../shared/Content/Content";
 import SelectFrom from "../../shared/SelectForm/SelectForm";
 import { validateForm } from "../../utils/validateForm";
 import { UPDATE_BOX } from "../../graphql/mutation";
-import { GET_BOXES } from "../../graphql/queries";
 import { isEqualObject } from "../../utils/compareObjects";
 import { stringToArray } from "../../utils/stringToArray";
 import { AuthContext } from "../../context/AuthContext";
+import { GET_USER_BOXES } from "../../graphql/queries";
 
 const EditBox = ({ boxData, closeCallback }) => {
     const { userId, logout } = useContext(AuthContext);
@@ -81,7 +81,7 @@ const EditBox = ({ boxData, closeCallback }) => {
                 image: form.image ? form.image : undefined,
             },
         },
-        refetchQueries: [GET_BOXES],
+        refetchQueries: [GET_USER_BOXES],
     });
 
     return (

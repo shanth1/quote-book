@@ -22,6 +22,29 @@ module.exports = {
         },
     },
     Mutation: {
+        incrementQuoteCounter: async (_, { boxId }, { Box, isAuth }) => {
+            if (!isAuth) {
+                throw new ApolloError("Auth error");
+            }
+            const box = await Box.findById(boxId);
+            return await Box.findByIdAndUpdate(
+                boxId,
+                { quoteCounter: (box.quoteCounter += 1) },
+                { new: true },
+            );
+        },
+        decrementQuoteCounter: async (_, { boxId }, { Box, isAuth }) => {
+            if (!isAuth) {
+                throw new ApolloError("Auth error");
+            }
+            const box = await Box.findById(boxId);
+            return await Box.findByIdAndUpdate(
+                boxId,
+                { quoteCounter: (box.quoteCounter -= 1) },
+                { new: true },
+            );
+        },
+
         addBox: async (_, { box }, { Box, isAuth }) => {
             if (!isAuth) {
                 throw new ApolloError("Auth error");
