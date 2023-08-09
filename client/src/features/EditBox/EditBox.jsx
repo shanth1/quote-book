@@ -21,7 +21,7 @@ const EditBox = ({ boxData, closeCallback }) => {
     const [oldValues, setOldValues] = useState({});
     useEffect(() => {
         setOldValues({
-            rating: boxData.rating ? String(boxData.rating) : "",
+            rating: boxData.rating ? boxData.rating : "",
             isPrivate: boxData.isPrivate,
             type: boxData.type,
             title: boxData.title,
