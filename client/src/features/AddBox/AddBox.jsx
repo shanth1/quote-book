@@ -14,6 +14,8 @@ import { validateForm } from "../../utils/validateForm";
 import { AuthContext } from "../../context/AuthContext";
 import { GET_USER_BOXES } from "../../graphql/queries";
 import { getBoxPlaceholders } from "../../utils/boxPlaceholders";
+import { MultipleSelect } from "../../shared/MultipleSelect/MultipleSelect";
+import { SingleSelect } from "../../shared/SingleSelect/SingleSelect";
 
 export const AddBox = ({ closeCallback }) => {
     const { userId, logout } = useContext(AuthContext);
@@ -24,7 +26,14 @@ export const AddBox = ({ closeCallback }) => {
     };
     const [type, setType] = useState("Book");
     const [isPrivate, setPrivateStatus] = useState(true);
-    const [rating, setRating] = useState("");
+    const [rating, setRating] = useState();
+    const ratingOptions = [
+        { value: "1", label: "★☆☆☆☆" },
+        { value: "2", label: "★★☆☆☆" },
+        { value: "3", label: "★★★☆☆" },
+        { value: "4", label: "★★★★☆" },
+        { value: "5", label: "★★★★★" },
+    ];
 
     const [onChange, onSubmit, values] = useForm(addBox, {
         title: "",
@@ -58,6 +67,20 @@ export const AddBox = ({ closeCallback }) => {
         refetchQueries: [GET_USER_BOXES],
     });
 
+    const [tags, setTags] = useState();
+    const tagsOptions = [
+        {
+            label: "Mammal",
+            options: [
+                { value: "Dolphin", label: "🐬 Dolphin" },
+                { value: "Giraffe", label: "🦒 Giraffe" },
+            ],
+        },
+        { value: "fox", label: "🦊 Fox" },
+        { value: "Butterfly", label: "🦋 Butterfly" },
+        { value: "Honeybee", label: "🐝 Honeybee" },
+    ];
+
     return (
         <form>
             <Content>
@@ -79,19 +102,13 @@ export const AddBox = ({ closeCallback }) => {
                             autoFocus={true}
                         />
                     </div>
-                    <div className="w-52">
+                    <div className="w-64">
                         <Label>Rating</Label>
-                        <select
-                            onChange={(event) => setRating(event.target.value)}
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        >
-                            <option value="">-</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
+                        <SingleSelect
+                            options={ratingOptions}
+                            state={rating}
+                            setState={setRating}
+                        />
                     </div>
                 </div>
                 <div className="w-full flex gap-4">
@@ -104,7 +121,7 @@ export const AddBox = ({ closeCallback }) => {
                             disabled={type === "Person"}
                         />
                     </div>
-                    <div className="w-52">
+                    <div className="w-64">
                         <Label>{type === "Person" ? "Century" : "Year"}</Label>
                         <Input
                             name="year"
@@ -112,6 +129,14 @@ export const AddBox = ({ closeCallback }) => {
                             onChange={onChange}
                         />
                     </div>
+                </div>
+                <div>
+                    <Label>Tags</Label>
+                    <MultipleSelect
+                        options={tagsOptions}
+                        state={tags}
+                        setState={setTags}
+                    />
                 </div>
 
                 <div>
@@ -142,21 +167,13 @@ export const AddBox = ({ closeCallback }) => {
                         />
                     </div>
                     <div className="w-full">
-                        <Label>Tags</Label>
+                        <Label>Image (URL)</Label>
                         <Input
-                            name="tags"
-                            placeholder="Work"
+                            name="image"
+                            placeholder={getBoxPlaceholders(type).image}
                             onChange={onChange}
                         />
                     </div>
-                </div>
-                <div className="w-50">
-                    <Label>Image (URL)</Label>
-                    <Input
-                        name="image"
-                        placeholder={getBoxPlaceholders(type).image}
-                        onChange={onChange}
-                    />
                 </div>
                 <div className="w-full flex gap-4">
                     <div className="w-full flex justify-center items-center">
