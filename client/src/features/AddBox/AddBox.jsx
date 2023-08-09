@@ -14,6 +14,7 @@ import { validateForm } from "../../utils/validateForm";
 import { AuthContext } from "../../context/AuthContext";
 import { GET_USER_BOXES } from "../../graphql/queries";
 import { getBoxPlaceholders } from "../../utils/boxPlaceholders";
+import { MultipleSelect } from "../../shared/MultipleSelect/MultipleSelect";
 
 export const AddBox = ({ closeCallback }) => {
     const { userId, logout } = useContext(AuthContext);
@@ -57,6 +58,20 @@ export const AddBox = ({ closeCallback }) => {
         },
         refetchQueries: [GET_USER_BOXES],
     });
+
+    const [tags, setTags] = useState();
+    const options = [
+        {
+            label: "Mammal",
+            options: [
+                { value: "Dolphin", label: "🐬 Dolphin" },
+                { value: "Giraffe", label: "🦒 Giraffe" },
+            ],
+        },
+        { value: "fox", label: "🦊 Fox" },
+        { value: "Butterfly", label: "🦋 Butterfly" },
+        { value: "Honeybee", label: "🐝 Honeybee" },
+    ];
 
     return (
         <form>
@@ -113,6 +128,14 @@ export const AddBox = ({ closeCallback }) => {
                         />
                     </div>
                 </div>
+                <div>
+                    <Label>Tags</Label>
+                    <MultipleSelect
+                        options={options}
+                        state={tags}
+                        setState={setTags}
+                    />
+                </div>
 
                 <div>
                     <Label>Main idea</Label>
@@ -142,21 +165,13 @@ export const AddBox = ({ closeCallback }) => {
                         />
                     </div>
                     <div className="w-full">
-                        <Label>Tags</Label>
+                        <Label>Image (URL)</Label>
                         <Input
-                            name="tags"
-                            placeholder="Work"
+                            name="image"
+                            placeholder={getBoxPlaceholders(type).image}
                             onChange={onChange}
                         />
                     </div>
-                </div>
-                <div className="w-50">
-                    <Label>Image (URL)</Label>
-                    <Input
-                        name="image"
-                        placeholder={getBoxPlaceholders(type).image}
-                        onChange={onChange}
-                    />
                 </div>
                 <div className="w-full flex gap-4">
                     <div className="w-full flex justify-center items-center">
