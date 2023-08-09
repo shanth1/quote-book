@@ -13,6 +13,7 @@ import { isEqualObject } from "../../utils/compareObjects";
 import { stringToArray } from "../../utils/stringToArray";
 import { AuthContext } from "../../context/AuthContext";
 import { GET_USER_BOXES } from "../../graphql/queries";
+import { getBoxPlaceholders } from "../../utils/boxPlaceholders";
 
 const EditBox = ({ boxData, closeCallback }) => {
     const { userId, logout } = useContext(AuthContext);
@@ -89,7 +90,7 @@ const EditBox = ({ boxData, closeCallback }) => {
             <Content>
                 <H1>Edit box</H1>
                 <SelectFrom
-                    names={["Book", "Movie", "Person", "Other"]}
+                    names={["Book", "Movie", "Person", "Music", "Other"]}
                     selected={type}
                     setSelected={setType}
                 />
@@ -101,7 +102,7 @@ const EditBox = ({ boxData, closeCallback }) => {
                         <Input
                             name="title"
                             value={form.title}
-                            placeholder="Enter title of box"
+                            placeholder={getBoxPlaceholders(type).title}
                             onChange={onChange}
                             autoFocus={true}
                         />
@@ -124,20 +125,21 @@ const EditBox = ({ boxData, closeCallback }) => {
                 </div>
                 <div className="w-full flex gap-4">
                     <div className="w-full">
-                        <Label>Authors</Label>
+                        <Label isActive={type !== "Person"}>Authors</Label>
                         <Input
                             name="authors"
                             value={form.authors}
-                            placeholder="Biba, Boba"
+                            placeholder={getBoxPlaceholders(type).authors}
                             onChange={onChange}
+                            disabled={type === "Person"}
                         />
                     </div>
                     <div className="w-52">
-                        <Label>Year</Label>
+                        <Label>{type === "Person" ? "Century" : "Year"}</Label>
                         <Input
                             name="year"
                             value={form.year}
-                            placeholder="2023"
+                            placeholder={getBoxPlaceholders(type).year}
                             onChange={onChange}
                         />
                     </div>
@@ -148,7 +150,7 @@ const EditBox = ({ boxData, closeCallback }) => {
                     <Input
                         name="mainIdea"
                         value={form.mainIdea}
-                        placeholder="Add main idea of box"
+                        placeholder={getBoxPlaceholders(type).mainIdea}
                         onChange={onChange}
                     />
                 </div>
@@ -157,17 +159,19 @@ const EditBox = ({ boxData, closeCallback }) => {
                     <Input
                         name="description"
                         value={form.description}
-                        placeholder="Add description"
+                        placeholder={getBoxPlaceholders(type).description}
                         onChange={onChange}
                     />
                 </div>
                 <div className="w-full flex gap-4">
                     <div className="w-full">
-                        <Label>Genres</Label>
+                        <Label>
+                            {type === "Person" ? "Activity" : "Genres"}
+                        </Label>
                         <Input
                             name="genres"
                             value={form.genres}
-                            placeholder="Drama, Comedy"
+                            placeholder={getBoxPlaceholders(type).genres}
                             onChange={onChange}
                         />
                     </div>
@@ -186,7 +190,7 @@ const EditBox = ({ boxData, closeCallback }) => {
                     <Input
                         name="image"
                         value={form.image}
-                        placeholder="https://www.images.com/image1"
+                        placeholder={getBoxPlaceholders(type).image}
                         onChange={onChange}
                     />
                 </div>

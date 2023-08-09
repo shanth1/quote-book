@@ -13,6 +13,7 @@ import { stringToArray } from "../../utils/stringToArray";
 import { validateForm } from "../../utils/validateForm";
 import { AuthContext } from "../../context/AuthContext";
 import { GET_USER_BOXES } from "../../graphql/queries";
+import { getBoxPlaceholders } from "../../utils/boxPlaceholders";
 
 export const AddBox = ({ closeCallback }) => {
     const { userId, logout } = useContext(AuthContext);
@@ -62,7 +63,7 @@ export const AddBox = ({ closeCallback }) => {
             <Content>
                 <H1>Add box</H1>
                 <SelectFrom
-                    names={["Book", "Movie", "Person", "Other"]}
+                    names={["Book", "Movie", "Person", "Music", "Other"]}
                     selected={type}
                     setSelected={setType}
                 />
@@ -73,7 +74,7 @@ export const AddBox = ({ closeCallback }) => {
                         </Label>
                         <Input
                             name="title"
-                            placeholder="Enter title of box"
+                            placeholder={getBoxPlaceholders(type).title}
                             onChange={onChange}
                             autoFocus={true}
                         />
@@ -95,18 +96,19 @@ export const AddBox = ({ closeCallback }) => {
                 </div>
                 <div className="w-full flex gap-4">
                     <div className="w-full">
-                        <Label>Authors</Label>
+                        <Label isActive={type !== "Person"}>Authors</Label>
                         <Input
                             name="authors"
-                            placeholder="Biba, Boba"
+                            placeholder={getBoxPlaceholders(type).authors}
                             onChange={onChange}
+                            disabled={type === "Person"}
                         />
                     </div>
                     <div className="w-52">
-                        <Label>Year</Label>
+                        <Label>{type === "Person" ? "Century" : "Year"}</Label>
                         <Input
                             name="year"
-                            placeholder="2023"
+                            placeholder={getBoxPlaceholders(type).year}
                             onChange={onChange}
                         />
                     </div>
@@ -116,7 +118,7 @@ export const AddBox = ({ closeCallback }) => {
                     <Label>Main idea</Label>
                     <Input
                         name="mainIdea"
-                        placeholder="Add main idea of box"
+                        placeholder={getBoxPlaceholders(type).mainIdea}
                         onChange={onChange}
                     />
                 </div>
@@ -124,16 +126,18 @@ export const AddBox = ({ closeCallback }) => {
                     <Label>Description</Label>
                     <Input
                         name="description"
-                        placeholder="Add description"
+                        placeholder={getBoxPlaceholders(type).description}
                         onChange={onChange}
                     />
                 </div>
                 <div className="w-full flex gap-4">
                     <div className="w-full">
-                        <Label>Genres</Label>
+                        <Label>
+                            {type === "Person" ? "Activity" : "Genres"}
+                        </Label>
                         <Input
                             name="genres"
-                            placeholder="Drama, Comedy"
+                            placeholder={getBoxPlaceholders(type).genres}
                             onChange={onChange}
                         />
                     </div>
@@ -150,7 +154,7 @@ export const AddBox = ({ closeCallback }) => {
                     <Label>Image (URL)</Label>
                     <Input
                         name="image"
-                        placeholder="https://www.images.com/image1"
+                        placeholder={getBoxPlaceholders(type).image}
                         onChange={onChange}
                     />
                 </div>
