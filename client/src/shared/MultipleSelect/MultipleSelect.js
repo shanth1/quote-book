@@ -36,10 +36,10 @@ export const MultipleSelect = ({ options, state, setState }) => {
                                 : `text-gray-500 hover:bg-primary-100 hover:text-primary-500`
                         }`,
                     tagItem: () =>
-                        "flex items-center rounded-lg bg-primary-100 px-1 py-1 gap-0.5",
-                    tagItemText: "text-gray-600 text-sm",
+                        "flex bg-primary-500 items-center rounded-lg px-1 py-1 gap-1",
+                    tagItemText: "text-white text-sm",
                     tagItemIconContainer:
-                        "flex justify-center items-center hover:bg-red-300 rounded-md cursor-pointer px-0.5 py-0.5",
+                        "flex text-gray-100 hover:text-white transition-all duration-200 justify-center items-center hover:bg-red-500 rounded-md cursor-pointer px-0.5 py-0.5",
                     tagItemIcon: "w-3 h-3",
                     list: "",
                     listGroupLabel: "",
