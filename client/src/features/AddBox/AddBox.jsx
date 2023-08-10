@@ -38,7 +38,7 @@ export const AddBox = ({ closeCallback }) => {
                 title: values.title,
                 type: typeStore[0],
                 authors: stringToArray(values.authors),
-                year: Number(values.year),
+                year: values.year,
                 genres: stringToArray(values.genres),
                 tags: tagsStore[0],
                 mainIdea: values.mainIdea,
