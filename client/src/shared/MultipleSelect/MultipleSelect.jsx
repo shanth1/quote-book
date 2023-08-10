@@ -1,8 +1,35 @@
+import { useState } from "react";
 import Select from "react-tailwindcss-select";
 
 export const MultipleSelect = ({ options, state, setState }) => {
-    const handleChange = (value) => {
-        setState(value);
+    const initialValues = [];
+    state &&
+        state.forEach((element) => {
+            options.forEach((option) => {
+                const group = option?.options;
+                if (group) {
+                    group.forEach((subOption) => {
+                        if (element === subOption.value)
+                            initialValues.push(subOption);
+                    });
+                } else {
+                    if (element === option.value) initialValues.push(option);
+                }
+            });
+        });
+    const [values, setValues] = useState(
+        initialValues.length ? initialValues : null,
+    );
+
+    const handleChange = (arr) => {
+        const stateArray = [];
+        arr &&
+            arr.forEach((el) => {
+                stateArray.push(el.value);
+                return el.value;
+            });
+        setState(stateArray);
+        setValues(arr);
     };
     return (
         <div className="">
@@ -12,7 +39,7 @@ export const MultipleSelect = ({ options, state, setState }) => {
                 noOptionsMessage="No options found ):"
                 isSearchable
                 isClearable
-                value={state}
+                value={values}
                 onChange={handleChange}
                 options={options}
                 formatGroupLabel={(data) => (
