@@ -4,7 +4,7 @@ const BoxSchema = new mongoose.Schema(
     {
         title: { type: String },
         authors: { type: [String] },
-        year: { type: Number },
+        year: { type: String },
         image: {
             type: String,
             default:

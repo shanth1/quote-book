@@ -1,13 +1,23 @@
+import { useState } from "react";
 import Select from "react-tailwindcss-select";
 
 export const SingleSelect = ({ options, state, setState }) => {
-    const handleChange = (value) => {
-        setState(value);
+    let initialValues;
+    state &&
+        options.forEach((option) => {
+            if (String(state) === option?.value) initialValues = option;
+        });
+
+    const [values, setValues] = useState(initialValues);
+
+    const handleChange = (obj) => {
+        setState(obj?.value || "");
+        setValues(obj);
     };
 
     return (
         <Select
-            value={state}
+            value={values}
             onChange={handleChange}
             options={options}
             isClearable

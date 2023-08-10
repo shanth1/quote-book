@@ -17,7 +17,7 @@ module.exports = gql`
     input BoxInput {
         title: String!
         authors: [String!]!
-        year: Int
+        year: String
         image: String
         mainIdea: String
         description: String
@@ -33,7 +33,7 @@ module.exports = gql`
         id: ID!
         title: String!
         authors: [String!]!
-        year: Int
+        year: String
         image: String
         mainIdea: String
         description: String
