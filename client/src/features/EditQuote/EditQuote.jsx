@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
 import Button from "../../shared/Button/Button";
 import { UPDATE_QUOTE } from "../../graphql/mutation";
-import { stringToArray } from "../../utils/stringToArray";
+import { getArrayFromString } from "../../utils/stringToArray";
 import { validateForm } from "../../utils/validateForm";
 import { GET_BOX_QUOTES } from "../../graphql/queries";
 import { isEqualObject } from "../../utils/compareObjects";
@@ -46,7 +46,7 @@ export const EditQuote = ({ boxId, quoteId, quoteData, closeCallback }) => {
                 boxId: boxId,
                 header: values.header,
                 marker: values.marker,
-                tags: stringToArray(values.tags),
+                tags: getArrayFromString(values.tags),
                 text: values.text,
                 isPrivate: privateStore[0],
             },
