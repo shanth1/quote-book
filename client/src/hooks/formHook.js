@@ -10,16 +10,18 @@ export const useForm = (submitCallback, initialState = {}) => {
         const key = event.target.name;
         let value = event.target.value;
         const isRemove = previousLength > value.length;
+
         value = getStandardFormattedValue(value, previousSymbol, isRemove);
 
         switch (key) {
             case "title":
-                if (!value) return;
-                if (checkValidLength(value, 20, isRemove)) return;
+            case "header":
+                if (!value && value !== "") return;
+                if (checkValidLength(value, 25, isRemove)) return;
                 break;
             case "authors":
             case "genres":
-                if (!value) return;
+                if (!value && value !== "") return;
                 if (checkValidLength(value, 40, isRemove)) return;
                 break;
             case "year":
@@ -27,7 +29,7 @@ export const useForm = (submitCallback, initialState = {}) => {
                 break;
             case "mainIdea":
             case "description":
-                if (!value) return;
+                if (!value && value !== "") return;
                 break;
             case "image":
                 break;
