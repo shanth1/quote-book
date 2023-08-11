@@ -1,4 +1,5 @@
 export const getStandardFormattedValue = (value, previousSymbol, isRemove) => {
+    value = value.trimStart();
     if (!/[A-Za-zА-Яа-я0-9,?!-_\s]/.test(value.at(-1))) return;
     if (previousSymbol === "," && value.at(-1) === ",") return;
     if (previousSymbol === " " && value.at(-1) === " ") return;

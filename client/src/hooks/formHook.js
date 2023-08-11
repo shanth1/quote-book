@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { getStandardFormattedValue } from "./utils/standardFormatting";
+import { checkValidLength } from "./utils/lengthFormatting";
 
 export const useForm = (submitCallback, initialState = {}) => {
     const [values, setValues] = useState(initialState);
@@ -9,24 +10,26 @@ export const useForm = (submitCallback, initialState = {}) => {
         const key = event.target.name;
         let value = event.target.value;
         const isRemove = previousLength > value.length;
-        value = value.trimStart();
+        value = getStandardFormattedValue(value, previousSymbol, isRemove);
 
         switch (key) {
-            case "year":
-                break;
-            case "image":
-                break;
             case "title":
-            case "mainIdea":
-            case "description":
+                if (!value) return;
+                if (checkValidLength(value, 20, isRemove)) return;
+                break;
             case "authors":
             case "genres":
-                value = getStandardFormattedValue(
-                    value,
-                    previousSymbol,
-                    isRemove,
-                );
                 if (!value) return;
+                if (checkValidLength(value, 40, isRemove)) return;
+                break;
+            case "year":
+                if (checkValidLength(value, 4, isRemove)) return;
+                break;
+            case "mainIdea":
+            case "description":
+                if (!value) return;
+                break;
+            case "image":
                 break;
             default:
                 break;
