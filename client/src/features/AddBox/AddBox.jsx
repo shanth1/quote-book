@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client";
 import Button from "../../shared/Button/Button";
 import { useForm } from "../../hooks/formHook";
 import { ADD_BOX } from "../../graphql/mutation";
-import { stringToArray } from "../../utils/stringToArray";
+import { getArrayFromString } from "../../utils/stringToArray";
 import { validateForm } from "../../utils/validateForm";
 import { AuthContext } from "../../context/AuthContext";
 import { GET_USER_BOXES } from "../../graphql/queries";
@@ -37,9 +37,9 @@ export const AddBox = ({ closeCallback }) => {
                 userId: userId,
                 title: values.title,
                 type: typeStore[0],
-                authors: stringToArray(values.authors),
+                authors: getArrayFromString(values.authors),
                 year: values.year,
-                genres: stringToArray(values.genres),
+                genres: getArrayFromString(values.genres),
                 tags: tagsStore[0],
                 mainIdea: values.mainIdea,
                 description: values.description,
@@ -58,6 +58,7 @@ export const AddBox = ({ closeCallback }) => {
             privateStore={privateStore}
             ratingStore={ratingStore}
             tagsStore={tagsStore}
+            values={values}
             onChange={onChange}
         >
             <Button onClick={onSubmit} isActive={validateForm([values.title])}>

@@ -4,7 +4,7 @@ import Button from "../../shared/Button/Button";
 import { validateForm } from "../../utils/validateForm";
 import { UPDATE_BOX } from "../../graphql/mutation";
 import { isEqualObject } from "../../utils/compareObjects";
-import { stringToArray } from "../../utils/stringToArray";
+import { getArrayFromString } from "../../utils/stringToArray";
 import { AuthContext } from "../../context/AuthContext";
 import { GET_USER_BOXES } from "../../graphql/queries";
 import { BoxForm } from "../../entities/BoxForm/BoxForm";
@@ -56,9 +56,9 @@ const EditBox = ({ boxData, closeCallback }) => {
                 userId: userId,
                 title: values.title,
                 type: typeStore[0],
-                authors: stringToArray(values.authors),
+                authors: getArrayFromString(values.authors),
                 year: values.year,
-                genres: stringToArray(values.genres),
+                genres: getArrayFromString(values.genres),
                 tags: tagsStore[0],
                 mainIdea: values.mainIdea,
                 description: values.description,
