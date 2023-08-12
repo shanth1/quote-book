@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { getStandardFormattedValue } from "./utils/standardFormatting";
 import { checkValidLength } from "./utils/lengthFormatting";
+import { getIterableFormattedValue } from "./utils/iterableStringFormatting";
 
 export const useForm = (submitCallback, initialState = {}) => {
     const [values, setValues] = useState(initialState);
@@ -10,8 +11,8 @@ export const useForm = (submitCallback, initialState = {}) => {
         const key = event.target.name;
         let value = event.target.value;
         const isRemove = previousLength > value.length;
-
-        value = getStandardFormattedValue(value, previousSymbol, isRemove);
+        value = getStandardFormattedValue(value);
+        if (!value && value !== "") return;
 
         switch (key) {
             case "title":
@@ -21,6 +22,11 @@ export const useForm = (submitCallback, initialState = {}) => {
                 break;
             case "authors":
             case "genres":
+                value = getIterableFormattedValue(
+                    value,
+                    previousSymbol,
+                    isRemove,
+                );
                 if (!value && value !== "") return;
                 if (checkValidLength(value, 40, isRemove)) return;
                 break;
@@ -38,6 +44,7 @@ export const useForm = (submitCallback, initialState = {}) => {
         }
         setPreviousLength(value.length);
         setPreviousSymbol(value.at(-1));
+
         setValues({
             ...values,
             [key]: value,
