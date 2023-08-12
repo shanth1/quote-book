@@ -31,7 +31,9 @@ export const useForm = (submitCallback, initialState = {}) => {
                 if (checkValidLength(value, 40, isRemove)) return;
                 break;
             case "year":
-                if (checkValidLength(value, 4, isRemove)) return;
+                value = value.toUpperCase();
+                if (/[^IVX0-9ML]/.test(value)) return;
+                if (checkValidLength(value, 8, isRemove)) return;
                 break;
             case "mainIdea":
             case "description":
