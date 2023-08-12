@@ -1,6 +1,6 @@
 export const getIterableFormattedValue = (value, previousSymbol, isRemove) => {
     if (value === ",") return;
-    if (!/[A-Za-zА-Яа-я0-9,\s]/.test(value.at(-1))) return;
+    if (/[^A-Za-zА-Яа-я0-9,\s]/.test(value)) return;
     if (previousSymbol === "," && value.at(-1) === ",") return;
     if (previousSymbol === " " && value.at(-1) === " ") return;
     if (previousSymbol === " " && value.at(-1) === "," && !isRemove) return;
