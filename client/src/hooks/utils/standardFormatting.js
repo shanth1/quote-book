@@ -1,6 +1,6 @@
 export const getStandardFormattedValue = (value) => {
-    value = value.trimStart();
-    if (/[^A-Za-zА-Яа-я0-9\-()[\]@%.,?!+$#"'\s]/.test(value)) return;
+    if (/^\s/.test(value)) return;
+    if (/(,{2,})|(\s{2,})|(-{2,})/.test(value)) return;
 
     return value;
 };
