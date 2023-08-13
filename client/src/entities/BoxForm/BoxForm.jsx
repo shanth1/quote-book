@@ -142,6 +142,7 @@ export const BoxForm = ({
                             value={values?.image}
                             placeholder={getBoxPlaceholders(type).image}
                             onChange={onChange}
+                            autoSelect={true}
                         />
                     </div>
                 </div>
