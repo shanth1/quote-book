@@ -23,7 +23,7 @@ export const SingleSelect = ({ options, state, setState }) => {
             isClearable
             classNames={{
                 menuButton: () =>
-                    "flex h-10 rounded-lg text-sm text-gray-500 bg-gray-50 border border-gray-300 transition-all duration-300 focus:outline-none hover:border-gray-400 focus:border-primary-500",
+                    "flex h-10 rounded-lg text-sm text-gray-500 bg-gray-50 border border-gray-300 transition-all duration-200 focus:outline-none hover:border-gray-400 focus:border-primary-500",
                 menu: "absolute rounded-lg z-10 w-full bg-white shadow-lg border rounded py-1 mt-1.5 text-sm text-gray-700",
                 listItem: ({ isSelected }) =>
                     `block rounded-lg transition duration-200 px-2 py-2 cursor-pointer select-none truncate rounded ${
