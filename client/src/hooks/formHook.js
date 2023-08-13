@@ -5,13 +5,12 @@ import { getIterableFormattedValue } from "./utils/iterableStringFormatting";
 
 export const useForm = (submitCallback, initialState = {}) => {
     const [values, setValues] = useState(initialState);
-    const [previousSymbol, setPreviousSymbol] = useState();
     const [previousLength, setPreviousLength] = useState();
     const onChange = (event) => {
         const key = event.target.name;
         let value = event.target.value;
         const isRemove = previousLength > value.length;
-        value = getStandardFormattedValue(value);
+        value = getStandardFormattedValue(value, isRemove);
         if (!value && value !== "") return;
 
         switch (key) {
@@ -22,11 +21,7 @@ export const useForm = (submitCallback, initialState = {}) => {
                 break;
             case "authors":
             case "genres":
-                value = getIterableFormattedValue(
-                    value,
-                    previousSymbol,
-                    isRemove,
-                );
+                value = getIterableFormattedValue(value, isRemove);
                 if (!value && value !== "") return;
                 if (checkValidLength(value, 40, isRemove)) return;
                 break;
@@ -37,6 +32,10 @@ export const useForm = (submitCallback, initialState = {}) => {
                 break;
             case "mainIdea":
             case "description":
+                value = value && value[0].toUpperCase() + value.slice(1);
+                if (value.at(-1) === "," && !isRemove) {
+                    value += " ";
+                }
                 if (!value && value !== "") return;
                 break;
             case "image":
@@ -45,7 +44,6 @@ export const useForm = (submitCallback, initialState = {}) => {
                 break;
         }
         setPreviousLength(value.length);
-        setPreviousSymbol(value.at(-1));
 
         setValues({
             ...values,
