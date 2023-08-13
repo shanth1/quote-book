@@ -56,7 +56,10 @@ const EditBox = ({ boxData, closeCallback }) => {
                 userId: userId,
                 title: values.title,
                 type: typeStore[0],
-                authors: getArrayFromString(values.authors),
+                authors:
+                    typeStore[0] !== "Person"
+                        ? getArrayFromString(values.authors)
+                        : [],
                 year: values.year,
                 genres: getArrayFromString(values.genres),
                 tags: tagsStore[0],
