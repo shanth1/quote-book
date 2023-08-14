@@ -27,14 +27,14 @@ function App() {
                         <Route path="login" element={<Login />} />
                         <Route path="register" element={<Register />} />
                         <Route path="profile" element={<Profile />} />
-                        <Route path="feed" element={<Feed />} />
+                        {/* <Route path="feed" element={<Feed />} /> */}
                         <Route path="collections" element={<Collections />}>
                             <Route index element={<Navigate to="boxes" />} />
                             <Route path="boxes" element={<Boxes />} />
                             <Route path="quotes" element={<Quotes />} />
                             <Route path="box/:boxId" element={<Box />} />
                         </Route>
-                        <Route path="settings" element={<Settings />} />
+                        {/* <Route path="settings" element={<Settings />} /> */}
                         <Route path="*" element={<NotFound />} />
                     </Routes>
                 ) : (
@@ -42,7 +42,8 @@ function App() {
                         <Route index element={<Home />} />
                         <Route path="login" element={<Login />} />
                         <Route path="register" element={<Register />} />
-                        <Route path="feed" element={<Feed />} />
+                        {/* <Route path="feed" element={<Feed />} /> */}
+                        <Route path="restore" element={<NotFound />} />
                         <Route path="*" element={<Navigate to="login" />} />
                     </Routes>
                 )}
