@@ -37,9 +37,7 @@ export const QuoteForm = ({
                 <H1>{header}</H1>
                 <div className="w-full flex gap-4">
                     <div className="w-full">
-                        <Label>
-                            <Required>Header</Required>
-                        </Label>
+                        <Label>Header</Label>
                         <Input
                             name="header"
                             placeholder="Enter header of quote"
