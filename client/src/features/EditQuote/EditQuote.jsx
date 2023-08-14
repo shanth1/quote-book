@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
 import Button from "../../shared/Button/Button";
 import { UPDATE_QUOTE } from "../../graphql/mutation";
-import { getArrayFromString } from "../../utils/stringToArray";
 import { validateForm } from "../../utils/validateForm";
 import { GET_BOX_QUOTES } from "../../graphql/queries";
 import { isEqualObject } from "../../utils/compareObjects";
@@ -23,8 +22,8 @@ export const EditQuote = ({ boxId, quoteId, quoteData, closeCallback }) => {
         setOldValues({
             header: quoteData.header,
             marker: quoteData.marker ? quoteData.marker : "",
-            tags: quoteData.tags ? quoteData.tags.join(", ") : "",
             isPrivate: quoteData.isPrivate,
+            tags: quoteData.tags ? quoteData.tags.join(", ") : "",
             text: quoteData.text,
         });
     }, [quoteData]);
@@ -46,7 +45,7 @@ export const EditQuote = ({ boxId, quoteId, quoteData, closeCallback }) => {
                 boxId: boxId,
                 header: values.header,
                 marker: values.marker,
-                tags: getArrayFromString(values.tags),
+                tags: tagsStore[0],
                 text: values.text,
                 isPrivate: privateStore[0],
             },
