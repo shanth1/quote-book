@@ -68,7 +68,6 @@ export const BoxItem = ({
         authors,
         year,
         isPrivate,
-        tags,
         image,
         genres,
         rating,
@@ -85,24 +84,27 @@ export const BoxItem = ({
     return (
         <div
             className={classNames(
-                "cursor-pointer flex flex-col px-3 pt-3 pb-1 gap-2 bg-white rounded-lg",
+                "group transition-all duration-300 hover:bg-primary-50 cursor-pointer flex flex-col px-3 pt-3 pb-1 gap-2 bg-white rounded-lg",
                 getShadowStyleFromRating(rating),
             )}
             onClick={boxClickHandler}
         >
-            <div className="flex justify-between items-start">
+            <div className="relative">
                 <div className="flex flex-col items-start leading-none">
-                    <h1 className="text-xl font-bold">{title}</h1>
+                    <div className="w-[60%] truncate transition-all text-xl font-bold group-hover:tracking-wider">
+                        {title}
+                    </div>
+                    <span class="block w-0 group-hover:w-full transition-all duration-300 h-0.5 bg-black"></span>
                     <span className="text-xs italic">
                         {getStringFromDate(createdDate)}
                     </span>
                 </div>
-                <div className="flex gap-2 items-center justify-start">
+                <div className="absolute right-0 top-0 flex gap-2 transition-all duration-300 items-center justify-start ">
                     <div>
                         {isPrivate ? <AiFillEyeInvisible /> : <AiFillEye />}
                     </div>
                     <div
-                        className="p-1 hover:bg-primary-200 rounded-lg"
+                        className="p-1 transition-all hover:bg-primary-200 rounded-lg"
                         onClick={(event) => {
                             event.stopPropagation();
                             setEditedBoxData(boxData);
@@ -112,7 +114,7 @@ export const BoxItem = ({
                         <IoPencil />
                     </div>
                     <div
-                        className="p-1 bg-red-500 hover:bg-red-600 rounded-lg"
+                        className="p-1 transition-all bg-red-500 hover:bg-red-600 rounded-lg"
                         onClick={(event) => {
                             event.stopPropagation();
                             setDeleteTitle(title);
@@ -146,7 +148,7 @@ export const BoxItem = ({
 
             <div className="w-full h-full object-cover rounded-lg overflow-hidden">
                 <img
-                    className="object-cover w-full h-full"
+                    className="group-hover:scale-110 transition-all duration-300 object-cover w-full h-full"
                     src={image}
                     alt=""
                 />
