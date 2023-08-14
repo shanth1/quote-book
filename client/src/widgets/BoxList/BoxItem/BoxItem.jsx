@@ -1,28 +1,9 @@
-// import styles from "./styles.module.scss";
-import { IoTrashBin, IoPencil, IoBook } from "react-icons/io5";
-import { BiSolidCameraMovie, BiSolidMusic } from "react-icons/bi";
-import { BsFillPersonFill, BsFillBoxFill } from "react-icons/bs";
-import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import styles from "./styles.module.scss";
 import { classNames } from "../../../utils/classNames";
-
-const getIconFromType = (type) => {
-    switch (type) {
-        case "Book":
-            return <IoBook />;
-        case "Movie":
-            return <BiSolidCameraMovie />;
-        case "Person":
-            return <BsFillPersonFill />;
-        case "Music":
-            return <BiSolidMusic />;
-        case "Other":
-            return <BsFillBoxFill />;
-        default:
-            break;
-    }
-};
+import { BoxHeader } from "./components/BoxHeader";
+import { BoxFooter } from "./components/BoxFooter";
+import { BoxImage } from "./components/BoxImage";
+import { BoxPayload } from "./components/BoxPayload";
 
 const getShadowStyleFromRating = (rating) => {
     switch (rating) {
@@ -43,31 +24,12 @@ const getShadowStyleFromRating = (rating) => {
     }
 };
 
-const getStringFromDate = (date) => {
-    const localeDate = date.toLocaleDateString();
-    return String.prototype.concat(
-        date.toLocaleTimeString().slice(0, 5),
-        " ",
-        localeDate.slice(0, -4),
-        localeDate.slice(-2),
-    );
-};
-
-export const BoxItem = ({
-    boxData,
-    setModalActive,
-    setDeleteTitle,
-    setDeleteId,
-    setEditedBoxData,
-    setEditModalActive,
-}) => {
+export const BoxItem = ({ boxData, setFunctions }) => {
     const {
         id,
-        title,
         type,
         authors,
         year,
-        isPrivate,
         image,
         genres,
         rating,
@@ -75,7 +37,6 @@ export const BoxItem = ({
         quoteCounter,
     } = boxData;
     const navigate = useNavigate();
-    const createdDate = new Date(Number(createdAt));
 
     const boxClickHandler = (event) => {
         navigate(`/collections/box/${id}`);
@@ -89,75 +50,16 @@ export const BoxItem = ({
             )}
             onClick={boxClickHandler}
         >
-            <div className="relative">
-                <div className="flex flex-col items-start leading-none">
-                    <div className="w-[60%] truncate transition-all text-xl font-bold group-hover:tracking-wider">
-                        {title}
-                    </div>
-                    <span class="block w-0 group-hover:w-full transition-all duration-300 h-0.5 bg-black"></span>
-                    <span className="text-xs italic">
-                        {getStringFromDate(createdDate)}
-                    </span>
-                </div>
-                <div className="absolute right-0 top-0 flex gap-2 transition-all duration-300 items-center justify-start ">
-                    <div>
-                        {isPrivate ? <AiFillEyeInvisible /> : <AiFillEye />}
-                    </div>
-                    <div
-                        className="p-1 transition-all hover:bg-primary-200 rounded-lg"
-                        onClick={(event) => {
-                            event.stopPropagation();
-                            setEditedBoxData(boxData);
-                            setEditModalActive(true);
-                        }}
-                    >
-                        <IoPencil />
-                    </div>
-                    <div
-                        className="p-1 transition-all bg-red-500 hover:bg-red-600 rounded-lg"
-                        onClick={(event) => {
-                            event.stopPropagation();
-                            setDeleteTitle(title);
-                            setDeleteId(id);
-                            setModalActive(true);
-                        }}
-                    >
-                        <IoTrashBin color="white" />
-                    </div>
-                </div>
-            </div>
+            <BoxHeader
+                boxData={boxData}
+                createdAt={createdAt}
+                setFunctions={setFunctions}
+            />
             {!!(authors.length || genres.length || year) && (
-                <div className="leading-none">
-                    {!!(authors.length || genres.length || year) && (
-                        <div className="flex gap-2 justify-between text-sm">
-                            {!!(authors.length || genres.length) && (
-                                <div>
-                                    {authors.length
-                                        ? authors.join(", ")
-                                        : genres.join(", ")}
-                                </div>
-                            )}
-                            <div>{year}</div>
-                        </div>
-                    )}
-                    {!!(authors.length && genres.length) && (
-                        <div className="text-xs">{genres.join(", ")}</div>
-                    )}
-                </div>
+                <BoxPayload authors={authors} genres={genres} year={year} />
             )}
-
-            <div className="w-full h-full object-cover rounded-lg overflow-hidden">
-                <img
-                    className="group-hover:scale-110 transition-all duration-300 object-cover w-full h-full"
-                    src={image}
-                    alt=""
-                />
-            </div>
-            <div className={styles.footer}>
-                <div className="flex items-center">{getIconFromType(type)}</div>
-                <div className="flex justify-center">Tags</div>
-                <div className="absolute right-0">{quoteCounter}</div>
-            </div>
+            <BoxImage image={image} />
+            <BoxFooter type={type} quoteCounter={quoteCounter} />
         </div>
     );
 };

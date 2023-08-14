@@ -13,17 +13,19 @@ export const BoxList = ({ boxes }) => {
 
     return (
         <div>
-            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-5">
+            <div className="overflow-hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-5">
                 {boxes.length !== 0
                     ? boxes.map((item) => (
                           <BoxItem
                               key={item.id}
                               boxData={item}
-                              setModalActive={setDeleteModalActive}
-                              setDeleteTitle={setDeleteTitle}
-                              setDeleteId={setDeleteId}
-                              setEditedBoxData={setEditedBoxData}
-                              setEditModalActive={setEditModalActive}
+                              setFunctions={{
+                                  setDeleteModalActive,
+                                  setDeleteTitle,
+                                  setDeleteId,
+                                  setEditedBoxData,
+                                  setEditModalActive,
+                              }}
                           />
                       ))
                     : "No boxes"}
