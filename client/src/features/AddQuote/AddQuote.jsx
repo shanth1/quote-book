@@ -52,10 +52,7 @@ export const AddQuote = ({ closeCallback, boxId }) => {
             values={values}
             onChange={onChange}
         >
-            <Button
-                onClick={onSubmit}
-                isActive={validateForm([values.header, values.text])}
-            >
+            <Button onClick={onSubmit} isActive={validateForm([values.text])}>
                 Add quote
             </Button>
         </QuoteForm>

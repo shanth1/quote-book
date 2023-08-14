@@ -1,17 +1,41 @@
-// import styles from "./styles.module.scss";
-import { IoTrashBin, IoPencil } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import { classNames } from "../../../utils/classNames";
+import { BoxHeader } from "./components/BoxHeader";
+import { BoxFooter } from "./components/BoxFooter";
+import { BoxImage } from "./components/BoxImage";
+import { BoxPayload } from "./components/BoxPayload";
 
-export const BoxItem = ({
-    boxData,
-    setModalActive,
-    setDeleteTitle,
-    setDeleteId,
-    setEditedBoxData,
-    setEditModalActive,
-}) => {
-    const { id, title, image, quoteCounter } = boxData;
-    console.log("quoteCounter", quoteCounter);
+const getShadowStyleFromRating = (rating) => {
+    switch (rating) {
+        case 0:
+            return "";
+        case 1:
+            return "shadow-md shadow-primary-200";
+        case 2:
+            return "shadow-lg shadow-primary-200";
+        case 3:
+            return "shadow-lg shadow-primary-300";
+        case 4:
+            return "shadow-lg shadow-primary-400";
+        case 5:
+            return "shadow-xl shadow-primary-400";
+        default:
+            break;
+    }
+};
+
+export const BoxItem = ({ boxData, setFunctions }) => {
+    const {
+        id,
+        type,
+        authors,
+        year,
+        image,
+        genres,
+        rating,
+        createdAt,
+        quoteCounter,
+    } = boxData;
     const navigate = useNavigate();
 
     const boxClickHandler = (event) => {
@@ -20,41 +44,22 @@ export const BoxItem = ({
 
     return (
         <div
-            className="cursor-pointer flex flex-col p-3 gap-2 bg-white rounded-lg"
+            className={classNames(
+                "group transition-all duration-300 hover:bg-primary-50 cursor-pointer flex flex-col px-3 pt-3 pb-1 gap-2 bg-white rounded-lg",
+                getShadowStyleFromRating(rating),
+            )}
             onClick={boxClickHandler}
         >
-            <div className="flex justify-between items-center">
-                <div
-                    className="p-1 hover:bg-primary-200 rounded-lg"
-                    onClick={(event) => {
-                        event.stopPropagation();
-                        setEditedBoxData(boxData);
-                        setEditModalActive(true);
-                    }}
-                >
-                    <IoPencil />
-                </div>
-
-                <h1>{title}</h1>
-                <div
-                    className="p-1 bg-red-500 hover:bg-red-600 rounded-lg"
-                    onClick={(event) => {
-                        event.stopPropagation();
-                        setDeleteTitle(title);
-                        setDeleteId(id);
-                        setModalActive(true);
-                    }}
-                >
-                    <IoTrashBin color="white" />
-                </div>
-            </div>
-            <div className="w-full h-40 object-cover rounded-lg overflow-hidden">
-                <img
-                    className="object-cover w-full h-full"
-                    src={image}
-                    alt=""
-                />
-            </div>
+            <BoxHeader
+                boxData={boxData}
+                createdAt={createdAt}
+                setFunctions={setFunctions}
+            />
+            {!!(authors.length || genres.length || year) && (
+                <BoxPayload authors={authors} genres={genres} year={year} />
+            )}
+            <BoxImage image={image} />
+            <BoxFooter type={type} quoteCounter={quoteCounter} />
         </div>
     );
 };
