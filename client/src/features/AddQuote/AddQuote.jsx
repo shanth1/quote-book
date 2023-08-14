@@ -1,15 +1,18 @@
 import { useContext, useState } from "react";
 import Button from "../../shared/Button/Button";
 import { useForm } from "../../hooks/formHook";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { ADD_QUOTE, INCREMENT_QUOTE_COUNTER } from "../../graphql/mutation";
 import { validateForm } from "../../utils/validateForm";
-import { GET_BOX_QUOTES } from "../../graphql/queries";
+import { GET_BOX_QUOTES, GET_BOX_TAGS } from "../../graphql/queries";
 import { AuthContext } from "../../context/AuthContext";
 import { QuoteForm } from "../../entities/QuoteForm/QuoteForm";
 
 export const AddQuote = ({ closeCallback, boxId }) => {
     const { userId, logout } = useContext(AuthContext);
+    const { data } = useQuery(GET_BOX_TAGS, {
+        variables: { boxId: boxId },
+    });
 
     const addQuote = () => {
         incrementQuoteCounter().catch((e) => logout());
@@ -17,13 +20,14 @@ export const AddQuote = ({ closeCallback, boxId }) => {
         closeCallback();
     };
     const privateStore = useState(true);
-    const tagsStore = useState();
+    const tagsStore = useState(data?.getBox?.tags);
 
     const [onChange, onSubmit, values] = useForm(addQuote, {
         header: "",
         marker: "",
         text: "",
     });
+
     const [addQuoteMutation] = useMutation(ADD_QUOTE, {
         variables: {
             quote: {
