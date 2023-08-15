@@ -1,6 +1,7 @@
 import { IoBook } from "react-icons/io5";
 import { BiSolidCameraMovie, BiSolidMusic } from "react-icons/bi";
 import { BsFillPersonFill, BsFillBoxFill } from "react-icons/bs";
+import { Tags } from "../../../../entities/Tags/Tags";
 
 const getIconFromType = (type) => {
     switch (type) {
@@ -18,11 +19,11 @@ const getIconFromType = (type) => {
             break;
     }
 };
-export const BoxFooter = ({ type, quoteCounter }) => {
+export const BoxFooter = ({ type, tags, quoteCounter }) => {
     return (
         <div className="relative w-full grid grid-cols-[10%_1fr_10%]">
             <div className="flex items-center">{getIconFromType(type)}</div>
-            <div className="flex justify-center">Tags</div>
+            <Tags tags={tags} />
             <div className="absolute right-0">{quoteCounter}</div>
         </div>
     );

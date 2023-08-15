@@ -2,6 +2,7 @@ import { IoTrashBin, IoPencil } from "react-icons/io5";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { getStringFromDate } from "../../utils/dateString";
 import { BsFillBookmarkFill, BsFillChatLeftQuoteFill } from "react-icons/bs";
+import { Tags } from "../../entities/Tags/Tags";
 
 const QuoteItem = ({
     quoteData,
@@ -16,7 +17,7 @@ const QuoteItem = ({
     const boxId = quoteData.box.id;
 
     return (
-        <div className="bg-white overflow-hidden w-full min-w-[200px] flex flex-col gap-2 rounded-lg p-4">
+        <div className="group bg-white overflow-hidden w-full min-w-[200px] flex flex-col gap-2 rounded-lg p-4">
             <div className="flex justify-end items-start">
                 {header || marker || !!tags.length ? (
                     <div className="w-full min-h-[32px] flex flex-col gap-2 justify-center items-start leading-none">
@@ -33,7 +34,7 @@ const QuoteItem = ({
                         )}
                         {!!tags.length && (
                             <div className="flex items-center">
-                                {tags.join(", ")}
+                                <Tags tags={tags} />
                             </div>
                         )}
                     </div>

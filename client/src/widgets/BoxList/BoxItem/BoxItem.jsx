@@ -30,6 +30,7 @@ export const BoxItem = ({ boxData, setFunctions }) => {
         type,
         authors,
         year,
+        tags,
         image,
         genres,
         rating,
@@ -59,7 +60,7 @@ export const BoxItem = ({ boxData, setFunctions }) => {
                 <BoxPayload authors={authors} genres={genres} year={year} />
             )}
             <BoxImage image={image} />
-            <BoxFooter type={type} quoteCounter={quoteCounter} />
+            <BoxFooter type={type} tags={tags} quoteCounter={quoteCounter} />
         </div>
     );
 };
