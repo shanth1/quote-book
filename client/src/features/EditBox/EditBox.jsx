@@ -95,7 +95,8 @@ const EditBox = ({ boxData, closeCallback }) => {
                 onClick={onSubmit}
                 isActive={
                     validateForm([values.title]) &&
-                    !boxes.includes(values.title) &&
+                    (!boxes.includes(values.title) ||
+                        values.title === oldValues.title) &&
                     !isEqualObject(oldValues, {
                         rating: ratingStore[0] || "",
                         isPrivate: privateStore[0],

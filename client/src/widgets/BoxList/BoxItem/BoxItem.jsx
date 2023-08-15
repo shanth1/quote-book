@@ -35,7 +35,6 @@ export const BoxItem = ({ boxData, setFunctions }) => {
         genres,
         rating,
         createdAt,
-        updatedAt,
         quoteCounter,
     } = boxData;
     const navigate = useNavigate();
