@@ -1,16 +1,24 @@
 import { useContext, useState } from "react";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import Button from "../../shared/Button/Button";
 import { useForm } from "../../hooks/formHook";
 import { ADD_BOX } from "../../graphql/mutation";
 import { getArrayFromString } from "../../utils/stringToArray";
 import { validateForm } from "../../utils/validateForm";
 import { AuthContext } from "../../context/AuthContext";
-import { GET_USER_BOXES } from "../../graphql/queries";
+import { GET_USER_BOXES, GET_USER_TITLES } from "../../graphql/queries";
 import { BoxForm } from "../../entities/BoxForm/BoxForm";
 
 export const AddBox = ({ closeCallback }) => {
     const { userId, logout } = useContext(AuthContext);
+
+    const { data } = useQuery(GET_USER_TITLES, {
+        variables: { userId: userId },
+    });
+    const boxes = [];
+    data?.getUser?.boxes.forEach((box) => {
+        boxes.push(box.title);
+    });
 
     const addBox = () => {
         addBoxMutation().catch((e) => logout());
@@ -64,7 +72,13 @@ export const AddBox = ({ closeCallback }) => {
             values={values}
             onChange={onChange}
         >
-            <Button onClick={onSubmit} isActive={validateForm([values.title])}>
+            <Button
+                onClick={onSubmit}
+                isActive={
+                    validateForm([values.title]) &&
+                    !boxes.includes(values.title)
+                }
+            >
                 Add box
             </Button>
         </BoxForm>

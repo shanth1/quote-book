@@ -1,17 +1,25 @@
 import { useContext, useEffect, useState } from "react";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import Button from "../../shared/Button/Button";
 import { validateForm } from "../../utils/validateForm";
 import { UPDATE_BOX } from "../../graphql/mutation";
 import { isEqualObject } from "../../utils/compareObjects";
 import { getArrayFromString } from "../../utils/stringToArray";
 import { AuthContext } from "../../context/AuthContext";
-import { GET_USER_BOXES } from "../../graphql/queries";
+import { GET_USER_BOXES, GET_USER_TITLES } from "../../graphql/queries";
 import { BoxForm } from "../../entities/BoxForm/BoxForm";
 import { useForm } from "../../hooks/formHook";
 
 const EditBox = ({ boxData, closeCallback }) => {
     const { userId, logout } = useContext(AuthContext);
+
+    const { data } = useQuery(GET_USER_TITLES, {
+        variables: { userId: userId },
+    });
+    const boxes = [];
+    data?.getUser?.boxes.forEach((box) => {
+        boxes.push(box.title);
+    });
 
     const editBox = () => {
         updateBoxMutation().catch((e) => logout());
@@ -87,6 +95,7 @@ const EditBox = ({ boxData, closeCallback }) => {
                 onClick={onSubmit}
                 isActive={
                     validateForm([values.title]) &&
+                    !boxes.includes(values.title) &&
                     !isEqualObject(oldValues, {
                         rating: ratingStore[0] || "",
                         isPrivate: privateStore[0],

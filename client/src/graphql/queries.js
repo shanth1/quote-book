@@ -82,3 +82,13 @@ export const GET_BOX_TAGS = gql`
         }
     }
 `;
+
+export const GET_USER_TITLES = gql`
+    query GetUser($userId: ID!) {
+        getUser(userId: $userId) {
+            boxes {
+                title
+            }
+        }
+    }
+`;
