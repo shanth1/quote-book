@@ -64,7 +64,7 @@ export const EditQuote = ({ boxId, quoteId, quoteData, closeCallback }) => {
             <Button
                 onClick={onSubmit}
                 isActive={
-                    validateForm([values.header, values.text]) &&
+                    validateForm([values.text]) &&
                     !isEqualObject(oldValues, {
                         header: values.header,
                         marker: values.marker,

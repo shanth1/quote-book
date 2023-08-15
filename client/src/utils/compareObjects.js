@@ -1,4 +1,6 @@
 export const isEqualObject = (obj1, obj2) => {
+    console.log("obj1", obj1);
+    console.log("obj2", obj2);
     if (!obj1 || !obj2) return false;
     for (var p in obj1) {
         if (obj1.hasOwnProperty(p) !== obj2.hasOwnProperty(p)) return false;

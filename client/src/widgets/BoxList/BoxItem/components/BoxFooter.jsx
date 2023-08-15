@@ -24,7 +24,7 @@ export const BoxFooter = ({ type, tags, quoteCounter }) => {
         <div className="relative w-full grid grid-cols-[10%_1fr_10%]">
             <div className="flex items-center">{getIconFromType(type)}</div>
             <Tags tags={tags} />
-            <div className="absolute right-0">{quoteCounter}</div>
+            <div className="flex justify-end">{quoteCounter}</div>
         </div>
     );
 };
