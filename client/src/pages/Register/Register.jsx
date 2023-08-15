@@ -12,6 +12,7 @@ import Content from "../../shared/Content/Content";
 import { validateEmail } from "../../utils/validateEmail";
 import { validateUsername } from "../../utils/validateUsername";
 import { validatePassword } from "../../utils/validatePassword";
+import Required from "../../shared/Required/Required";
 
 export const Register = () => {
     const [errors, setErrors] = useState([]);
@@ -61,7 +62,11 @@ export const Register = () => {
                         />
                     </div>
                     <div>
-                        <Label>Your username</Label>
+                        <Label
+                            tooltipMessage={"At list 3 characters\nLowercase"}
+                        >
+                            <Required>Your username</Required>
+                        </Label>
                         <Input
                             placeholder="username"
                             name="username"
@@ -69,7 +74,9 @@ export const Register = () => {
                         />
                     </div>
                     <div>
-                        <Label>Your email</Label>
+                        <Label tooltipMessage={"Valid email"}>
+                            <Required>Your email</Required>
+                        </Label>
                         <Input
                             placeholder="email"
                             name="email"
@@ -77,7 +84,13 @@ export const Register = () => {
                         />
                     </div>
                     <div>
-                        <Label>Password</Label>
+                        <Label
+                            tooltipMessage={
+                                "At least:\n6 characters\nOne uppercase\nOne lowercase\n"
+                            }
+                        >
+                            <Required>Password</Required>
+                        </Label>
                         <Input
                             type="password"
                             placeholder="••••••••"
@@ -86,7 +99,9 @@ export const Register = () => {
                         />
                     </div>
                     <div>
-                        <Label>Confirm password</Label>
+                        <Label>
+                            <Required>Confirm password</Required>
+                        </Label>
                         <Input
                             type="password"
                             placeholder="••••••••"
@@ -100,7 +115,6 @@ export const Register = () => {
                     <Button
                         onClick={onSubmit}
                         isActive={
-                            !!values.firstName &&
                             validateEmail(values.email) &&
                             validateUsername(values.username) &&
                             validatePassword(values.password) &&
