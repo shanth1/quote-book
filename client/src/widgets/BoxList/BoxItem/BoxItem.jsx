@@ -35,6 +35,7 @@ export const BoxItem = ({ boxData, setFunctions }) => {
         genres,
         rating,
         createdAt,
+        updatedAt,
         quoteCounter,
     } = boxData;
     const navigate = useNavigate();
@@ -53,7 +54,7 @@ export const BoxItem = ({ boxData, setFunctions }) => {
         >
             <BoxHeader
                 boxData={boxData}
-                createdAt={createdAt}
+                dateString={createdAt}
                 setFunctions={setFunctions}
             />
             {!!(authors.length || genres.length || year) && (

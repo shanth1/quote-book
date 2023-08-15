@@ -30,6 +30,7 @@ export const GET_BOX_QUOTES = gql`
     query GetBox($boxId: ID!) {
         getBox(boxId: $boxId) {
             id
+            title
             quotes {
                 id
                 header

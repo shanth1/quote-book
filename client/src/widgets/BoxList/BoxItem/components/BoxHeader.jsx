@@ -2,7 +2,7 @@ import { IoTrashBin, IoPencil } from "react-icons/io5";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { getStringFromDate } from "../../../../utils/dateString";
 
-export const BoxHeader = ({ boxData, createdAt, setFunctions }) => {
+export const BoxHeader = ({ boxData, dateString, setFunctions }) => {
     const {
         setDeleteTitle,
         setDeleteModalActive,
@@ -10,7 +10,7 @@ export const BoxHeader = ({ boxData, createdAt, setFunctions }) => {
         setEditedBoxData,
         setEditModalActive,
     } = setFunctions;
-    const createdDate = new Date(Number(createdAt));
+    const date = new Date(Number(dateString));
     const { id, title, isPrivate } = boxData;
     return (
         <div className="relative">
@@ -20,7 +20,7 @@ export const BoxHeader = ({ boxData, createdAt, setFunctions }) => {
                 </div>
                 <span className="block w-0 group-hover:w-full transition-all duration-300 h-0.5 bg-black"></span>
                 <span className="text-xs italic">
-                    {getStringFromDate(createdDate)}
+                    {getStringFromDate(date)}
                 </span>
             </div>
             <div className="absolute right-0 top-0 flex gap-2 transition-all duration-300 items-center justify-start ">

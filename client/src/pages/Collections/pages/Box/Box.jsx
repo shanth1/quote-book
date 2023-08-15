@@ -29,7 +29,7 @@ const Box = () => {
 
     return (
         <Content>
-            <H1>Box {boxId}</H1>
+            <H1>{data?.getBox?.title || "Box"}</H1>
             <QuoteList quotes={quotes} />
         </Content>
     );
