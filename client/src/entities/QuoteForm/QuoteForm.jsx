@@ -1,3 +1,4 @@
+import { tagOptions } from "../../data/tagOptions";
 import Content from "../../shared/Content/Content";
 import H1 from "../../shared/H1/H1";
 import Input from "../../shared/Input/Input";
@@ -6,19 +7,6 @@ import { MultipleSelect } from "../../shared/MultipleSelect/MultipleSelect";
 import Required from "../../shared/Required/Required";
 import { Switch } from "../../shared/Switch/Switch";
 import Textarea from "../../shared/Textarea/Textarea";
-
-const tagsOptions = [
-    {
-        label: "Mammal",
-        options: [
-            { value: "Dolphin", label: "🐬 Dolphin" },
-            { value: "Giraffe", label: "🦒 Giraffe" },
-        ],
-    },
-    { value: "fox", label: "🦊 Fox" },
-    { value: "Butterfly", label: "🦋 Butterfly" },
-    { value: "Honeybee", label: "🐝 Honeybee" },
-];
 
 export const QuoteForm = ({
     header,
@@ -59,7 +47,7 @@ export const QuoteForm = ({
                 <div className="w-full">
                     <Label>Tags</Label>
                     <MultipleSelect
-                        options={tagsOptions}
+                        options={tagOptions}
                         state={tags}
                         setState={setTags}
                     />

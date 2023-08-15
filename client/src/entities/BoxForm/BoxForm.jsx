@@ -1,3 +1,4 @@
+import { tagOptions } from "../../data/tagOptions";
 import Content from "../../shared/Content/Content";
 import H1 from "../../shared/H1/H1";
 import Input from "../../shared/Input/Input";
@@ -15,19 +16,6 @@ const ratingOptions = [
     { value: "3", label: "★★★☆☆" },
     { value: "4", label: "★★★★☆" },
     { value: "5", label: "★★★★★" },
-];
-
-const tagsOptions = [
-    {
-        label: "Mammal",
-        options: [
-            { value: "Dolphin", label: "🐬 Dolphin" },
-            { value: "Giraffe", label: "🦒 Giraffe" },
-        ],
-    },
-    { value: "fox", label: "🦊 Fox" },
-    { value: "Butterfly", label: "🦋 Butterfly" },
-    { value: "Honeybee", label: "🐝 Honeybee" },
 ];
 
 export const BoxForm = ({
@@ -100,7 +88,7 @@ export const BoxForm = ({
                 <div>
                     <Label>Tags</Label>
                     <MultipleSelect
-                        options={tagsOptions}
+                        options={tagOptions}
                         state={tags}
                         setState={setTags}
                     />
