@@ -18,7 +18,7 @@ export const BoxHeader = ({ boxData, createdAt, setFunctions }) => {
                 <div className="w-[60%] truncate transition-all text-lg font-bold group-hover:tracking-wider">
                     {title}
                 </div>
-                <span class="block w-0 group-hover:w-full transition-all duration-300 h-0.5 bg-black"></span>
+                <span className="block w-0 group-hover:w-full transition-all duration-300 h-0.5 bg-black"></span>
                 <span className="text-xs italic">
                     {getStringFromDate(createdDate)}
                 </span>

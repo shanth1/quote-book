@@ -73,3 +73,11 @@ export const GET_USER_QUOTES = gql`
         }
     }
 `;
+
+export const GET_BOX_TAGS = gql`
+    query Query($boxId: ID!) {
+        getBox(boxId: $boxId) {
+            tags
+        }
+    }
+`;
