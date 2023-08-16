@@ -54,9 +54,13 @@ module.exports = {
                     args.user;
 
                 const newUser = await User.findOne({ username });
+                const newEmail = await User.findOne({ email });
 
                 if (newUser) {
                     throw new Error("Username is already taken ");
+                }
+                if (newEmail) {
+                    throw new Error("Email is already taken ");
                 }
 
                 const hashedPassword = await hash(password, 7);

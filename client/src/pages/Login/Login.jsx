@@ -93,7 +93,12 @@ export const Login = () => {
                     {errors.map((error) => (
                         <div>{error.message}</div>
                     ))}
-                    <Button onClick={onSubmit}>Sign in</Button>
+                    <Button
+                        isActive={values.username && values.password}
+                        onClick={onSubmit}
+                    >
+                        Sign in
+                    </Button>
                     <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                         Don’t have an account yet?{" "}
                         <Link

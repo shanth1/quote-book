@@ -19,6 +19,11 @@ export const useForm = (submitCallback, initialState = {}) => {
                 if (!value && value !== "") return;
                 if (checkValidLength(value, 25, isRemove)) return;
                 break;
+            case "username":
+                value = value.toLowerCase();
+                if (!value && value !== "") return;
+                if (checkValidLength(value, 15, isRemove)) return;
+                break;
             case "authors":
             case "genres":
                 value = getIterableFormattedValue(value, isRemove);

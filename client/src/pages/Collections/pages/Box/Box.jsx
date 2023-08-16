@@ -19,7 +19,6 @@ const Box = () => {
 
     if (loading) return <div>Loading...</div>;
     if (error) {
-        console.log(error);
         if (error.message === "Auth error") logout();
         if (error.message.includes("Cast to ObjectId failed"))
             return <NotFound />;

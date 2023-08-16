@@ -14,6 +14,16 @@ import { validateUsername } from "../../utils/validateUsername";
 import { validatePassword } from "../../utils/validatePassword";
 import Required from "../../shared/Required/Required";
 
+const getPasswordStatusColor = (password) => {
+    if (validatePassword(password)) {
+        if (/[!@#$%^&*()<>?]+/.test(password) && /.{8,}/.test(password)) {
+            return "bg-green-500";
+        }
+        return "bg-yellow-500";
+    }
+    return "bg-red-500";
+};
+
 export const Register = () => {
     const [errors, setErrors] = useState([]);
     const context = useContext(AuthContext);
@@ -54,7 +64,15 @@ export const Register = () => {
                 <Content>
                     <H1>Create an account</H1>
                     <div>
-                        <Label>Your name</Label>
+                        <Label
+                            statusColor={
+                                values.firstName
+                                    ? "bg-green-500"
+                                    : "bg-yellow-500"
+                            }
+                        >
+                            Your name
+                        </Label>
                         <Input
                             placeholder="name"
                             name="firstName"
@@ -63,18 +81,33 @@ export const Register = () => {
                     </div>
                     <div>
                         <Label
-                            tooltipMessage={"At list 3 characters\nLowercase"}
+                            statusColor={
+                                validateUsername(values.username)
+                                    ? "bg-green-500"
+                                    : "bg-red-500"
+                            }
+                            tooltipMessage={
+                                "At list 3 characters\nStarting with a letter"
+                            }
                         >
                             <Required>Your username</Required>
                         </Label>
                         <Input
                             placeholder="username"
                             name="username"
+                            value={values.username}
                             onChange={onChange}
                         />
                     </div>
                     <div>
-                        <Label tooltipMessage={"Valid email"}>
+                        <Label
+                            statusColor={
+                                validateEmail(values.email)
+                                    ? "bg-green-500"
+                                    : "bg-red-500"
+                            }
+                            tooltipMessage={"Valid email"}
+                        >
                             <Required>Your email</Required>
                         </Label>
                         <Input
@@ -85,6 +118,9 @@ export const Register = () => {
                     </div>
                     <div>
                         <Label
+                            statusColor={getPasswordStatusColor(
+                                values.password,
+                            )}
                             tooltipMessage={
                                 "At least:\n6 characters\nOne uppercase\nOne lowercase\n"
                             }
@@ -99,7 +135,13 @@ export const Register = () => {
                         />
                     </div>
                     <div>
-                        <Label>
+                        <Label
+                            statusColor={
+                                values.password === values.confirmPassword
+                                    ? "bg-green-500"
+                                    : "bg-red-500"
+                            }
+                        >
                             <Required>Confirm password</Required>
                         </Label>
                         <Input
