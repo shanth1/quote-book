@@ -1,5 +1,5 @@
 .modal {
-    /* overflow: scroll; */
+    /* overflow-y: scroll; */
     width: 100%;
     height: 100%;
     background-color: rgba($color: #000000, $alpha: 0.3);
@@ -21,8 +21,14 @@
 
 .content {
     padding: 20px;
-    max-height: 90vh;
-    width: 40vw;
+    max-height: 100vh;
     background-color: white;
     border-radius: 10px;
+    @apply w-10/12 sm:w-9/12 md:w-7/12 lg:w-1/2 xl:w-5/12;
+}
+
+@media (max-height: 650px) {
+    .content {
+        overflow-y: scroll;
+    }
 }

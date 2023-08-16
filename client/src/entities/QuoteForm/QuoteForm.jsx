@@ -28,7 +28,7 @@ export const QuoteForm = ({
                 <div className="flex justify-between items-center">
                     <H1>{header}</H1>
                     {!!errors?.length && (
-                        <Tooltip message={errors.join("\n")}>
+                        <Tooltip leftSide message={errors.join("\n")}>
                             <BiErrorCircle size={"24px"} color="red" />
                         </Tooltip>
                     )}

@@ -1,0 +1,13 @@
+.menu {
+    @apply w-6 h-6 cursor-pointer relative z-20 flex flex-col justify-center items-center;
+    @apply lg:hidden;
+}
+
+.line {
+    @apply transition-all h-1 bg-primary-500 rounded-lg absolute;
+}
+.content {
+    position: fixed;
+    @apply top-[65px] p-4 bg-slate-50 rounded-lg z-20;
+    @apply right-4 sm:right-24 md:right-28 lg:right-40 xl:right-48;
+}

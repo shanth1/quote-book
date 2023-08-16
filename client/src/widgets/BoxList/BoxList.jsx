@@ -13,7 +13,7 @@ export const BoxList = ({ boxes }) => {
 
     return (
         <div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 lg:gap-x-3 gap-y-4">
                 {boxes.length !== 0
                     ? boxes.map((item) => (
                           <BoxItem
