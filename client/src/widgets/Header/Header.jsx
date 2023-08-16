@@ -1,10 +1,13 @@
 import { useContext } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+// import { BurgerMenu } from "../../shared/BurgerMenu/BurgerMenu";
 
 export const Header = () => {
     const { userId, logout } = useContext(AuthContext);
     let navigate = useNavigate();
+
+    // const [menuActive, setMenuActive] = useState(false);
 
     return (
         <div className="h-full flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
@@ -144,6 +147,10 @@ export const Header = () => {
                     )}
                 </ul>
             </div>
+            {/* <BurgerMenu active={menuActive} setActive={setMenuActive}>
+                <div>Text 1</div>
+                <div>Text 2</div>
+            </BurgerMenu> */}
         </div>
     );
 };
