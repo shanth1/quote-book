@@ -1,6 +1,7 @@
 import { IoTrashBin, IoPencil } from "react-icons/io5";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { getStringFromDate } from "../../../../utils/dateString";
+import { Tooltip } from "../../../../shared/Label/Components/Tooltip/Tooltip";
 
 export const BoxHeader = ({ boxData, dateString, setFunctions }) => {
     const {
@@ -24,7 +25,11 @@ export const BoxHeader = ({ boxData, dateString, setFunctions }) => {
                 </span>
             </div>
             <div className="absolute right-0 top-0 flex gap-2 transition-all duration-300 items-center justify-start ">
-                <div>{isPrivate ? <AiFillEyeInvisible /> : <AiFillEye />}</div>
+                <Tooltip message={isPrivate ? "Private box" : "Public box"}>
+                    <div>
+                        {isPrivate ? <AiFillEyeInvisible /> : <AiFillEye />}
+                    </div>
+                </Tooltip>
                 <div
                     className="p-1 transition-all hover:bg-primary-200 rounded-lg"
                     onClick={(event) => {

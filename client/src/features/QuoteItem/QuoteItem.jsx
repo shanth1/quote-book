@@ -3,6 +3,7 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { getStringFromDate } from "../../utils/dateString";
 import { BsFillBookmarkFill, BsFillChatLeftQuoteFill } from "react-icons/bs";
 import { Tags } from "../../entities/Tags/Tags";
+import { Tooltip } from "../../shared/Label/Components/Tooltip/Tooltip";
 
 const QuoteItem = ({
     quoteData,
@@ -44,9 +45,11 @@ const QuoteItem = ({
                     </div>
                 )}
                 <div className="w-[96px] h-[32px] flex gap-2 items-center justify-start transition-all duration-300">
-                    <div>
-                        {isPrivate ? <AiFillEyeInvisible /> : <AiFillEye />}
-                    </div>
+                    <Tooltip message={isPrivate ? "Private box" : "Public box"}>
+                        <div>
+                            {isPrivate ? <AiFillEyeInvisible /> : <AiFillEye />}
+                        </div>
+                    </Tooltip>
                     <div
                         className="p-2 cursor-pointer transition-all hover:bg-primary-200 rounded-lg"
                         onClick={() => {
