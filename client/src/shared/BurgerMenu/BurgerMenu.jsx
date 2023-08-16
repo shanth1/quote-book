@@ -5,7 +5,7 @@ import styles from "./styles.module.scss";
 
 export const BurgerMenu = ({ active = true, setActive, children }) => {
     return (
-        <div>
+        <div className="">
             {active && <Blackout active={active} setActive={setActive} />}
             <div
                 onClick={(e) => {
