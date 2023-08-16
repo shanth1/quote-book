@@ -18,7 +18,7 @@ const EditBox = ({ boxData, closeCallback }) => {
     });
     const boxes = [];
     data?.getUser?.boxes.forEach((box) => {
-        boxes.push(box.title);
+        boxes.push(box.title.toLowerCase());
     });
 
     const editBox = () => {
@@ -81,6 +81,28 @@ const EditBox = ({ boxData, closeCallback }) => {
         refetchQueries: [GET_USER_BOXES],
     });
 
+    const errors = [];
+    const requiredError = !validateForm([values.title]);
+    const uniqueError =
+        boxes.includes(values.title.toLowerCase()) &&
+        values.title !== oldValues.title;
+    const equalError = isEqualObject(oldValues, {
+        rating: ratingStore[0] || "",
+        isPrivate: privateStore[0],
+        type: typeStore[0],
+        title: values.title,
+        authors: values.authors,
+        year: values.year || "",
+        mainIdea: values.mainIdea,
+        description: values.description,
+        genres: values.genres,
+        tags: tagsStore[0] ? tagsStore[0].join(", ") : "",
+        image: values.image,
+    });
+    if (requiredError) errors.push("Title field is empty");
+    if (uniqueError) errors.push("Title already exists");
+    if (equalError) errors.push("Nothing to update");
+
     return (
         <BoxForm
             header="Edit box"
@@ -90,27 +112,11 @@ const EditBox = ({ boxData, closeCallback }) => {
             tagsStore={tagsStore}
             values={values}
             onChange={onChange}
+            errors={errors}
         >
             <Button
                 onClick={onSubmit}
-                isActive={
-                    validateForm([values.title]) &&
-                    (!boxes.includes(values.title) ||
-                        values.title === oldValues.title) &&
-                    !isEqualObject(oldValues, {
-                        rating: ratingStore[0] || "",
-                        isPrivate: privateStore[0],
-                        type: typeStore[0],
-                        title: values.title,
-                        authors: values.authors,
-                        year: values.year || "",
-                        mainIdea: values.mainIdea,
-                        description: values.description,
-                        genres: values.genres,
-                        tags: tagsStore[0] ? tagsStore[0].join(", ") : "",
-                        image: values.image,
-                    })
-                }
+                isActive={!requiredError && !uniqueError && !equalError}
             >
                 Update box
             </Button>

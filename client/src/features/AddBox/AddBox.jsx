@@ -17,7 +17,7 @@ export const AddBox = ({ closeCallback }) => {
     });
     const boxes = [];
     data?.getUser?.boxes.forEach((box) => {
-        boxes.push(box.title);
+        boxes.push(box.title.toLowerCase());
     });
 
     const addBox = () => {
@@ -62,6 +62,12 @@ export const AddBox = ({ closeCallback }) => {
         refetchQueries: [GET_USER_BOXES],
     });
 
+    const errors = [];
+    const requiredError = !validateForm([values.title]);
+    const uniqueError = boxes.includes(values.title.toLowerCase());
+    if (requiredError) errors.push("Title field is empty");
+    if (uniqueError) errors.push("Title already exists");
+
     return (
         <BoxForm
             header="Add Box"
@@ -71,13 +77,11 @@ export const AddBox = ({ closeCallback }) => {
             tagsStore={tagsStore}
             values={values}
             onChange={onChange}
+            errors={errors}
         >
             <Button
                 onClick={onSubmit}
-                isActive={
-                    validateForm([values.title]) &&
-                    !boxes.includes(values.title)
-                }
+                isActive={!requiredError && !uniqueError}
             >
                 Add box
             </Button>

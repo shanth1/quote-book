@@ -2,6 +2,7 @@ import { tagOptions } from "../../data/tagOptions";
 import Content from "../../shared/Content/Content";
 import H1 from "../../shared/H1/H1";
 import Input from "../../shared/Input/Input";
+import { Tooltip } from "../../shared/Label/Components/Tooltip/Tooltip";
 import Label from "../../shared/Label/Label";
 import { MultipleSelect } from "../../shared/MultipleSelect/MultipleSelect";
 import Required from "../../shared/Required/Required";
@@ -9,6 +10,7 @@ import SelectFrom from "../../shared/SelectForm/SelectForm";
 import { SingleSelect } from "../../shared/SingleSelect/SingleSelect";
 import { Switch } from "../../shared/Switch/Switch";
 import { getBoxPlaceholders } from "./utils/boxPlaceholders";
+import { BiErrorCircle } from "react-icons/bi";
 
 const ratingOptions = [
     { value: "1", label: "★☆☆☆☆" },
@@ -27,7 +29,9 @@ export const BoxForm = ({
     tagsStore,
     values,
     onChange,
+    errors,
 }) => {
+    console.log("BOX FORM", errors);
     const [type, setType] = typeStore;
     const [privateStatus, setPrivateStatus] = privateStore;
     const [rating, setRating] = ratingStore;
@@ -36,7 +40,14 @@ export const BoxForm = ({
     return (
         <form>
             <Content>
-                <H1>{header}</H1>
+                <div className="flex justify-between items-center">
+                    <H1>{header}</H1>
+                    {!!errors?.length && (
+                        <Tooltip message={errors.join("\n")}>
+                            <BiErrorCircle size={"24px"} color="red" />
+                        </Tooltip>
+                    )}
+                </div>
                 <SelectFrom
                     names={["Book", "Movie", "Person", "Music", "Other"]}
                     selected={type}
