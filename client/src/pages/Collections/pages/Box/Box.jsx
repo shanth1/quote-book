@@ -33,7 +33,7 @@ const Box = () => {
             <div className="flex gap-2 items-center">
                 <div
                     onClick={() => navigate(-1)}
-                    className="flex justify-center items-center w-10 h-10 bg-white rounded-full cursor-pointer shadow-sm"
+                    className="transition-all flex justify-center items-center w-10 h-10 bg-white hover:bg-gray-50 hover:scale-105 rounded-full cursor-pointer shadow-sm"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

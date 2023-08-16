@@ -16,7 +16,11 @@ import Required from "../../shared/Required/Required";
 
 const getPasswordStatusColor = (password) => {
     if (validatePassword(password)) {
-        if (/[!@#$%^&*()<>?]+/.test(password) && /.{8,}/.test(password)) {
+        if (
+            /[!@#$%^&*()<>?]+/.test(password) &&
+            /.{8,}/.test(password) &&
+            /([A-ZА-Я]+)/.test(password)
+        ) {
             return "bg-green-500";
         }
         return "bg-yellow-500";
@@ -122,7 +126,7 @@ export const Register = () => {
                                 values.password,
                             )}
                             tooltipMessage={
-                                "At least:\n6 characters\nOne uppercase\nOne lowercase\n"
+                                "At least:\n6 characters\nOne letter\nOne number\n\nBetter:\n8 characters\nOne uppercase\n"
                             }
                         >
                             <Required>Password</Required>
