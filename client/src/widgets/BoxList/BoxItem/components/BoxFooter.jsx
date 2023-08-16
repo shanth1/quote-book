@@ -27,13 +27,16 @@ export const BoxFooter = ({ type, tags, quoteCounter }) => {
                 <div className="flex items-center">{getIconFromType(type)}</div>
             </Tooltip>
             <Tags tags={tags} />
-            <Tooltip
-                message={`${quoteCounter === 0 ? "No" : quoteCounter} ${
-                    quoteCounter === 1 ? "quote" : "quotes"
-                } in box`}
-            >
-                <div className="flex justify-end">{quoteCounter}</div>
-            </Tooltip>
+            <div className="flex justify-end">
+                <Tooltip
+                    leftSide={true}
+                    message={`${quoteCounter === 0 ? "No" : quoteCounter} ${
+                        quoteCounter === 1 ? "quote" : "quotes"
+                    } in box`}
+                >
+                    {quoteCounter}
+                </Tooltip>
+            </div>
         </div>
     );
 };

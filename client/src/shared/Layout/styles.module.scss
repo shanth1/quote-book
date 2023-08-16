@@ -1,8 +1,8 @@
 $offset: 60px;
 
 .layout {
-    padding: 0 200px 0 200px;
     box-sizing: border-box;
+    @apply px-4 sm:px-24 md:px-28 lg:px-40 xl:px-48;
 }
 
 .header {
