@@ -53,6 +53,18 @@ export const EditQuote = ({ boxId, quoteId, quoteData, closeCallback }) => {
         refetchQueries: [GET_BOX_QUOTES],
     });
 
+    const errors = [];
+    const requiredError = !validateForm([values.text]);
+    const equalError = isEqualObject(oldValues, {
+        header: values.header,
+        marker: values.marker,
+        tags: tagsStore[0] ? tagsStore[0].join(", ") : "",
+        isPrivate: privateStore[0],
+        text: values.text,
+    });
+    if (requiredError) errors.push("Title field is empty");
+    if (equalError) errors.push("Nothing to update");
+
     return (
         <QuoteForm
             header="Edit quote"
@@ -60,20 +72,9 @@ export const EditQuote = ({ boxId, quoteId, quoteData, closeCallback }) => {
             tagsStore={tagsStore}
             values={values}
             onChange={onChange}
+            errors={errors}
         >
-            <Button
-                onClick={onSubmit}
-                isActive={
-                    validateForm([values.text]) &&
-                    !isEqualObject(oldValues, {
-                        header: values.header,
-                        marker: values.marker,
-                        tags: tagsStore[0] ? tagsStore[0].join(", ") : "",
-                        isPrivate: privateStore[0],
-                        text: values.text,
-                    })
-                }
-            >
+            <Button onClick={onSubmit} isActive={!requiredError && !equalError}>
                 Update quote
             </Button>
         </QuoteForm>

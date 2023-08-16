@@ -48,6 +48,10 @@ export const AddQuote = ({ closeCallback, boxId }) => {
         },
     });
 
+    const errors = [];
+    const requiredError = !validateForm([values.text]);
+    if (requiredError) errors.push("Text field is empty");
+
     return (
         <QuoteForm
             header="Add quote"
@@ -55,8 +59,9 @@ export const AddQuote = ({ closeCallback, boxId }) => {
             tagsStore={tagsStore}
             values={values}
             onChange={onChange}
+            errors={errors}
         >
-            <Button onClick={onSubmit} isActive={validateForm([values.text])}>
+            <Button onClick={onSubmit} isActive={!requiredError}>
                 Add quote
             </Button>
         </QuoteForm>

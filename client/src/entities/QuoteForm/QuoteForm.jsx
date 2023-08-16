@@ -2,11 +2,13 @@ import { tagOptions } from "../../data/tagOptions";
 import Content from "../../shared/Content/Content";
 import H1 from "../../shared/H1/H1";
 import Input from "../../shared/Input/Input";
+import { Tooltip } from "../../shared/Label/Components/Tooltip/Tooltip";
 import Label from "../../shared/Label/Label";
 import { MultipleSelect } from "../../shared/MultipleSelect/MultipleSelect";
 import Required from "../../shared/Required/Required";
 import { Switch } from "../../shared/Switch/Switch";
 import Textarea from "../../shared/Textarea/Textarea";
+import { BiErrorCircle } from "react-icons/bi";
 
 export const QuoteForm = ({
     header,
@@ -15,6 +17,7 @@ export const QuoteForm = ({
     tagsStore,
     values,
     onChange,
+    errors,
 }) => {
     const [privateStatus, setPrivateStatus] = privateStore;
     const [tags, setTags] = tagsStore;
@@ -22,7 +25,14 @@ export const QuoteForm = ({
     return (
         <form>
             <Content>
-                <H1>{header}</H1>
+                <div className="flex justify-between items-center">
+                    <H1>{header}</H1>
+                    {!!errors?.length && (
+                        <Tooltip message={errors.join("\n")}>
+                            <BiErrorCircle size={"24px"} color="red" />
+                        </Tooltip>
+                    )}
+                </div>
                 <div className="w-full flex gap-4">
                     <div className="w-full">
                         <Label>Header</Label>
