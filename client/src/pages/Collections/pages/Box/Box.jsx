@@ -7,6 +7,7 @@ import H1 from "../../../../shared/H1/H1";
 import { useContext } from "react";
 import { AuthContext } from "../../../../context/AuthContext";
 import { NotFound } from "../../../NotFound/NotFound";
+import { Loading } from "../../../../shared/Loading/Loading";
 
 const Box = () => {
     const { logout } = useContext(AuthContext);
@@ -17,7 +18,7 @@ const Box = () => {
         variables: { boxId: boxId },
     });
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <Loading />;
     if (error) {
         if (error.message === "Auth error") logout();
         if (error.message.includes("Cast to ObjectId failed"))

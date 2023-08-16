@@ -5,6 +5,7 @@ import H1 from "../../../../shared/H1/H1";
 import { useContext } from "react";
 import { AuthContext } from "../../../../context/AuthContext";
 import { GET_USER_BOXES } from "../../../../graphql/queries";
+import { Loading } from "../../../../shared/Loading/Loading";
 
 export const Boxes = () => {
     const { userId, logout } = useContext(AuthContext);
@@ -13,7 +14,7 @@ export const Boxes = () => {
         variables: { userId },
     });
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <Loading />;
     if (error) {
         if (error.message === "Auth error") logout();
         return <div>{error.message}</div>;
