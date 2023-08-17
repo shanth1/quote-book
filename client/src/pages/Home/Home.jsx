@@ -22,7 +22,7 @@ import {
 import { VersionContainer } from "./components/VersionContainer";
 import { Divider } from "./components/Divider";
 import { Link } from "react-router-dom";
-import { WithCaption } from "./components/WithCaption";
+import { WithCaption } from "../../shared/WithCaption/WithCaption";
 import { DefaultLink } from "./components/DefaultLink";
 import { AnimationUnderline } from "./components/AnimationUnderline";
 
