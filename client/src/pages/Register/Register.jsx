@@ -126,7 +126,7 @@ export const Register = () => {
                                 values.password,
                             )}
                             tooltipMessage={
-                                "At least:\n6 characters\nOne letter\nOne number\n\nBetter:\n8 characters\nOne uppercase\n"
+                                "At least:\n6 characters\nOne letter\nOne number\n\nBetter:\n8 characters\nOne uppercase\nOne special symbol"
                             }
                         >
                             <Required>Password</Required>
