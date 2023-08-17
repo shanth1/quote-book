@@ -160,7 +160,7 @@ export const Home = () => {
                 </VersionContainer>
             </div>
             <Divider isVisual />
-            <div className="flex justify-between px-6 md:justify-around md:px-0">
+            <div className="pt-4 pb-6 flex justify-between px-6 md:justify-around md:px-0">
                 <WithCaption
                     sizeStyle="w-8 h-8 md:w-12 md:h-12"
                     caption="Gmail"
