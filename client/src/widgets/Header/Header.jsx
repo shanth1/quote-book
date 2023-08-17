@@ -46,7 +46,7 @@ export const Header = () => {
                     </NavLink>
                 )}
                 <NavLink
-                    to="feed"
+                    to="/about"
                     className={({ isActive, isPending }) =>
                         isActive
                             ? "block text-primary-700"
@@ -54,22 +54,8 @@ export const Header = () => {
                     }
                     aria-current="page"
                 >
-                    Feed
+                    About
                 </NavLink>
-                {userId && (
-                    <NavLink
-                        to="settings"
-                        className={({ isActive, isPending }) =>
-                            isActive
-                                ? "block text-primary-700"
-                                : "block text-gray-700  hover:text-primary-700 "
-                        }
-                        aria-current="page"
-                    >
-                        {" "}
-                        Settings
-                    </NavLink>
-                )}
             </div>
             <div className="flex justify-end items-center">
                 {userId ? (

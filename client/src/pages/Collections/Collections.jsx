@@ -3,7 +3,7 @@ import { TabBar } from "../../widgets/TabBar/TabBar";
 
 export const Collections = () => {
     return (
-        <div>
+        <div className="pb-20">
             <Outlet />
             <TabBar />
         </div>

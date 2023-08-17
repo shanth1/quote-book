@@ -12,6 +12,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { Boxes } from "../pages/Collections/pages/Boxes/Boxes";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { About } from "../pages/About/About";
 
 function App() {
     const { userId } = useContext(AuthContext);
@@ -25,14 +26,13 @@ function App() {
                         <Route path="login" element={<Login />} />
                         <Route path="register" element={<Register />} />
                         <Route path="profile" element={<Profile />} />
-                        {/* <Route path="feed" element={<Feed />} /> */}
                         <Route path="collections" element={<Collections />}>
                             <Route index element={<Navigate to="boxes" />} />
                             <Route path="boxes" element={<Boxes />} />
                             <Route path="quotes" element={<Quotes />} />
                             <Route path="box/:boxId" element={<Box />} />
                         </Route>
-                        {/* <Route path="settings" element={<Settings />} /> */}
+                        <Route path="about" element={<About />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
                 ) : (
@@ -40,8 +40,8 @@ function App() {
                         <Route index element={<Home />} />
                         <Route path="login" element={<Login />} />
                         <Route path="register" element={<Register />} />
-                        {/* <Route path="feed" element={<Feed />} /> */}
                         <Route path="restore" element={<NotFound />} />
+                        <Route path="about" element={<About />} />
                         <Route path="*" element={<Navigate to="login" />} />
                     </Routes>
                 )}
