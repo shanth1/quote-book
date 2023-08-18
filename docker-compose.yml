@@ -1,0 +1,44 @@
+version: "3"
+
+services:
+  frontend:
+    build: ./client
+    container_name: react-ui
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+    networks:
+      - mern-network
+
+  backend:
+    build: ./
+    container_name: node-js
+    ports:
+      - 127.0.0.1:4040:4040
+    depends_on:
+      - database
+    environment:
+      MONGO_URI: mongodb://mongo-db/quotes
+      SECRET: biba
+      NODE_ENV: development
+      PORT: 4040
+    networks:
+      - mern-network
+
+  database:
+    image: mongo:4.0-xenial
+    container_name: mongo-db
+    ports:
+      - 27017:27017
+    volumes:
+      - backup:/data/db
+    networks:
+      - mern-network
+
+volumes:
+  backup:
+
+networks:
+  mern-network:
+    driver: bridge
