@@ -64,6 +64,12 @@ export const Register = () => {
 
     return (
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-full lg:py-0">
+            <Link
+                to={"/"}
+                className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
+            >
+                <H1>Quote it</H1>
+            </Link>
             <form className="w-full p-4 md:p-6 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md  dark:bg-gray-800 dark:border-gray-700">
                 <Content>
                     <H1>Create an account</H1>

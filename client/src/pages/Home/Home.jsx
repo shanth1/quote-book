@@ -24,14 +24,16 @@ import { Divider } from "./components/Divider";
 import { Link } from "react-router-dom";
 import { WithCaption } from "../../shared/WithCaption/WithCaption";
 import { DefaultLink } from "./components/DefaultLink";
-import { AnimationUnderline } from "./components/AnimationUnderline";
+import { AnimationUnderline } from "../../shared/AnimationUnderline/AnimationUnderline";
 
 export const Home = () => {
     return (
         <Content>
             <div className="flex justify-center items-center">
                 <div className="flex flex-col justify-center items-center gap-4">
-                    <H1>Logo Quote it</H1>
+                    <div className="pb-4">
+                        <H1>Quote it</H1>
+                    </div>
                     <div className="flex justify-center items-center gap-2 md:gap-4 lg:gap-6">
                         <WithCaption
                             sizeStyle={styles.bigIcon}

@@ -1,4 +1,4 @@
-import H2 from "../../../shared/H2/H2";
+import H2 from "../H2/H2";
 
 export const AnimationUnderline = ({ children }) => {
     return (

@@ -47,12 +47,7 @@ export const Login = () => {
                 to={"/"}
                 className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
             >
-                <img
-                    className="w-8 h-8 mr-2"
-                    src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
-                    alt="Logo"
-                />
-                Quote it
+                <H1>Quote it</H1>
             </Link>
             <form className="w-full bg-white p-4 md:p-6 rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700">
                 <Content>
