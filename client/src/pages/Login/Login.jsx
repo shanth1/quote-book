@@ -17,11 +17,11 @@ export const Login = () => {
     let navigate = useNavigate();
     const [errors, setErrors] = useState([]);
 
-    const registerUserCallback = () => {
+    const loginUserCallback = () => {
         loginUser();
     };
 
-    const [onChange, onSubmit, values] = useForm(registerUserCallback, {
+    const [onChange, onSubmit, values] = useForm(loginUserCallback, {
         username: "",
         password: "",
     });
@@ -32,8 +32,9 @@ export const Login = () => {
             navigate("/collections");
         },
         onError({ graphQLErrors }) {
-            logout();
+            console.log("LOGIN GRAPHQL ERROR:", graphQLErrors);
             setErrors(graphQLErrors);
+            logout();
         },
         variables: {
             username: values.username,

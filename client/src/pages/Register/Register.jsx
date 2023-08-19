@@ -50,6 +50,7 @@ export const Register = () => {
             navigate("/");
         },
         onError({ graphQLErrors }) {
+            console.log("REGISTER GRAPHQL ERRORS", graphQLErrors);
             setErrors(graphQLErrors);
         },
         variables: {

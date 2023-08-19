@@ -2,37 +2,42 @@ version: "3"
 
 services:
   frontend:
+    image: shanth1/quotes-client:$CLIENT_VERSION
     build: ./client
     container_name: react-ui
     ports:
-      - 3000:3000
+      - $IP:80:3000
+      - $IP:443:3000
     depends_on:
       - backend
     networks:
       - mern-network
 
   backend:
+    image: shanth1/quotes-server:$SERVER_VERSION
     build: ./
     container_name: node-js
     ports:
-      - 127.0.0.1:4040:4040
+      - $IP:4040:4040
     depends_on:
       - database
+    restart: unless-stopped
     environment:
-      MONGO_URI: mongodb://mongo-db/quotes
-      SECRET: biba
-      NODE_ENV: development
-      PORT: 4040
+      MONGO_URI: $MONGO_URI
+      SECRET: $SECRET
+      NODE_ENV: $NODE_ENV
+      PORT: $PORT
     networks:
       - mern-network
 
   database:
     image: mongo:4.0-xenial
     container_name: mongo-db
+    restart: always
     ports:
       - 27017:27017
     volumes:
-      - backup:/data/db
+      - ./backup:/data/db
     networks:
       - mern-network
 

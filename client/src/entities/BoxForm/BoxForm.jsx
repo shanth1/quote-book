@@ -31,7 +31,6 @@ export const BoxForm = ({
     onChange,
     errors,
 }) => {
-    console.log("BOX FORM", errors);
     const [type, setType] = typeStore;
     const [privateStatus, setPrivateStatus] = privateStore;
     const [rating, setRating] = ratingStore;

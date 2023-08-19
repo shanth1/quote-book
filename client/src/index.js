@@ -14,7 +14,7 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 
 const httpLint = createHttpLink({
-    uri: "http://localhost:4040/graphql",
+    uri: `http://${window.location.hostname}:4040/graphql`,
 });
 
 const authLink = setContext((_, { header }) => {
@@ -28,7 +28,6 @@ const authLink = setContext((_, { header }) => {
 
 const client = new ApolloClient({
     link: authLink.concat(httpLint),
-    // uri: "http://localhost:4000/graphql",
     cache: new InMemoryCache(),
 });
 
