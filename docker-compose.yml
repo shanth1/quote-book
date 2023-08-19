@@ -15,7 +15,7 @@ services:
 
   backend:
     image: shanth1/quotes-server:$SERVER_VERSION
-    build: ./
+    build: ./server
     container_name: node-js
     ports:
       - $IP:4040:4040

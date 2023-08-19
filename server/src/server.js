@@ -20,7 +20,7 @@ const cors = require("cors");
 const typeDefs = [baseDefs, userType, boxType, quoteType];
 const resolvers = [userResolver, boxResolver, quoteResolver];
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4040;
 
 const app = express();
 app.use(cors());
