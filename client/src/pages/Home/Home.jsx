@@ -20,10 +20,10 @@ import {
     FcAdvance,
 } from "react-icons/fc";
 import { VersionContainer } from "./components/VersionContainer";
-import { Divider } from "./components/Divider";
+import { Divider } from "../../shared/Divider/Divider";
 import { Link } from "react-router-dom";
 import { WithCaption } from "../../shared/WithCaption/WithCaption";
-import { DefaultLink } from "./components/DefaultLink";
+import { DefaultLink } from "../../shared/DefaultLink/DefaultLink";
 import { AnimationUnderline } from "../../shared/AnimationUnderline/AnimationUnderline";
 
 export const Home = () => {
@@ -39,7 +39,7 @@ export const Home = () => {
                             sizeStyle={styles.bigIcon}
                             caption="Inspiration"
                         >
-                            <div className="grid grid-cols-2">
+                            <div className="grid grid-cols-2 ">
                                 <div className={styles.smallContainer}>
                                     <FcReading className={styles.smallIcon} />
                                 </div>
@@ -73,7 +73,7 @@ export const Home = () => {
             <Divider />
             <div className="bg-white p-6  md:p-7 rounded-lg shadow-sm">
                 <div className="flex justify-center pb-4">
-                    <H1>Hello on v1.0.0!</H1>
+                    <H1>Hello on v1.1.0!</H1>
                 </div>
                 <div className="px-4 grid gap-8 lg:gap-12 lg:px-8 grid-cols-1 md:grid-cols-2">
                     <div className="flex flex-col items-center group hover:scale-105 transition-all">
@@ -123,7 +123,7 @@ export const Home = () => {
             </div>
             <div className="grid grid-cols-2 gap-4 lg:grid-cols-3 xl:gap-6">
                 <VersionContainer isCurrent>
-                    <AnimationUnderline>v1.X.X</AnimationUnderline>
+                    <AnimationUnderline>v1.x.x</AnimationUnderline>
                     <div className="">
                         <CheckBox checked>Database model</CheckBox>
                         <CheckBox checked>GraphQL schemas</CheckBox>
@@ -133,12 +133,13 @@ export const Home = () => {
                         <CheckBox checked>Pages navigation</CheckBox>
                         <CheckBox checked>Input validations</CheckBox>
                         <CheckBox checked>Responsive design</CheckBox>
+                        <CheckBox>HTTPS protocol</CheckBox>
                         <CheckBox>Search and filters</CheckBox>
                         <CheckBox>Keyboard shortcuts</CheckBox>
                     </div>
                 </VersionContainer>
                 <VersionContainer>
-                    <AnimationUnderline>v2.X.X</AnimationUnderline>
+                    <AnimationUnderline>v2.x.x</AnimationUnderline>
                     <div className="">
                         <CheckBox>Advanced JWT</CheckBox>
                         <CheckBox>Language support</CheckBox>
@@ -152,7 +153,7 @@ export const Home = () => {
                     </div>
                 </VersionContainer>
                 <VersionContainer>
-                    <AnimationUnderline>v3.X.X</AnimationUnderline>
+                    <AnimationUnderline>v3.x.x</AnimationUnderline>
                     <div className="">
                         <CheckBox>Quotes feed</CheckBox>
                         <CheckBox>Comments feature</CheckBox>

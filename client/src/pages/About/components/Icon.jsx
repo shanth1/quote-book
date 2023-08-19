@@ -42,7 +42,7 @@ export const Icon = ({ name }) => {
     }
     return (
         <div className="w-full flex justify-center items-center">
-            <img className={styles.icon} src={src} alt="#" />
+            <img className={styles.icon} src={src} alt="icon" />
         </div>
     );
 };

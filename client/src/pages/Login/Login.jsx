@@ -65,6 +65,7 @@ export const Login = () => {
                         <Label>Username</Label>
                         <Input
                             name="username"
+                            value={values.username}
                             placeholder="Enter your username"
                             onChange={onChange}
                         />

@@ -16,7 +16,7 @@ export const TabBar = () => {
 
     return (
         <div className="flex justify-center">
-            <div className="fixed w-48 shadow-md transition-all justify-evenly flex items-center bottom-4 md:bottom-6 lg:bottom-8 gap-4 bg-white rounded-lg p-1">
+            <div className="fixed w-48 shadow-md transition-all justify-evenly flex items-center bottom-5 md:bottom-6 lg:bottom-8 gap-4 bg-white rounded-lg p-1">
                 <NavLink to="boxes">
                     {({ isActive }) => (
                         <div
