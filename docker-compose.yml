@@ -6,8 +6,8 @@ services:
     build: ./client
     container_name: react-ui
     ports:
-      - $IP:80:3000
-      - $IP:443:3000
+      - $PUBLIC_IP:80:3000
+      - $PUBLIC_IP:443:3000
     depends_on:
       - backend
     networks:
@@ -18,7 +18,7 @@ services:
     build: ./server
     container_name: node-js
     ports:
-      - $IP:4040:4040
+      - $PUBLIC_IP:4040:4040
     depends_on:
       - database
     restart: unless-stopped
@@ -34,15 +34,20 @@ services:
     image: mongo:4.0-xenial
     container_name: mongo-db
     restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: $MONGO_USERNAME
+      MONGO_INITDB_ROOT_PASSWORD: $MONGO_PASSWORD
+      MONGO_INITDB_DATABASE: quotes
     ports:
-      - 27017:27017
+      - $PRIVATE_IP:27017:27017
     volumes:
-      - ./backup:/data/db
+      - ./database:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     networks:
       - mern-network
 
 volumes:
-  backup:
+  database:
 
 networks:
   mern-network:
