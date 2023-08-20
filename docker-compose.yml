@@ -34,10 +34,15 @@ services:
     image: mongo:4.0-xenial
     container_name: mongo-db
     restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: $MONGO_USERNAME
+      MONGO_INITDB_ROOT_PASSWORD: $MONGO_PASSWORD
+      MONGO_INITDB_DATABASE: quotes
     ports:
       - $PRIVATE_IP:27017:27017
     volumes:
       - ./database:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     networks:
       - mern-network
 

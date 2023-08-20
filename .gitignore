@@ -4,3 +4,4 @@ client/node_modules
 .vscode
 backup
 database
+mongo-init.js

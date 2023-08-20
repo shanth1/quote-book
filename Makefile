@@ -17,6 +17,6 @@ entrance:
 
 DATE := $(shell date +"%Y_%m_%d__%I_%M_%p")
 dump:
-	docker exec $(ID) sh -c 'mongodump --archive' > ./backup/$(DATE).dump
+	docker exec $(ID) sh -c 'mongodump --authenticationDatabase quotes -u $(USER) -p $(PASSWORD) --db quotes --archive' > ./backup/$(DATE).dump
 restore:
-	docker exec -i $(ID) sh -c 'mongorestore --archive' < ./backup/$(DUMP_NAME).dump
+	docker exec -i $(ID) sh -c 'mongorestore --authenticationDatabase admin -u $(USER) -p $(PASSWORD) --db quotes --archive' < ./backup/$(DUMP_NAME).dump
