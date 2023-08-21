@@ -111,7 +111,7 @@ export const Home = () => {
                             }{" "}
                             with {<span className="font-bold">"test"</span>}{" "}
                             username. and{" "}
-                            {<span className="font-bold">"qwe123"</span>}{" "}
+                            {<span className="font-bold">"psw123"</span>}{" "}
                             password. This is test account
                         </div>
                     </div>
