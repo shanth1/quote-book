@@ -6,8 +6,10 @@ import { ResponsiveHeader } from "./ResponsiveHeader";
 import { Logo } from "../../shared/Logo/Logo";
 
 export const Header = () => {
-    const { userId, logout } = useContext(AuthContext);
+    const { userId, username, logout } = useContext(AuthContext);
     let navigate = useNavigate();
+
+    console.log("username", username);
 
     return (
         <ResponsiveHeader>
@@ -53,7 +55,10 @@ export const Header = () => {
             </div>
             <div className="flex justify-end items-center">
                 {userId ? (
-                    <div>
+                    <div className="w-28 flex flex-col gap-2 items-center lg:flex-row lg:w-48">
+                        <div className="w-full flex justify-center font-semibold">
+                            {username}
+                        </div>
                         <Button
                             onClick={() => {
                                 logout();
