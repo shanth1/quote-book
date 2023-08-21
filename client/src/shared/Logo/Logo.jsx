@@ -4,7 +4,7 @@ import { AnimationUnderline } from "../AnimationUnderline/AnimationUnderline";
 
 export const Logo = () => {
     return (
-        <div className="group flex lg:justify-center items-center w-44">
+        <div className="group w-auto flex lg:justify-center items-center">
             <div className="transition-all cursor-pointer gap-3 lg:group-hover:gap-1 flex justify-center items-end">
                 <img className="h-7 md:group-hover:h-6" src={logo} alt="" />
                 <h1 className="group-hover:tracking-wide hidden md:block text-2xl font-semibold leading-tight tracking-tight text-gray-900 dark:text-white">
