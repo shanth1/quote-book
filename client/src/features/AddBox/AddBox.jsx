@@ -8,6 +8,7 @@ import { validateForm } from "../../utils/validateForm";
 import { AuthContext } from "../../context/AuthContext";
 import { GET_USER_BOXES, GET_USER_TITLES } from "../../graphql/queries";
 import { BoxForm } from "../../entities/BoxForm/BoxForm";
+import { getDefaultImageFromType } from "../../utils/defaultImage";
 
 export const AddBox = ({ closeCallback }) => {
     const { userId, logout } = useContext(AuthContext);
@@ -56,7 +57,9 @@ export const AddBox = ({ closeCallback }) => {
                 description: values.description,
                 isPrivate: privateStore[0],
                 rating: Number(ratingStore[0]),
-                image: values.image ? values.image : undefined,
+                image: values.image
+                    ? values.image
+                    : getDefaultImageFromType(typeStore[0]),
             },
         },
         refetchQueries: [GET_USER_BOXES],

@@ -5,11 +5,7 @@ const BoxSchema = new mongoose.Schema(
         title: { type: String },
         authors: { type: [String] },
         year: { type: String },
-        image: {
-            type: String,
-            default:
-                "https://www.vinterier.ru/pictures/shop/rodnoiy-peiyzag-kartina-maslom-90x60.jpg",
-        },
+        image: { type: String },
         mainIdea: { type: String },
         description: { type: String },
         type: {

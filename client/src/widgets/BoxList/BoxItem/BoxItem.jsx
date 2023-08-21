@@ -46,7 +46,7 @@ export const BoxItem = ({ boxData, setFunctions }) => {
     return (
         <div
             className={classNames(
-                "group transition-all duration-300 hover:bg-primary-50 cursor-pointer flex flex-col px-3 pt-3 pb-1 gap-2 bg-white rounded-lg",
+                "group max-h-96 transition-all duration-300 hover:bg-primary-50 cursor-pointer flex flex-col px-3 pt-3 pb-1 gap-2 bg-white rounded-lg",
                 getShadowStyleFromRating(rating),
             )}
             onClick={boxClickHandler}
