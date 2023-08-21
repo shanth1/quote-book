@@ -124,7 +124,7 @@ export const Home = () => {
             <div className="grid grid-cols-2 gap-4 lg:grid-cols-3 xl:gap-6">
                 <VersionContainer isCurrent>
                     <AnimationUnderline>v1.x.x</AnimationUnderline>
-                    <div className="">
+                    <div>
                         <CheckBox checked>Database model</CheckBox>
                         <CheckBox checked>GraphQL schemas</CheckBox>
                         <CheckBox checked>Password hashing </CheckBox>
@@ -140,7 +140,7 @@ export const Home = () => {
                 </VersionContainer>
                 <VersionContainer>
                     <AnimationUnderline>v2.x.x</AnimationUnderline>
-                    <div className="">
+                    <div>
                         <CheckBox>Advanced JWT</CheckBox>
                         <CheckBox>Language support</CheckBox>
                         <CheckBox>Color themes</CheckBox>
@@ -154,7 +154,9 @@ export const Home = () => {
                 </VersionContainer>
                 <VersionContainer>
                     <AnimationUnderline>v3.x.x</AnimationUnderline>
-                    <div className="">
+                    <div>
+                        <CheckBox>File upload</CheckBox>
+                        <CheckBox>Quotes feed</CheckBox>
                         <CheckBox>Quotes feed</CheckBox>
                         <CheckBox>Comments feature</CheckBox>
                         <CheckBox>Recommendation system</CheckBox>
