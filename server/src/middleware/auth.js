@@ -4,7 +4,6 @@ const User = require("../models/User");
 const AuthMiddleware = async (req, res, next) => {
     const authHeader = req.get("authorization");
     const SECRET = process.env.SECRET || "PUBLIC_SECRET";
-    console.log(SECRET);
     if (!authHeader) {
         req.isAuth = false;
         return next();

@@ -25,6 +25,7 @@ import { Link } from "react-router-dom";
 import { WithCaption } from "../../shared/WithCaption/WithCaption";
 import { DefaultLink } from "../../shared/DefaultLink/DefaultLink";
 import { AnimationUnderline } from "../../shared/AnimationUnderline/AnimationUnderline";
+import H2 from "../../shared/H2/H2";
 
 export const Home = () => {
     return (
@@ -73,12 +74,12 @@ export const Home = () => {
             <Divider />
             <div className="bg-white p-6  md:p-7 rounded-lg shadow-sm">
                 <div className="flex justify-center pb-4">
-                    <H1>Hello on v1.1.2!</H1>
+                    <H1>Hello on v1.1.3!</H1>
                 </div>
                 <div className="px-4 grid gap-8 lg:gap-12 lg:px-8 grid-cols-1 md:grid-cols-2">
-                    <div className="flex flex-col items-center group hover:scale-105 transition-all">
-                        <FcSearch className="w-10 h-10 transition-all group-hover:scale-125" />
-                        <AnimationUnderline>What is that?</AnimationUnderline>
+                    <div className="flex flex-col items-center">
+                        <FcSearch className="w-10 h-10" />
+                        <H2>What is that?</H2>
                         <div className="text-center">
                             {<span className="font-bold">Completely free</span>}{" "}
                             service, where you can{" "}
@@ -91,9 +92,9 @@ export const Home = () => {
                             you like!
                         </div>
                     </div>
-                    <div className="flex flex-col items-center group hover:scale-105 transition-all">
-                        <FcFlashOn className="w-10 h-10 transition-all group-hover:scale-125" />
-                        <AnimationUnderline>Getting started</AnimationUnderline>
+                    <div className="flex flex-col items-center ">
+                        <FcFlashOn className="w-10 h-10" />
+                        <H2>Getting started</H2>
                         <div className="text-center">
                             {
                                 <Link

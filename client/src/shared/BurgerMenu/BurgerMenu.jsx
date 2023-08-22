@@ -5,14 +5,17 @@ import styles from "./styles.module.scss";
 
 export const BurgerMenu = ({ active = true, setActive, children }) => {
     return (
-        <div className="">
+        <div>
             {active && <Blackout active={active} setActive={setActive} />}
             <div
                 onClick={(e) => {
                     e.stopPropagation();
                     setActive(!active);
                 }}
-                className={classNames(styles.menu, "group")}
+                className={classNames(
+                    styles.menu,
+                    "group transition-all hover:scale-105",
+                )}
             >
                 <div
                     className={classNames(
