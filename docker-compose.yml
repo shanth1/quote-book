@@ -1,54 +1,25 @@
 version: "3"
 
 services:
+  nginx:
+    image: nginx:v1
+    build: ./nginx
+    depends_on:
+      - frontend
+    container_name: nginx
+    ports:
+      - "80:80"
+    networks:
+      - mern-network
+
   frontend:
     image: shanth1/quotes-client:$CLIENT_VERSION
     build: ./client
     container_name: react-ui
-    ports:
-      - $PUBLIC_IP:80:3000
-      - $PUBLIC_IP:443:3000
-    depends_on:
-      - backend
     networks:
       - mern-network
 
-  backend:
-    image: shanth1/quotes-server:$SERVER_VERSION
-    build: ./server
-    container_name: node-js
-    ports:
-      - $PUBLIC_IP:4040:4040
-    depends_on:
-      - database
-    restart: unless-stopped
-    environment:
-      MONGO_URI: $MONGO_URI
-      SECRET: $SECRET
-      NODE_ENV: $NODE_ENV
-      PORT: $PORT
-    networks:
-      - mern-network
-
-  database:
-    image: mongo:4.0-xenial
-    container_name: mongo-db
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: $MONGO_USERNAME
-      MONGO_INITDB_ROOT_PASSWORD: $MONGO_PASSWORD
-      MONGO_INITDB_DATABASE: quotes
-    ports:
-      - $PRIVATE_IP:27017:27017
-    volumes:
-      - ./database:/data/db
-      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
-    networks:
-      - mern-network
-
-volumes:
-  database:
-
+    
 networks:
   mern-network:
     driver: bridge
