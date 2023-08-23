@@ -1,16 +1,29 @@
 version: '2'
 
 services:
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - web-root:/var/www/html
+    depends_on:
+      - nginx
+    command: certonly --webroot --webroot-path=/var/www/html --email denisberesnev59@gmail.com --agree-tos --no-eff-email --staging -d quote-it.ru  -d www.quote-it.ru
+
   nginx:
     image: nginx
     container_name: nginx
     depends_on:
       - frontend
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      - shared-build:/etc/nginx/html
+      - ./nginx-conf:/etc/nginx/conf.d
+      - web-root:/var/www/html
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
     ports:
-      - $PUBLIC_IP:80:80
+      - 80:80
       - $PUBLIC_IP:443:443
     networks:
       - mern-network
@@ -19,7 +32,7 @@ services:
     image: shanth1/quotes-client:$CLIENT_VERSION
     build: ./client
     volumes:
-      - shared-build:/client/build
+      - web-root:/client/build
     container_name: react-ui
     ports:
       - 8080:3000
@@ -62,8 +75,15 @@ services:
       - mern-network
 
 volumes:
-  shared-build:
   database:
+  certbot-etc:
+  certbot-var:
+  web-root:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/shanth1/quoteitt/views/
+      o: bind
 
 networks:
   mern-network:
