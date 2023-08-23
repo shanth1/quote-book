@@ -82,7 +82,7 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/shanth1/quoteit/views/
+      device: /home/denis/quoteit/views/
       o: bind
 
 networks:
