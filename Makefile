@@ -2,16 +2,19 @@
 IMAGES := $(shell docker images -q)
 CONTAINERS := $(shell docker ps -q)
 
-rm-images:
+make up:
+	docker compose up -d
+
+rmi:
 	[ -z "$(IMAGES)" ] && echo "No images to delete" || docker image rm -f $(IMAGES)
 
-rm-containers:
+rmc:
 	[ -z "$(CONTAINERS)" ] && echo "No containers to delete" || docker stop $(CONTAINERS)
 	docker container prune -f
 
-clear-docker: rm-containers rm-images
+clear: rmc rmi
 
-entrance:
+in:
 	docker exec -it $(ID) bash
 
 
