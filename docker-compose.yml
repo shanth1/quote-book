@@ -9,7 +9,7 @@ services:
     volumes:
       - etc-letsencrypt:/etc/letsencrypt
       - shared-build:/etc/nginx/html
-    command: certonly --webroot --webroot-path=/var/www/html --email denisberesnev59@@gmail.com --agree-tos --no-eff-email -d quote-it.ru -d www.quote-it.ru
+    command: certonly --webroot --webroot-path=/etc/nginx/html --email denisberesnev59@@gmail.com --agree-tos --no-eff-email -d quote-it.ru -d www.quote-it.ru
  
 
   nginx:
@@ -23,6 +23,7 @@ services:
       - etc-letsencrypt:/etc/letsencrypt
     ports:
       - $PUBLIC_IP:80:80
+      - $PUBLIC_IP:443:443
     networks:
       - mern-network
 
