@@ -1,13 +1,39 @@
-version: "3"
+version: '2'
 
 services:
+  certbot:
+    image: certbot/certbot
+    depends_on:
+      - nginx
+    container_name: certbot
+    volumes:
+      - etc-letsencrypt:/etc/letsencrypt
+      - shared-build:/etc/nginx/html
+    command: certonly --webroot --webroot-path=/var/www/html --email denisberesnev59@@gmail.com --agree-tos --no-eff-email -d quote-it.ru -d www.quote-it.ru
+ 
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    depends_on:
+      - frontend
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - shared-build:/etc/nginx/html
+      - etc-letsencrypt:/etc/letsencrypt
+    ports:
+      - $PUBLIC_IP:80:80
+    networks:
+      - mern-network
+
   frontend:
     image: shanth1/quotes-client:$CLIENT_VERSION
     build: ./client
+    volumes:
+      - shared-build:/client/build
     container_name: react-ui
     ports:
-      - $PUBLIC_IP:80:3000
-      - $PUBLIC_IP:443:3000
+      - 8080:3000
     depends_on:
       - backend
     networks:
@@ -47,8 +73,18 @@ services:
       - mern-network
 
 volumes:
+  shared-build:
   database:
+  etc-letsencrypt:
 
 networks:
   mern-network:
     driver: bridge
+
+# networks:
+#   front-tier:
+#     external: true
+#     name: host
+#   back-tier:
+
+  
