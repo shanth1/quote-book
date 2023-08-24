@@ -27,7 +27,9 @@ module.exports = {
     },
     Mutation: {
         loginUser: async (_, { username, password }, { User }) => {
+	    console.log("LOGIN USER MUTATION");
             try {
+		console.log("IN TRY");
                 const user = await User.findOne({ username });
                 if (!user) {
                     throw new ApolloError("User not found");
@@ -45,6 +47,7 @@ module.exports = {
                 });
                 return { user, token };
             } catch (error) {
+		console.log("IN CATCH", error);
                 throw new ApolloError(error.message, 403);
             }
         },

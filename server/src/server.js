@@ -46,6 +46,7 @@ const startApp = async () => {
         await server.start();
         server.applyMiddleware({ app: app });
         app.listen(PORT, () => {
+	    console.log("IN LISTEN");
             console.log(`Server running on port ${PORT}`);
         });
     } catch (error) {

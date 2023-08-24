@@ -6,3 +6,5 @@ client/build
 backup
 database
 mongo-init.js
+views
+dhparam

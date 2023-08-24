@@ -14,7 +14,7 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 
 const httpLint = createHttpLink({
-    uri: `http://${window.location.hostname}:4040/graphql`,
+    uri: `/graphql`,
 });
 
 const authLink = setContext((_, { header }) => {
