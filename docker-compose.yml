@@ -6,15 +6,35 @@ networks:
 
 volumes:
   database:
-
+  certbot-etc:
+  certbot-var:
+  web-root:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/shanth1/quoteit/views/
+      o: bind
 
 services:
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - web-root:/var/www/html
+    depends_on:
+      - webserver
+    command: certonly --webroot --webroot-path=/var/www/html --email denisberesnev59@gmail.com --agree-tos --no-eff-email --staging -d quote-it.ru  -d www.quote-it.ru
   proxy:
     image: nginx:latest
     depends_on:
       - client
     volumes:
+      - web-root:/var/www/html
       - ./nginx.conf:/etc/nginx/nginx.conf
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
     ports:
       - $PUBLIC_IP:80:80
     networks:
@@ -26,6 +46,8 @@ services:
     build: 
       context: ./client
       dockerfile: Dockerfile
+    volumes:
+      - web-root:/client/build
     ports:
       - 3000
     networks:
