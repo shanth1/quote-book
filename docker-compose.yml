@@ -24,7 +24,7 @@ services:
       - certbot-var:/var/lib/letsencrypt
       - web-root:/var/www/html
     depends_on:
-      - webserver
+      - proxy
     command: certonly --webroot --webroot-path=/var/www/html --email denisberesnev59@gmail.com --agree-tos --no-eff-email --staging -d quote-it.ru  -d www.quote-it.ru
   proxy:
     image: nginx:latest
