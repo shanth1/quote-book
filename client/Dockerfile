@@ -1,16 +1,9 @@
-FROM node:19.2.0
+FROM node:19
 
-WORKDIR /client
+WORKDIR /app
 
-COPY ./package.json ./package.json
-COPY ./package-lock.json ./package-lock.json
-COPY ./public ./public
-COPY ./tailwind.config.js ./tailwind.config.js
-COPY ./src ./src
+COPY . .
 
-RUN npm install
 RUN npm run build
 
-# EXPOSE 3000
-
-# CMD [ "npm", "start" ]
+CMD [ "npm", "start" ]

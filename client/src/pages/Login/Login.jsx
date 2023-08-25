@@ -56,7 +56,7 @@ export const Login = () => {
                         <H1>Sign in to your account</H1>
                         <Tooltip
                             leftSide
-                            message={`You can try on test account\n\nLogin: test\nPassword: qwe123`}
+                            message={`You can try on test account\n\nLogin: test\nPassword: psw123`}
                         >
                             <AiOutlineQuestionCircle size="22px" />
                         </Tooltip>

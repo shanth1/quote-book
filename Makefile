@@ -5,6 +5,16 @@ CONTAINERS := $(shell docker ps -q)
 make up:
 	docker compose up -d
 
+make reup:
+	docker compose up -d  --force-recreate
+
+make prune:
+	docker image prune -f
+	docker container prune -f
+	docker volume prune -f
+	docker network prune -f
+	docker system prune -f
+
 rmi:
 	[ -z "$(IMAGES)" ] && echo "No images to delete" || docker image rm -f $(IMAGES)
 
