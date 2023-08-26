@@ -13,6 +13,7 @@ import { Boxes } from "../pages/Collections/pages/Boxes/Boxes";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { About } from "../pages/About/About";
+import { Playground } from "../pages/Playground/Playground";
 
 function App() {
     const { userId } = useContext(AuthContext);
@@ -41,6 +42,7 @@ function App() {
                         <Route path="login" element={<Login />} />
                         <Route path="register" element={<Register />} />
                         <Route path="restore" element={<NotFound />} />
+                        <Route path="playground" element={<Playground />} />
                         <Route path="about" element={<About />} />
                         <Route path="*" element={<Navigate to="login" />} />
                     </Routes>
