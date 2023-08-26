@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import Button from "../../shared/Button/Button";
-import { ResponsiveHeader } from "./ResponsiveHeader";
+import { ResponsiveHeader } from "./components/ResponsiveHeader";
 import { Logo } from "../../shared/Logo/Logo";
 
 export const Header = () => {
@@ -28,6 +28,19 @@ export const Header = () => {
                 >
                     Home
                 </NavLink>
+                {!userId && (
+                    <NavLink
+                        to="playground"
+                        className={({ isActive, isPending }) =>
+                            isActive
+                                ? "block text-primary-700"
+                                : "block text-gray-700  hover:text-primary-700 "
+                        }
+                        aria-current="page"
+                    >
+                        Playground
+                    </NavLink>
+                )}
                 {userId && (
                     <NavLink
                         to="collections"

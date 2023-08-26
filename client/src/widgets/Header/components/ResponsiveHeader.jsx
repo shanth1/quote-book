@@ -1,4 +1,4 @@
-import { BurgerMenu } from "../../shared/BurgerMenu/BurgerMenu";
+import { BurgerMenu } from "../../../shared/BurgerMenu/BurgerMenu";
 import { useState } from "react";
 
 export const ResponsiveHeader = ({ children }) => {
