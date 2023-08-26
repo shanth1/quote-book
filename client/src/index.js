@@ -13,8 +13,11 @@ import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 
+const isProduction = window.location.hostname !== "localhost";
+const host = isProduction ? window.location.hostname : "localhost:4040";
+
 const httpLint = createHttpLink({
-    uri: `http://${window.location.hostname}/graphql`,
+    uri: `http://${host}/graphql`,
 });
 
 const authLink = setContext((_, { header }) => {
