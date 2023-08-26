@@ -92,3 +92,24 @@ export const GET_USER_TITLES = gql`
         }
     }
 `;
+
+export const GET_PLAYGROUND_BOXES = gql`
+    query GetPlaygroundBoxes {
+        getPlaygroundBoxes {
+            id
+            title
+            type
+            isPrivate
+            image
+            mainIdea
+            description
+            genres
+            tags
+            rating
+            year
+            authors
+            createdAt
+            quoteCounter
+        }
+    }
+`;

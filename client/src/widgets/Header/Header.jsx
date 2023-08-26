@@ -9,8 +9,6 @@ export const Header = () => {
     const { userId, username, logout } = useContext(AuthContext);
     let navigate = useNavigate();
 
-    console.log("username", username);
-
     return (
         <ResponsiveHeader>
             <Link to="/" className="flex items-center">
