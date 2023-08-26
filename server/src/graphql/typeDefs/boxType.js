@@ -4,6 +4,7 @@ module.exports = gql`
     extend type Query {
         getAllBoxes: [Box]!
         getBox(boxId: ID!): Box
+        getPlaygroundBoxes: [Box]!
     }
 
     extend type Mutation {
