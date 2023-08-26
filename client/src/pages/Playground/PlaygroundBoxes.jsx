@@ -5,7 +5,7 @@ import H1 from "../../shared/H1/H1";
 import { Loading } from "../../shared/Loading/Loading";
 import { BoxList } from "../../widgets/BoxList/BoxList";
 
-export const Playground = () => {
+export const PlaygroundBoxes = () => {
     const { loading, error, data } = useQuery(GET_PLAYGROUND_BOXES);
 
     if (loading) return <Loading />;
