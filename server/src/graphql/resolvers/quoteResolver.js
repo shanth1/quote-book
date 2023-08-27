@@ -11,6 +11,9 @@ module.exports = {
         getBoxPlaygroundQuotes: async (_, { boxId }) => {
             return playgroundQuotes[Number(boxId) - 1];
         },
+        getAllPlaygroundQuotes: async () => {
+            return [...playgroundQuotes[0], ...playgroundQuotes[1]];
+        },
     },
     Quote: {
         user: async ({ userId }, _, { User }) => {

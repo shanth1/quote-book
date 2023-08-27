@@ -132,3 +132,22 @@ export const GET_BOX_PLAYGROUND_QUOTES = gql`
         }
     }
 `;
+
+export const GET_ALL_PLAYGROUND_QUOTES = gql`
+    query GetPlaygroundQuotes {
+        getAllPlaygroundQuotes {
+            id
+            header
+            isPrivate
+            marker
+            tags
+            text
+            createdAt
+            updatedAt
+            box {
+                id
+                title
+            }
+        }
+    }
+`;

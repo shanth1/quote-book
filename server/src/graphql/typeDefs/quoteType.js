@@ -5,6 +5,8 @@ module.exports = gql`
         getAllQuotes: [Quote]
         getQuote(quoteId: ID!): Quote!
         getBoxPlaygroundQuotes(boxId: ID!): [PlaygroundQuote]
+        getBoxPlaygroundQuotes(boxId: ID!): [PlaygroundQuote]
+        getAllPlaygroundQuotes: [PlaygroundQuote]
     }
 
     extend type Mutation {
