@@ -174,7 +174,7 @@ export const Home = () => {
             <Divider isVisual />
             <div className="pt-4 pb-6 flex justify-between px-6 md:justify-around md:px-0">
                 <WithCaption
-                    sizeStyle="w-8 h-8 md:w-12 md:h-12"
+                    sizeStyle="w-8 h-8 md:w-10 md:h-10"
                     caption="Gmail"
                 >
                     <DefaultLink href="mailto:denisberesnev59@gmail.com">
@@ -182,7 +182,7 @@ export const Home = () => {
                     </DefaultLink>
                 </WithCaption>
                 <WithCaption
-                    sizeStyle="w-8 h-8 md:w-12 md:h-12"
+                    sizeStyle="w-8 h-8 md:w-10 md:h-10"
                     caption="GitHub"
                 >
                     <DefaultLink href="https://github.com/shanth1">
@@ -190,7 +190,7 @@ export const Home = () => {
                     </DefaultLink>
                 </WithCaption>
                 <WithCaption
-                    sizeStyle="w-8 h-8 md:w-12 md:h-12"
+                    sizeStyle="w-8 h-8 md:w-10 md:h-10"
                     caption="Telegram"
                 >
                     <DefaultLink href="https://telegram.me/andabura">
