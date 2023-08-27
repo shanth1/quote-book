@@ -9,6 +9,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { GET_USER_BOXES, GET_USER_TITLES } from "../../graphql/queries";
 import { BoxForm } from "../../entities/BoxForm/BoxForm";
 import { getDefaultImageFromType } from "../../utils/defaultImage";
+import { playgroundCallback } from "../../utils/playgroundCallback";
 
 export const AddBox = ({ closeCallback }) => {
     const { userId, logout } = useContext(AuthContext);
@@ -83,7 +84,7 @@ export const AddBox = ({ closeCallback }) => {
             errors={errors}
         >
             <Button
-                onClick={onSubmit}
+                onClick={userId ? onSubmit : playgroundCallback}
                 isActive={!requiredError && !uniqueError}
             >
                 Add box
