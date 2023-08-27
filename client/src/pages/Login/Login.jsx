@@ -32,7 +32,6 @@ export const Login = () => {
             navigate("/collections");
         },
         onError({ graphQLErrors }) {
-            console.log("LOGIN GRAPHQL ERROR:", graphQLErrors);
             setErrors(graphQLErrors);
             logout();
         },

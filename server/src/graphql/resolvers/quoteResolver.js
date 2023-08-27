@@ -1,3 +1,5 @@
+const playgroundQuotes = require("./data/playgroundQuotes");
+
 module.exports = {
     Query: {
         getAllQuotes: async (_, __, { Quote }) => {
@@ -5,6 +7,12 @@ module.exports = {
         },
         getQuote: async (_, { quoteId }, { Quote }) => {
             return await Quote.findById(quoteId);
+        },
+        getBoxPlaygroundQuotes: async (_, { boxId }) => {
+            return playgroundQuotes[Number(boxId) - 1];
+        },
+        getAllPlaygroundQuotes: async () => {
+            return [...playgroundQuotes[0], ...playgroundQuotes[1]];
         },
     },
     Quote: {

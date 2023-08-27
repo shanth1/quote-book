@@ -13,7 +13,7 @@ export const About = () => {
             <div className="flex justify-center pb-6">
                 <H1>What is it build on</H1>
             </div>
-            <div className="px-6 gap-10 md:gap-0 lg:px-10 xl:px-28 2xl:px-32 grid grid-cols-4 md:grid-cols-8 ">
+            <div className="px-6 gap-10 lg:px-10 xl:px-28 2xl:px-32 grid grid-cols-4 md:grid-cols-6 ">
                 <WithCaption caption="JavaScript">
                     <Icon name="javascript" />
                 </WithCaption>
@@ -29,14 +29,26 @@ export const About = () => {
                 <WithCaption caption="GraphQL">
                     <Icon name="graphql" />
                 </WithCaption>
+                <WithCaption caption="Apollo Client/Server">
+                    <Icon name="apollo" />
+                </WithCaption>
                 <WithCaption caption="React">
                     <Icon name="react" />
                 </WithCaption>
                 <WithCaption caption="Tailwind">
                     <Icon name="tailwind" />
                 </WithCaption>
+                <WithCaption caption="JSON Web Token">
+                    <Icon name="jwt" />
+                </WithCaption>
                 <WithCaption caption="Docker">
                     <Icon name="docker" />
+                </WithCaption>
+                <WithCaption caption="Nginx">
+                    <Icon name="nginx" />
+                </WithCaption>
+                <WithCaption caption="GitHub">
+                    <Icon name="git" />
                 </WithCaption>
             </div>
             <Divider />

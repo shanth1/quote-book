@@ -8,6 +8,10 @@ import mongo from "../assets/mongo.svg";
 import node from "../assets/node.svg";
 import react from "../assets/react.svg";
 import tailwind from "../assets/tailwind.svg";
+import apollo from "../assets/apollo.svg";
+import nginx from "../assets/nginx.svg";
+import jwt from "../assets/jwt.svg";
+import git from "../assets/git.svg";
 
 export const Icon = ({ name }) => {
     let src = undefined;
@@ -20,6 +24,18 @@ export const Icon = ({ name }) => {
             break;
         case "graphql":
             src = graphql;
+            break;
+        case "apollo":
+            src = apollo;
+            break;
+        case "nginx":
+            src = nginx;
+            break;
+        case "jwt":
+            src = jwt;
+            break;
+        case "git":
+            src = git;
             break;
         case "javascript":
             src = javascript;

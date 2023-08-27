@@ -15,7 +15,7 @@ export const Logo = () => {
                     <AnimationUnderline>Quote it</AnimationUnderline>
                 </h1>
                 <img
-                    className="transition-all h-6 group-hover:h-7 hidden lg:block"
+                    className="transition-all h-6 group-hover:h-7 hidden xl:block"
                     src={logo}
                     alt=""
                 />

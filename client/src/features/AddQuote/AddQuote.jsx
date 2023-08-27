@@ -7,6 +7,7 @@ import { validateForm } from "../../utils/validateForm";
 import { GET_BOX_QUOTES, GET_BOX_TAGS } from "../../graphql/queries";
 import { AuthContext } from "../../context/AuthContext";
 import { QuoteForm } from "../../entities/QuoteForm/QuoteForm";
+import { playgroundCallback } from "../../utils/playgroundCallback";
 
 export const AddQuote = ({ closeCallback, boxId }) => {
     const { userId, logout } = useContext(AuthContext);
@@ -61,7 +62,10 @@ export const AddQuote = ({ closeCallback, boxId }) => {
             onChange={onChange}
             errors={errors}
         >
-            <Button onClick={onSubmit} isActive={!requiredError}>
+            <Button
+                onClick={userId ? onSubmit : playgroundCallback}
+                isActive={!requiredError}
+            >
                 Add quote
             </Button>
         </QuoteForm>

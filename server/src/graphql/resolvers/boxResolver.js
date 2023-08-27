@@ -1,4 +1,5 @@
 const { ApolloError } = require("apollo-server-express");
+const playgroundBoxes = require("./data/playgroundBoxes");
 
 module.exports = {
     Query: {
@@ -11,6 +12,9 @@ module.exports = {
                 throw new ApolloError("Auth error");
             }
             return await Box.findById(boxId);
+        },
+        getPlaygroundBoxes: async () => {
+            return playgroundBoxes;
         },
     },
     Box: {

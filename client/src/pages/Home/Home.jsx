@@ -74,12 +74,13 @@ export const Home = () => {
             <Divider />
             <div className="bg-white p-6  md:p-7 rounded-lg shadow-sm">
                 <div className="flex justify-center pb-4">
-                    <H1>Hello on v1.2.0!</H1>
+                    <H1>Hello on v1.2.2!</H1>
                 </div>
                 <div className="px-4 grid gap-8 lg:gap-12 lg:px-8 grid-cols-1 md:grid-cols-2">
                     <div className="flex flex-col items-center">
                         <FcSearch className="w-10 h-10" />
                         <H2>What is that?</H2>
+                        <div className="h-2"></div>
                         <div className="text-center">
                             {<span className="font-bold">Completely free</span>}{" "}
                             service, where you can{" "}
@@ -95,6 +96,7 @@ export const Home = () => {
                     <div className="flex flex-col items-center ">
                         <FcFlashOn className="w-10 h-10" />
                         <H2>Getting started</H2>
+                        <div className="h-2"></div>
                         <div className="text-center">
                             {
                                 <Link
@@ -104,16 +106,21 @@ export const Home = () => {
                                     Sign up
                                 </Link>
                             }{" "}
-                            and try it! Don't want to register? You can{" "}
+                            and {<span className="font-bold">try it</span>}{" "}
+                            yourself!{" "}
+                            {<span className="font-bold">Don't want</span>} to
+                            register? You can{" "}
+                            {<span className="font-bold">visit</span>} the{" "}
                             {
-                                <Link to="/login" className="text-primary-700">
-                                    Log in
+                                <Link
+                                    to="/playground"
+                                    className="text-primary-700"
+                                >
+                                    Playground
                                 </Link>
                             }{" "}
-                            with {<span className="font-bold">"test"</span>}{" "}
-                            username. and{" "}
-                            {<span className="font-bold">"psw123"</span>}{" "}
-                            password. This is test account
+                            page and see how the interaction with the service
+                            looks like
                         </div>
                     </div>
                 </div>
@@ -158,7 +165,6 @@ export const Home = () => {
                     <div>
                         <CheckBox>File upload</CheckBox>
                         <CheckBox>Quotes feed</CheckBox>
-                        <CheckBox>Quotes feed</CheckBox>
                         <CheckBox>Comments feature</CheckBox>
                         <CheckBox>Recommendation system</CheckBox>
                         <CheckBox>Customization options</CheckBox>
@@ -168,7 +174,7 @@ export const Home = () => {
             <Divider isVisual />
             <div className="pt-4 pb-6 flex justify-between px-6 md:justify-around md:px-0">
                 <WithCaption
-                    sizeStyle="w-8 h-8 md:w-12 md:h-12"
+                    sizeStyle="w-8 h-8 md:w-10 md:h-10"
                     caption="Gmail"
                 >
                     <DefaultLink href="mailto:denisberesnev59@gmail.com">
@@ -176,7 +182,7 @@ export const Home = () => {
                     </DefaultLink>
                 </WithCaption>
                 <WithCaption
-                    sizeStyle="w-8 h-8 md:w-12 md:h-12"
+                    sizeStyle="w-8 h-8 md:w-10 md:h-10"
                     caption="GitHub"
                 >
                     <DefaultLink href="https://github.com/shanth1">
@@ -184,7 +190,7 @@ export const Home = () => {
                     </DefaultLink>
                 </WithCaption>
                 <WithCaption
-                    sizeStyle="w-8 h-8 md:w-12 md:h-12"
+                    sizeStyle="w-8 h-8 md:w-10 md:h-10"
                     caption="Telegram"
                 >
                     <DefaultLink href="https://telegram.me/andabura">
