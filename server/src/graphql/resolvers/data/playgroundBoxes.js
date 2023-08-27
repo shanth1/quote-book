@@ -30,7 +30,8 @@ module.exports = [
         year: "II",
         image: "https://aif-s3.aif.ru/images/023/499/bbc4015d47166a5245d2cb78d05df2b9.jpg",
         mainIdea: "",
-        description: "",
+        description:
+            "Как писал в XIX веке французский историк Э. Ренан, явно глядя и на эту статую: «Книга Марка Аврелия не имеет никакой догматической основы и потому вечно будет свежа. В ней могут найти поучение все, начиная от атеиста или воображающего себя таковым, до человека, всего более преданного особым верованиям любого культа. Это самая чисто человеческая книга из всех существующих».",
         genres: ["Эссе", "Саморазвитие"],
         tags: ["Personal", "Ideas"],
         createdAt: "1693070015066",
@@ -38,7 +39,7 @@ module.exports = [
         updatedAt: "1693070015066",
         isPrivate: false,
         rating: 4,
-        quoteCounter: 0,
+        quoteCounter: 3,
     },
     {
         id: "2",
@@ -55,6 +56,6 @@ module.exports = [
         updatedAt: "1693070557992",
         isPrivate: false,
         rating: 0,
-        quoteCounter: 0,
+        quoteCounter: 5,
     },
 ];
