@@ -74,7 +74,7 @@ export const Home = () => {
             <Divider />
             <div className="bg-white p-6  md:p-7 rounded-lg shadow-sm">
                 <div className="flex justify-center pb-4">
-                    <H1>Hello on v1.2.2!</H1>
+                    <H1>Hello on v1.4.0!</H1>
                 </div>
                 <div className="px-4 grid gap-8 lg:gap-12 lg:px-8 grid-cols-1 md:grid-cols-2">
                     <div className="flex flex-col items-center">
@@ -141,7 +141,7 @@ export const Home = () => {
                         <CheckBox checked>Pages navigation</CheckBox>
                         <CheckBox checked>Input validations</CheckBox>
                         <CheckBox checked>Responsive design</CheckBox>
-                        <CheckBox>HTTPS protocol</CheckBox>
+                        <CheckBox checked>HTTPS protocol</CheckBox>
                         <CheckBox>Search and filters</CheckBox>
                         <CheckBox>Keyboard shortcuts</CheckBox>
                     </div>
