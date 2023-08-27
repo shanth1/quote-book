@@ -9,8 +9,6 @@ import { LOGIN_USER } from "../../graphql/mutation";
 import H1 from "../../shared/H1/H1";
 import Label from "../../shared/Label/Label";
 import Content from "../../shared/Content/Content";
-import { AiOutlineQuestionCircle } from "react-icons/ai";
-import { Tooltip } from "../../shared/Label/Components/Tooltip/Tooltip";
 
 export const Login = () => {
     const { login, logout } = useContext(AuthContext);
@@ -53,12 +51,6 @@ export const Login = () => {
                 <Content>
                     <div className="w-full flex justify-between items-center">
                         <H1>Sign in to your account</H1>
-                        <Tooltip
-                            leftSide
-                            message={`You can try on test account\n\nLogin: test\nPassword: psw123`}
-                        >
-                            <AiOutlineQuestionCircle size="22px" />
-                        </Tooltip>
                     </div>
                     <div>
                         <Label>Username</Label>
