@@ -92,3 +92,62 @@ export const GET_USER_TITLES = gql`
         }
     }
 `;
+
+export const GET_PLAYGROUND_BOXES = gql`
+    query GetPlaygroundBoxes {
+        getPlaygroundBoxes {
+            id
+            title
+            type
+            isPrivate
+            image
+            mainIdea
+            description
+            genres
+            tags
+            rating
+            year
+            authors
+            createdAt
+            quoteCounter
+        }
+    }
+`;
+
+export const GET_BOX_PLAYGROUND_QUOTES = gql`
+    query GetPlaygroundQuotes($boxId: ID!) {
+        getBoxPlaygroundQuotes(boxId: $boxId) {
+            id
+            header
+            isPrivate
+            marker
+            tags
+            text
+            createdAt
+            updatedAt
+            box {
+                id
+                title
+            }
+        }
+    }
+`;
+
+export const GET_ALL_PLAYGROUND_QUOTES = gql`
+    query GetPlaygroundQuotes {
+        getAllPlaygroundQuotes {
+            id
+            header
+            isPrivate
+            marker
+            tags
+            text
+            createdAt
+            updatedAt
+            box {
+                id
+                title
+            }
+        }
+    }
+`;

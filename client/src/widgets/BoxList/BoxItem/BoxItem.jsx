@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { classNames } from "../../../utils/classNames";
 import { BoxHeader } from "./components/BoxHeader";
 import { BoxFooter } from "./components/BoxFooter";
@@ -37,10 +37,11 @@ export const BoxItem = ({ boxData, setFunctions }) => {
         createdAt,
         quoteCounter,
     } = boxData;
+    const location = useLocation();
     const navigate = useNavigate();
 
     const boxClickHandler = (event) => {
-        navigate(`/collections/box/${id}`);
+        navigate(`/${location.pathname.split("/")[1]}/box/${id}`);
     };
 
     return (

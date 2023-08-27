@@ -35,7 +35,7 @@ export const TabBar = () => {
                         </div>
                     )}
                 </NavLink>
-                {location.pathname === "/collections/boxes" && (
+                {location.pathname.endsWith("/boxes") && (
                     <div className="flex justify-center">
                         <div
                             onClick={() => setAddBoxModalActive(true)}
@@ -45,7 +45,7 @@ export const TabBar = () => {
                         </div>
                     </div>
                 )}
-                {location.pathname.includes("/collections/box/") && (
+                {location.pathname.includes("/box/") && (
                     <div className="flex justify-center">
                         <div
                             onClick={() => setAddQuoteModalActive(true)}

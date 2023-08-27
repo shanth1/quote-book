@@ -7,9 +7,10 @@ import { DECREMENT_QUOTE_COUNTER, DELETE_QUOTE } from "../../graphql/mutation";
 import { GET_BOX_QUOTES, GET_USER_QUOTES } from "../../graphql/queries";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { playgroundCallback } from "../../utils/playgroundCallback";
 
 const DeleteQuote = ({ id, boxId, closeCallback }) => {
-    const { logout } = useContext(AuthContext);
+    const { userId, logout } = useContext(AuthContext);
 
     const onSubmit = (event) => {
         event.preventDefault();
@@ -36,7 +37,9 @@ const DeleteQuote = ({ id, boxId, closeCallback }) => {
                 <Label>Quote can`t be retrieved</Label>
                 <div className="w-full">
                     <div className="w-1/2 ml-auto mr-0">
-                        <DeleteButton onClick={onSubmit}>
+                        <DeleteButton
+                            onClick={userId ? onSubmit : playgroundCallback}
+                        >
                             Delete quote
                         </DeleteButton>
                     </div>

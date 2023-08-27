@@ -10,6 +10,7 @@ import { GET_USER_BOXES, GET_USER_TITLES } from "../../graphql/queries";
 import { BoxForm } from "../../entities/BoxForm/BoxForm";
 import { useForm } from "../../hooks/formHook";
 import { getDefaultImageFromType } from "../../utils/defaultImage";
+import { playgroundCallback } from "../../utils/playgroundCallback";
 
 const EditBox = ({ boxData, closeCallback }) => {
     const { userId, logout } = useContext(AuthContext);
@@ -118,7 +119,7 @@ const EditBox = ({ boxData, closeCallback }) => {
             errors={errors}
         >
             <Button
-                onClick={onSubmit}
+                onClick={userId ? onSubmit : playgroundCallback}
                 isActive={!requiredError && !uniqueError && !equalError}
             >
                 Update box

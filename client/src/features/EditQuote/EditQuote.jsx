@@ -8,6 +8,7 @@ import { isEqualObject } from "../../utils/compareObjects";
 import { AuthContext } from "../../context/AuthContext";
 import { QuoteForm } from "../../entities/QuoteForm/QuoteForm";
 import { useForm } from "../../hooks/formHook";
+import { playgroundCallback } from "../../utils/playgroundCallback";
 
 export const EditQuote = ({ boxId, quoteId, quoteData, closeCallback }) => {
     const { userId, logout } = useContext(AuthContext);
@@ -74,7 +75,10 @@ export const EditQuote = ({ boxId, quoteId, quoteData, closeCallback }) => {
             onChange={onChange}
             errors={errors}
         >
-            <Button onClick={onSubmit} isActive={!requiredError && !equalError}>
+            <Button
+                onClick={userId ? onSubmit : playgroundCallback}
+                isActive={!requiredError && !equalError}
+            >
                 Update quote
             </Button>
         </QuoteForm>
