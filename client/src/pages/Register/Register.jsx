@@ -17,7 +17,7 @@ import Required from "../../shared/Required/Required";
 const getPasswordStatusColor = (password) => {
     if (validatePassword(password)) {
         if (
-            /[!@#$%^&*()<>?]+/.test(password) &&
+            /[!@\-:,.+=#$%^&*(){}[\]~`_<>?]+/.test(password) &&
             /.{8,}/.test(password) &&
             /([A-ZА-Я]+)/.test(password)
         ) {
