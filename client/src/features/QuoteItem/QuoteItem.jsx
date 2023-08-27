@@ -73,9 +73,13 @@ const QuoteItem = ({
                     </div>
                 </div>
             </div>
-            <div className="p-2 bg-gray-50 rounded-lg border">
+            <div className="flex flex-col p-2 gap-2 bg-gray-50 rounded-lg border">
                 {text.split("\n").map((stroke) => (
-                    <p>{stroke}</p>
+                    <p className="text-justify whitespace-pre-wrap">
+                        {"\t"}
+                        <span className="hidden lg:inline">{"\t"}</span>
+                        {stroke}
+                    </p>
                 ))}
             </div>
 
