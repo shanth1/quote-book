@@ -113,3 +113,22 @@ export const GET_PLAYGROUND_BOXES = gql`
         }
     }
 `;
+
+export const GET_BOX_PLAYGROUND_QUOTES = gql`
+    query GetPlaygroundQuotes($boxId: ID!) {
+        getBoxPlaygroundQuotes(boxId: $boxId) {
+            id
+            header
+            isPrivate
+            marker
+            tags
+            text
+            createdAt
+            updatedAt
+            box {
+                id
+                title
+            }
+        }
+    }
+`;

@@ -28,7 +28,7 @@ module.exports = [
         title: "Наедине с собой",
         authors: ["Марк Аврелий"],
         year: "II",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Metropolitan_Marcus_Aurelius_Roman_2C_AD.JPG/1024px-Metropolitan_Marcus_Aurelius_Roman_2C_AD.JPG",
+        image: "https://aif-s3.aif.ru/images/023/499/bbc4015d47166a5245d2cb78d05df2b9.jpg",
         mainIdea: "",
         description: "",
         genres: ["Эссе", "Саморазвитие"],
@@ -38,8 +38,6 @@ module.exports = [
         updatedAt: "1693070015066",
         isPrivate: false,
         rating: 4,
-        quotes: {},
-        user: {},
         quoteCounter: 0,
     },
     {
@@ -57,8 +55,6 @@ module.exports = [
         updatedAt: "1693070557992",
         isPrivate: false,
         rating: 0,
-        quotes: {},
-        user: {},
         quoteCounter: 0,
     },
 ];

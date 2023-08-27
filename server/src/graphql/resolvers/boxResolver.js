@@ -1,5 +1,5 @@
 const { ApolloError } = require("apollo-server-express");
-const playgroundData = require("./data/playgroundData");
+const playgroundBoxes = require("./data/playgroundBoxes");
 
 module.exports = {
     Query: {
@@ -13,8 +13,8 @@ module.exports = {
             }
             return await Box.findById(boxId);
         },
-        getPlaygroundBoxes: async (_, __, ___) => {
-            return playgroundData;
+        getPlaygroundBoxes: async () => {
+            return playgroundBoxes;
         },
     },
     Box: {

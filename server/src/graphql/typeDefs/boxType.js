@@ -4,7 +4,7 @@ module.exports = gql`
     extend type Query {
         getAllBoxes: [Box]!
         getBox(boxId: ID!): Box
-        getPlaygroundBoxes: [Box]!
+        getPlaygroundBoxes: [PlaygroundBox]
     }
 
     extend type Mutation {
@@ -47,6 +47,23 @@ module.exports = gql`
         rating: Int
         quotes: [Quote]
         user: User
+        quoteCounter: Int
+    }
+    type PlaygroundBox {
+        id: ID!
+        title: String!
+        authors: [String!]!
+        year: String
+        image: String
+        mainIdea: String
+        description: String
+        genres: [String]
+        tags: [String]
+        createdAt: String!
+        type: String!
+        updatedAt: String!
+        isPrivate: Boolean!
+        rating: Int
         quoteCounter: Int
     }
 `;
