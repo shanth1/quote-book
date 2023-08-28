@@ -47,7 +47,7 @@ export const About = () => {
                 <WithCaption caption="Nginx">
                     <Icon name="nginx" />
                 </WithCaption>
-                <WithCaption caption="GitHub">
+                <WithCaption caption="Git">
                     <Icon name="git" />
                 </WithCaption>
             </div>
